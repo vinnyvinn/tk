@@ -25,7 +25,7 @@
 
 <div class="modal-footer">
     <?php
-    echo modal_anchor(get_uri("notes/modal_form/"), "<i class='fa fa-pencil'></i> " . lang('edit_note'), array("class" => "btn btn-default", "data-post-id" => $model_info->id, "title" => lang('edit_note')));
+    echo modal_anchor(get_uri("notes/modal_form"), "<i class='fa fa-pencil'></i> " . lang('edit_note'), array("class" => "btn btn-default", "data-post-id" => $model_info->id, "title" => lang('edit_note')));
     ?>
     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-close"></span> <?php echo lang('close'); ?></button>
 </div>

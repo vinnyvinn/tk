@@ -4,7 +4,6 @@
             <?php
             if ($this->login_user->user_type == "staff") {
 
-
                 $sidebar_menu = array(
                     array("name" => "dashboard", "url" => "dashboard", "class" => "fa-desktop")
                 );
@@ -40,11 +39,16 @@
                     $sidebar_menu[] = array("name" => "clients", "url" => "clients", "class" => "fa-briefcase");
                 }
 
-                $sidebar_menu[] = array("name" => "projects", "url" => "projects", "class" => "fa-th-large",
-                    "submenu" => array(
-                        array("name" => "all_projects", "url" => "projects/all_projects"),
-                        array("name" => "tasks", "url" => "projects/all_tasks")
-                ));
+                $openProjects = [];
+                $openProjects [] = ["name" => "All Projects", "url" => "projects/all_projects"];
+
+                foreach ($projects as $project) {
+                    $openProjects[] = ['name' => $project->title, 'url' => 'projects/view/' . $project->id];
+                }
+
+                $sidebar_menu[] = array("name" => "projects", "url" => "projects", "class" => "fa-th-large", "submenu" => $openProjects);
+
+                $sidebar_menu[] = array("name" => "Your Tasks", "url" => "projects/all_tasks", "class" => "fa-check", "devider" => true);
 
                 if (get_setting("module_estimate") && get_setting("module_estimate_request") && ($this->login_user->is_admin || $access_estimate)) {
 
@@ -132,7 +136,14 @@
                     $sidebar_menu[] = array("name" => "messages", "url" => "messages", "class" => "fa-envelope", "badge" => count_unread_message());
                 }
 
-                $sidebar_menu[] = array("name" => "projects", "url" => "projects/all_projects", "class" => "fa fa-th-large");
+                $openProjects = [];
+                $openProjects [] = ["name" => "All Projects", "url" => "projects/all_projects"];
+
+                foreach ($projects as $project) {
+                    $openProjects[] = ['name' => $project->title, 'url' => 'projects/view/' . $project->id];
+                }
+
+                $sidebar_menu[] = array("name" => "projects", "url" => "projects", "class" => "fa-th-large", "submenu" => $openProjects);
 
                 if (get_setting("module_estimate")) {
                     $sidebar_menu[] = array("name" => "estimates", "url" => "estimates", "class" => "fa-file");
@@ -171,12 +182,17 @@
                 <li class="<?php echo $active_class . " " . $expend_class . " " . $submenu_open_class . " $devider_class"; ?> main">
                     <a href="<?php echo_uri($main_menu['url']); ?>">
                         <i class="fa <?php echo ($main_menu['class']); ?>"></i>
+                        <?php if (lang($main_menu['name'])): ?>
                         <span><?php echo lang($main_menu['name']); ?></span>
-                        <?php
+                    <?php else : ?>
+                        <span><?php echo $main_menu['name']; ?></span>
+                    <?php
+                        endif;
+
                         if ($badge) {
                             echo "<span class='badge $badge_class'>$badge</span>";
                         }
-                        ?>
+                    ?>
                     </a>
                     <?php
                     if ($submenu) {
@@ -186,7 +202,11 @@
                         <li>
                             <a href="<?php echo_uri($s_menu['url']); ?>">
                                 <i class="dot fa fa-circle"></i>
-                                <span><?php echo lang($s_menu['name']); ?></span>
+                                <?php if (lang($s_menu['name'])): ?>
+                                    <span><?php echo lang($s_menu['name']); ?></span>
+                                <?php else : ?>
+                                    <span><?php echo $s_menu['name']; ?></span>
+                                <?php endif; ?>
                             </a>
                         </li>
                         <?php

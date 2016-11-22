@@ -1,6 +1,8 @@
 <?php
 ini_set('date.timezone', 'Africa/Nairobi');
-ini_set('allow_url_fopen', true);
+ini_set('allow_url_fopen', 'On');
+ini_set('allow_url_include', 'On');
+
 /**
  * CodeIgniter
  *

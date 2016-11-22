@@ -104,7 +104,13 @@
         <label for="status" class=" col-md-3"><?php echo lang('status'); ?></label>
         <div class="col-md-9">
             <?php
-            $task_status = array("to_do" => lang('to_do'), "in_progress" => lang('in_progress'), "done" => lang('done'));
+            $task_status = [
+                'to_do - 0%' => 'ToDo - 0% Complete',
+                'in_progress - 25%' => 'In Progress - 25% Complete',
+                'in_progress - 50%' => 'In Progress - 50% Complete',
+                'in_progress - 75%' => 'In Progress - 75% Complete',
+                'done - 100%' => 'Done - 100% Complete'
+            ];
             echo form_dropdown("status", $task_status, array($model_info->status), "class='select2'");
             ?>
         </div>

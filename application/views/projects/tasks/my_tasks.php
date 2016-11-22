@@ -18,9 +18,11 @@
             order: [[0, "desc"]],
             filterDropdown: [{name: "specific_user_id", class: "w200", options: <?php echo $team_members_dropdown; ?>}, {name: "project_id", class: "w200", options: <?php echo $projects_dropdown; ?>}],
             checkBoxes: [
-                {text: '<?php echo lang("to_do") ?>', name: "status", value: "to_do", isChecked: true},
-                {text: '<?php echo lang("in_progress") ?>', name: "status", value: "in_progress", isChecked: true},
-                {text: '<?php echo lang("done") ?>', name: "status", value: "done", isChecked: false}
+                {text: 'ToDo', name: "status", value: "to_do - 0%", isChecked: true},
+                {text: '25%', name: "status", value: "in_progress - 25%", isChecked: true},
+                {text: '50%', name: "status", value: "in_progress - 50%", isChecked: true},
+                {text: '75%', name: "status", value: "in_progress - 75%", isChecked: true},
+                {text: 'Done', name: "status", value: "done - 100%", isChecked: false}
             ],
             columns: [
                 {title: '<?php echo lang("id") ?>'},

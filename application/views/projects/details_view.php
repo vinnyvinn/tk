@@ -46,7 +46,6 @@
             </div>
             <ul id="project-tabs" data-toggle="ajax-tab" class="nav nav-tabs classic" role="tablist">
                 <?php if ($this->login_user->user_type === "staff") { ?>
-                    <li><a role="presentation" href="<?php echo_uri("projects/overview/" . $project_info->id); ?>" data-target="#project-overview-section"><?php echo lang('overview'); ?></a></li>
                     <li><a role="presentation" href="<?php echo_uri("projects/tasks/" . $project_info->id); ?>" data-target="#project-tasks-section"><?php echo lang('tasks'); ?></a></li>
                     <li><a role="presentation" href="<?php echo_uri("projects/milestones/" . $project_info->id); ?>" data-target="#project-milestones-section"> <?php echo lang('milestones'); ?></a></li>
                     <li><a role="presentation" href="<?php echo_uri("projects/gantt/" . $project_info->id); ?>" data-target="#project-gantt-section"> <?php echo lang('gantt'); ?></a></li>
@@ -61,26 +60,26 @@
                     <?php } ?>
                     <?php if ($show_expense_info) { ?>
                         <li><a  role="presentation" href="<?php echo_uri("projects/expenses/" . $project_info->id); ?>" data-target="#project-expenses"> <?php echo lang('expenses'); ?></a></li>
-                    <?php } ?>   
+                    <?php } ?>
+                    <li><a role="presentation" href="<?php echo_uri("projects/overview/" . $project_info->id); ?>" data-target="#project-overview-section"><?php echo lang('overview'); ?></a></li>
 
                 <?php } else { ?>
-                    <li><a role="presentation" href="<?php echo_uri("projects/overview_for_client/" . $project_info->id); ?>" data-target="#project-overview-section"><?php echo lang('description'); ?></a></li>                   
-
                     <?php if ($show_tasks) { ?>
                         <li><a role="presentation" href="<?php echo_uri("projects/tasks/" . $project_info->id); ?>" data-target="#project-tasks-section"><?php echo lang('tasks'); ?></a></li>
                     <?php } ?>
+
                     <?php if ($show_files) { ?>    
                         <li><a role="presentation" href="<?php echo_uri("projects/files/" . $project_info->id); ?>" data-target="#project-files-section"> <?php echo lang('files'); ?></a></li>
                     <?php } ?>
 
                     <li><a role="presentation" href="<?php echo_uri("projects/customer_feedback/" . $project_info->id); ?>" data-target="#project-customer-feedback-section"> <?php echo lang('comments'); ?></a></li>
                     <li><a role="presentation" href="<?php echo_uri("projects/milestones/" . $project_info->id); ?>" data-target="#project-milestones-section"> <?php echo lang('milestones'); ?></a></li>
+                    <li><a role="presentation" href="<?php echo_uri("projects/overview_for_client/" . $project_info->id); ?>" data-target="#project-overview-section"><?php echo lang('description'); ?></a></li>
                 <?php } ?>
 
 
             </ul>
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active" id="project-overview-section" style="min-height: 200px;"></div>
                 <div role="tabpanel" class="tab-pane fade" id="project-tasks-section"></div>
                 <div role="tabpanel" class="tab-pane fade" id="project-milestones-section"></div>
                 <div role="tabpanel" class="tab-pane fade" id="project-gantt-section"></div>
@@ -92,7 +91,7 @@
                 <div role="tabpanel" class="tab-pane fade" id="project-invoices"></div>
                 <div role="tabpanel" class="tab-pane fade" id="project-payments"></div>
                 <div role="tabpanel" class="tab-pane fade" id="project-expenses"></div>
-
+                <div role="tabpanel" class="tab-pane fade active" id="project-overview-section" style="min-height: 200px;"></div>
             </div>
         </div>
     </div>

@@ -32,9 +32,11 @@
                 order: [[0, "desc"]],
                 filterDropdown: [{name: "milestone_id", class: "w200", options: <?php echo $milestone_dropdown; ?>}],
                 checkBoxes: [
-                    {text: '<?php echo lang("to_do") ?>', name: "status", value: "to_do", isChecked: false},
-                    {text: '<?php echo lang("in_progress") ?>', name: "status", value: "in_progress", isChecked: false},
-                    {text: '<?php echo lang("done") ?>', name: "status", value: "done", isChecked: false}
+                    {text: 'ToDo', name: "status", value: "to_do - 0%", isChecked: true},
+                    {text: '25%', name: "status", value: "in_progress - 25%", isChecked: true},
+                    {text: '50%', name: "status", value: "in_progress - 50%", isChecked: true},
+                    {text: '75%', name: "status", value: "in_progress - 75%", isChecked: true},
+                    {text: 'Done', name: "status", value: "done - 100%", isChecked: false}
                 ],
                 columns: [
                     {title: '<?php echo lang("id") ?>'},
@@ -61,9 +63,11 @@
                 order: [[0, "desc"]],
                 filterDropdown: [{name: "milestone_id", class: "w200", options: <?php echo $milestone_dropdown; ?>}, {name: "assigned_to", class: "w200", options: <?php echo $assigned_to_dropdown; ?>}],
                 checkBoxes: [
-                    {text: '<?php echo lang("to_do") ?>', name: "status", value: "to_do", isChecked: true},
-                    {text: '<?php echo lang("in_progress") ?>', name: "status", value: "in_progress", isChecked: true},
-                    {text: '<?php echo lang("done") ?>', name: "status", value: "done", isChecked: false}
+                    {text: 'ToDo', name: "status", value: "to_do - 0%", isChecked: true},
+                    {text: '25%', name: "status", value: "in_progress - 25%", isChecked: false},
+                    {text: '50%', name: "status", value: "in_progress - 50%", isChecked: false},
+                    {text: '75%', name: "status", value: "in_progress - 75%", isChecked: false},
+                    {text: 'Done', name: "status", value: "done - 100%", isChecked: false}
                 ],
                 columns: [
                     {title: '<?php echo lang("id") ?>'},

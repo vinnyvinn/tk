@@ -12,7 +12,7 @@
                 <?php
                 count_project_status_widget($user_info->id);
                 count_total_time_widget($user_info->id);
-                ?> 
+                ?>
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
 
         <?php if ($show_projects) { ?>
             <li><a role="presentation" href="<?php echo_uri("team_members/projects_info/" . $user_info->id); ?>" data-target="#tab-projects-info"><?php echo lang('projects'); ?></a></li>
-        <?php } ?> 
+        <?php } ?>
 
         <?php if ($show_attendance) { ?>
             <li><a role="presentation" href="<?php echo_uri("team_members/attendance_info/" . $user_info->id); ?>" data-target="#tab-attendance-info"> <?php echo lang('attendance'); ?></a></li>
@@ -53,7 +53,7 @@
         <?php } ?>
         <?php if ($show_expense_info) { ?>
             <li><a role="presentation" href="<?php echo_uri("team_members/expense_info/" . $user_info->id); ?>" data-target="#tab-expense-info"><?php echo lang('expenses'); ?></a></li>
-        <?php } ?> 
+        <?php } ?>
 
     </ul>
 

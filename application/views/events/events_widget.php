@@ -10,7 +10,7 @@
                     foreach ($events as $event) {
                         ?>
                         <div class="mb20">
-                            <div><?php echo modal_anchor(get_uri("events/view/"), "<i style='color:" . $event->color . "' class='fa " . get_event_icon($event->share_with) . "'></i></span> " . $event->title, array("data-post-id" => encode_id($event->id, "event_id"), "title" => lang("event_details"))); ?></div>
+                            <div><?php echo modal_anchor(get_uri("events/view"), "<i style='color:" . $event->color . "' class='fa " . get_event_icon($event->share_with) . "'></i></span> " . $event->title, array("data-post-id" => encode_id($event->id, "event_id"), "title" => lang("event_details"))); ?></div>
                             <div><?php $this->load->view("events/event_time", array("model_info" => $event)); ?></div>
                         </div>
                         <?php

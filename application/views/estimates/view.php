@@ -32,7 +32,7 @@
                         if ($estimate_status == "accepted" && $show_invoice_option) {
                             ?>
                             <li role="presentation" class="divider"></li>
-                            <li role="presentation"><?php echo modal_anchor(get_uri("invoices/modal_form/"), "<i class='fa fa-refresh'></i> " . lang('create_invoice'), array("title" => lang("create_invoice"), "data-post-estimate_id"=>$estimate_info->id )); ?> </li>
+                            <li role="presentation"><?php echo modal_anchor(get_uri("invoices/modal_form"), "<i class='fa fa-refresh'></i> " . lang('create_invoice'), array("title" => lang("create_invoice"), "data-post-estimate_id"=>$estimate_info->id )); ?> </li>
                         <?php } ?>
                     </ul>
                 </span>

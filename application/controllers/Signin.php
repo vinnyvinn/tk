@@ -9,9 +9,9 @@ class Signin extends CI_Controller {
 
     function index() {
         if ($this->Users_model->login_user_id()) {
-            redirect('dashboard');
+            $user = $this->Users_model->get_access_info(intval($this->Users_model->login_user_id()));
+            redirect($user->landing_page);
         } else {
-
             $redirect = "";
             if (isset($_REQUEST["redirect"])) {
                 $redirect = $_REQUEST["redirect"];
@@ -19,16 +19,16 @@ class Signin extends CI_Controller {
 
             $this->form_validation->set_rules('email', '', 'callback_authenticate');
             $this->form_validation->set_error_delimiters('<span>', '</span>');
-            if ($this->form_validation->run() == FALSE) {
 
+            if ($this->form_validation->run() == false) {
                 $view_data["redirect"] = $redirect;
                 $this->load->view('signin/index', $view_data);
             } else {
-
                 if ($redirect) {
                     redirect($redirect);
                 } else {
-                    redirect('dashboard');
+                    $user = $this->Users_model->get_access_info(intval($this->Users_model->login_user_id()));
+                    redirect($user->landing_page);
                 }
             }
         }

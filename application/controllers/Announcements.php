@@ -165,7 +165,7 @@ class Announcements extends Pre_loader {
         $user = "<span class='avatar avatar-xs mr10'><img src='$image_url' alt=''></span> $data->created_by_user";
         $option = "";
         if ($this->access_type === "all") {
-            $option = modal_anchor(get_uri("announcements/modal_form/"), "<i class='fa fa-pencil'></i>", array("class" => "edit", "data-modal-lg" => "1", "data-post-id" => $data->id, "title" => lang('edit_announcement')))
+            $option = modal_anchor(get_uri("announcements/modal_form"), "<i class='fa fa-pencil'></i>", array("class" => "edit", "data-modal-lg" => "1", "data-post-id" => $data->id, "title" => lang('edit_announcement')))
                     . js_anchor("<i class='fa fa-times fa-fw'></i>", array('title' => lang('delete_announcement'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("announcements/delete"), "data-action" => "delete"));
         }
         return array(

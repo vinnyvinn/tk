@@ -6,6 +6,20 @@
         </div>
         <div class="panel-body">
             <div class="form-group">
+                <label for="name" class=" col-md-2">Landing Page</label>
+                <div class=" col-md-10">
+                    <?php
+                        $landingPages = [
+                            '/dashboard' => 'Dashboard',
+                            '/projects/all_projects' => 'All Projects',
+                            '/projects/all_tasks' => 'My Tasks',
+                        ];
+                    
+                        echo form_dropdown("landing_page", $landingPages, array($user_info->landing_page), "class='select2'");
+                    ?>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="name" class=" col-md-2"><?php echo lang('first_name'); ?></label>
                 <div class=" col-md-10">
                     <?php
@@ -172,8 +186,8 @@
             }
         });
         $("#general-info-form .select2").select2();
-        
+
         setDatePicker("#dob");
 
     });
-</script>    
+</script>

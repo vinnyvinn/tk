@@ -425,7 +425,8 @@ class Team_members extends Pre_loader
             "alternative_address" => $this->input->post('alternative_address'),
             "alternative_phone"   => $this->input->post('alternative_phone'),
             "dob"                 => $this->input->post('dob'),
-            "ssn"                 => $this->input->post('ssn')
+            "ssn"                 => $this->input->post('ssn'),
+            "landing_page"        => $this->input->post('landing_page')
         );
 
         $user_info_updated = $this->Users_model->save($user_data, $user_id);

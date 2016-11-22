@@ -664,8 +664,6 @@ class Projects extends Pre_loader {
             $price = "-";
         }
 
-
-
         return array(
             anchor(get_uri("projects/view/" . $data->id), $data->id),
             $title,
@@ -1351,7 +1349,6 @@ class Projects extends Pre_loader {
             }
         }
 
-
         $view_data['milestones_dropdown'] = array(0 => "None") + $this->Milestones_model->get_dropdown_list(array("title"), "id", array("project_id" => $project_id));
 
         $project_members = $this->Project_members_model->get_project_members_dropdown_list($project_id)->result();
@@ -1579,7 +1576,6 @@ class Projects extends Pre_loader {
         }
         $title.="<span class='pull-right'>" . $task_labels . "</span>";
 
-
         $project_title = anchor(get_uri("projects/view/" . $data->project_id), $data->project_title);
 
         $assigned_to = "-";
@@ -1590,7 +1586,6 @@ class Projects extends Pre_loader {
             $assigned_to = get_team_member_profile_link($data->assigned_to, $assigned_to_user);
         }
 
-
         $collaborators = $this->_get_collaborators($data->collaborator_list);
 
         if (!$collaborators) {
@@ -1598,28 +1593,51 @@ class Projects extends Pre_loader {
         }
 
 
+//
+//        {text: 'ToDo - 0% Complete', name: "status", value: "to_do - 0%", isChecked: true},
+//        {text: 'In Progress - 10% Complete', name: "status", value: "in_progress - 10%", isChecked: false},
+//        {text: 'In Progress - 20% Complete', name: "status", value: "in_progress - 20%", isChecked: false},
+//        {text: 'In Progress - 30% Complete', name: "status", value: "in_progress - 30%", isChecked: false},
+//        {text: 'In Progress - 40% Complete', name: "status", value: "in_progress - 40%", isChecked: false},
+//        {text: 'In Progress - 50% Complete', name: "status", value: "in_progress - 50%", isChecked: false},
+//        {text: 'In Progress - 60% Complete', name: "status", value: "in_progress - 60%", isChecked: false},
+//        {text: 'In Progress - 70% Complete', name: "status", value: "in_progress - 70%", isChecked: false},
+//        {text: 'In Progress - 80% Complete', name: "status", value: "in_progress - 80%", isChecked: false},
+//        {text: 'In Progress - 90% Complete', name: "status", value: "in_progress - 90%", isChecked: false},
+//        {text: 'Done - 100%', name: "status", value: "done - 100%", isChecked: false}
+//
+
         $status_class = "";
         $checkbox_class = "checkbox-blank";
-        if ($data->status === "to_do") {
+        if (strpos($data->status, "to_do")) {
             $status_class = "b-warning";
-        } else if ($data->status === "in_progress") {
+        } else if (strpos($data->status, "in_progress")) {
             $status_class = "b-primary";
         } else {
             $checkbox_class = "checkbox-checked";
             $status_class = "b-success";
         }
 
+        $data->parsed_status = ucwords(str_replace('_', ' ', $data->status)) . ' Complete';
+
         if ($this->login_user->user_type == "staff") {
             //show changeable status checkbox and link to team members
-            $check_status = js_anchor("<span class='$checkbox_class'></span>", array('title' => "", "class" => "", "data-id" => $data->id, "data-value" => $data->status === "done" ? "to_do" : "done", "data-act" => "update-task-status-checkbox")) . $data->id;
-            $status = js_anchor(lang($data->status), array('title' => "", "class" => "", "data-id" => $data->id, "data-value" => $data->status, "data-act" => "update-task-status"));
+            $check_status = js_anchor("<span class='$checkbox_class'></span>",
+                [
+                    'title' => "",
+                    "class" => "",
+                    "data-id" => $data->id,
+                    "data-value" => $data->status === "done - 100%" ? "to_do - 0%" : "done - 100%",
+                    "data-act" => "update-task-status-checkbox"
+                ]) . $data->id;
+            $status = js_anchor($data->parsed_status, array('title' => "", "class" => "", "data-id" => $data->id, "data-value" => $data->status, "data-act" => "update-task-status"));
         } else {
             //don't show clickable checkboxes/status to client
             if ($checkbox_class == "checkbox-blank") {
                 $checkbox_class = "checkbox-un-checked";
             }
             $check_status = "<span class='$checkbox_class'></span> " . $data->id;
-            $status = lang($data->status);
+            $status = $data->parsed_status;
         }
 
 
