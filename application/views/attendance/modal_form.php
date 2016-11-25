@@ -3,6 +3,7 @@
     <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />
 
     <div class="clearfix">
+        <?php if ($user->isAdmin) : ?>
         <div class="form-group">
             <label for="applicant_id" class=" col-md-3"><?php echo lang('team_member'); ?></label>
             <div class=" col-md-9">
@@ -16,6 +17,17 @@
                 } else {
                     echo form_dropdown("user_id", $team_members_dropdown, "", "class='select2 validate-hidden' id='attendance_user_id' data-rule-required='true', data-msg-required='" . lang('field_required') . "'");
                 }
+                ?>
+            </div>
+        </div>
+        <?php else : ?>
+            <input type="hidden" name="user_id" value="<?= $user->id; ?>" />
+        <?php endif; ?>
+        <div class="form-group">
+            <label for="applicant_id" class=" col-md-3"><?php echo lang('tasks'); ?></label>
+            <div class=" col-md-9">
+                <?php
+                    echo form_dropdown("task_id", $tasks, "", "class='select2 validate-hidden' id='task_id' data-rule-required='true', data-msg-required='" . lang('field_required') . "'");
                 ?>
             </div>
         </div>
@@ -34,7 +46,7 @@
             echo form_input(array(
                 "id" => "in_date",
                 "name" => "in_date",
-                "value" => $in_time ? date("Y-m-d", strtotime($in_time)) : "",
+                "value" => $in_time ? date("Y-m-d", strtotime($in_time)) : date("Y-m-d"),
                 "class" => "form-control",
                 "placeholder" => lang('in_date'),
                 "data-rule-required" => true,
@@ -73,7 +85,7 @@
             echo form_input(array(
                 "id" => "out_date",
                 "name" => "out_date",
-                "value" => $out_time ? date("Y-m-d", strtotime($out_time)) : "",
+                "value" => $out_time ? date("Y-m-d", strtotime($out_time)) :  date("Y-m-d"),
                 "class" => "form-control",
                 "placeholder" => lang('out_date'),
                 "data-rule-required" => true,
@@ -121,6 +133,7 @@
         if ($("#attendance_user_id").length) {
             $("#attendance_user_id").select2();
         }
+        $("#task_id").select2();
         setDatePicker("#in_date, #out_date");
 
         setTimePicker("#in_time, #out_time");

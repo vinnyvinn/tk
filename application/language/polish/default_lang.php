@@ -153,7 +153,7 @@ $lang["select_a_team"] = "Select a team";
 $lang["dashboard"] = "Dashboard";
 
 /* attendance */
-$lang["add_attendance"] = "Add time manually";
+$lang["add_attendance"] = "Enter Time Card";
 $lang["edit_attendance"] = "Edit time card";
 $lang["delete_attendance"] = "Delete time card";
 $lang["attendance"] = "Karty czasowe";

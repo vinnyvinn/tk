@@ -36,7 +36,7 @@ class Attendance extends Pre_loader {
     //only admin or assigend members can access/manage other member's attendance
     protected function access_only_allowed_members($user_id = 0) {
         if ($this->access_type !== "all") {
-            if ($user_id === $this->login_user->id || !array_search($user_id, $this->allowed_members)) {
+            if ($this->login_user->user_type != 'staff') {
                 redirect("forbidden");
             }
         }
@@ -71,17 +71,22 @@ class Attendance extends Pre_loader {
         } else {
             //new add mode. show users dropdown
             //don't show none allowed members in dropdown
-            if ($this->access_type === "all") {
-                $where = array("user_type" => "staff");
-            } else {
-                if (!count($this->allowed_members)) {
-                    redirect("forbidden");
-                }
-                $where = array("user_type" => "staff", "id !=" => $this->login_user->id, "where_in" => array("id" => $this->allowed_members));
+            if ($this->login_user->user_type != 'staff') {
+                redirect("forbidden");
             }
 
-            $view_data['team_members_dropdown'] = array("" => "-") + $this->Users_model->get_dropdown_list(array("first_name", "last_name"), "id", $where);
+            $view_data['team_members_dropdown'] = array("" => "-") + $this->Users_model->get_dropdown_list(array("first_name", "last_name"), "id");
         }
+
+        $tasks = $this->Tasks_model->getTasks($this->login_user->id)->result();
+        $mappedTasks = [];
+
+        foreach ($tasks as $task) {
+            $mappedTasks[] = [$task->id => $task->title];
+        }
+
+        $view_data['tasks'] = $mappedTasks;
+        $view_data['user'] = $this->login_user;
 
         $this->load->view('attendance/modal_form', $view_data);
     }
@@ -118,6 +123,7 @@ class Attendance extends Pre_loader {
         $data = array(
             "in_time" => $in_date_time,
             "out_time" => $out_date_time,
+            "task_id" => $this->input->post('task_id'),
             "status" => "pending"
         );
 

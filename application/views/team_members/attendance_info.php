@@ -3,6 +3,12 @@ if (isset($page_type) && $page_type === "full") {
     echo "m20";
 }
 ?>">
+
+    <?php if ($user_id === $this->login_user->id) : ?>
+    <div class="title-button-group" style="margin: 20px">
+        <?php echo modal_anchor(get_uri("attendance/modal_form"), "<i class='fa fa-plus-circle'></i> " . lang('add_attendance'), array("class" => "btn btn-default", "title" => lang('add_attendance'))); ?>
+    </div>
+    <?php endif; ?>
     <ul data-toggle="ajax-tab" class="nav nav-tabs bg-white inner" role="tablist">
         <li class="title-tab"><h4 class="pl15 pt5 pr15"><?php
                 if ($user_id === $this->login_user->id) {

@@ -87,7 +87,7 @@ class Settings extends Pre_loader {
     }
 
     function save_company_settings() {
-        $settings = array("company_name", "company_address", "company_phone", "company_email", "company_website", 'working_hours');
+        $settings = array("company_name", "company_address", "company_phone", "company_email", "company_website", 'working_hours', 'opening_hours');
 
         foreach ($settings as $setting) {
             $this->Settings_model->save_setting($setting, $this->input->post($setting));

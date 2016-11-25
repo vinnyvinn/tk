@@ -103,6 +103,25 @@
                         ?>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="opening_hours" class=" col-md-2">Start of Working Hours</label>
+                    <div id="time">
+                        <div class=" col-md-10">
+
+                            <?php
+                            echo form_input(array(
+                                "id" => "opening_hours",
+                                "name" => "opening_hours",
+                                "value" => get_setting('opening_hours'),
+                                "class" => "form-control",
+                                "placeholder" => 'Start of Working Hours',
+                                "data-rule-required" => true,
+                                "data-msg-required" => lang("field_required"),
+                            ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="panel-footer">
                 <button type="submit" class="btn btn-primary"><span class="fa fa-check-circle"></span> <?php echo lang('save'); ?></button>
@@ -121,5 +140,13 @@
             }
         });
 
+        var settings = $.extend({}, {
+            minuteStep: 5,
+            defaultTime: "",
+            appendWidgetTo: "#time",
+            showMeridian: AppHelper.settings.timeFormat != "24_hours"
+        }, {});
+
+        $('#opening_hours').timepicker(settings);
     });
 </script>

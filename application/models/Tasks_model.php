@@ -142,6 +142,19 @@ class Tasks_model extends Crud_model {
         return $this->db->query($sql);
     }
 
+    public function getTasks($userId)
+    {
+        $tasksTable = $this->db->dbprefix('tasks');
+        $query = 'SELECT * FROM ' . $tasksTable .
+            ' WHERE assigned_to = ' . $userId .
+            ' OR collaborators LIKE "%,' . $userId . ',%"' .
+            ' OR collaborators LIKE "' . $userId . ',%"' .
+            ' OR collaborators LIKE "%,' . $userId . '"' .
+            ' OR collaborators = ' . $userId;
+
+        return $this->db->query($query);
+    }
+
     function count_my_open_tasks($user_id) {
         $tasks_table = $this->db->dbprefix('tasks');
         $sql = "SELECT COUNT($tasks_table.id) AS total

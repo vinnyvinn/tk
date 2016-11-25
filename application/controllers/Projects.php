@@ -1640,8 +1640,6 @@ class Projects extends Pre_loader {
             $status = $data->parsed_status;
         }
 
-
-
         $deadline_text = "-";
         if ($data->deadline) {
             $deadline_text = format_to_date($data->deadline);
