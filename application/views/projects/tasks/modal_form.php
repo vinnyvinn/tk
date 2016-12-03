@@ -130,6 +130,22 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="start_date" class=" col-md-3">Max. Allowed Hours</label>
+        <div class=" col-md-9">
+            <?php
+            echo form_input(array(
+                "id" => "max_hours",
+                "name" => "max_hours",
+                "type" => 'number',
+                'min' => 0,
+                "value" => $model_info->max_hours * 1 ? $model_info->max_hours : "",
+                "class" => "form-control",
+                "placeholder" => "Maximum Hours"
+            ));
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="start_date" class=" col-md-3"><?php echo lang('start_date'); ?></label>
         <div class=" col-md-9">
             <?php

@@ -16,6 +16,9 @@
     <div class="p10 b-b">
         <?php echo lang("deadline"); ?>: <?php echo $project_info->deadline * 1 ? format_to_date($project_info->deadline) : "-"; ?>
     </div>
+    <div class="p10 b-b">
+        Cost: <?php echo get_setting('currency_symbol') . ' ' . number_format($project_info->price, 2); ?>
+    </div>
     <?php if ($this->login_user->user_type === "staff") { ?>
         <div class="p10">
             <?php echo lang("client"); ?>: <?php echo anchor(get_uri("clients/view/" . $project_info->client_id), $project_info->company_name); ?>

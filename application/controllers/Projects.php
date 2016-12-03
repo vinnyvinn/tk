@@ -1420,6 +1420,7 @@ class Projects extends Pre_loader {
             "points" => $this->input->post('points'),
             "status" => $this->input->post('status'),
             "labels" => $this->input->post('labels'),
+            "max_hours" => $this->input->post('max_hours'),
             "start_date" => $this->input->post('start_date') ? $this->input->post('start_date') : "0000-00-00",
             "deadline" => $this->input->post('deadline') ? $this->input->post('deadline') : "0000-00-00"
         );
@@ -1592,21 +1593,6 @@ class Projects extends Pre_loader {
             $collaborators = "-";
         }
 
-
-//
-//        {text: 'ToDo - 0% Complete', name: "status", value: "to_do - 0%", isChecked: true},
-//        {text: 'In Progress - 10% Complete', name: "status", value: "in_progress - 10%", isChecked: false},
-//        {text: 'In Progress - 20% Complete', name: "status", value: "in_progress - 20%", isChecked: false},
-//        {text: 'In Progress - 30% Complete', name: "status", value: "in_progress - 30%", isChecked: false},
-//        {text: 'In Progress - 40% Complete', name: "status", value: "in_progress - 40%", isChecked: false},
-//        {text: 'In Progress - 50% Complete', name: "status", value: "in_progress - 50%", isChecked: false},
-//        {text: 'In Progress - 60% Complete', name: "status", value: "in_progress - 60%", isChecked: false},
-//        {text: 'In Progress - 70% Complete', name: "status", value: "in_progress - 70%", isChecked: false},
-//        {text: 'In Progress - 80% Complete', name: "status", value: "in_progress - 80%", isChecked: false},
-//        {text: 'In Progress - 90% Complete', name: "status", value: "in_progress - 90%", isChecked: false},
-//        {text: 'Done - 100%', name: "status", value: "done - 100%", isChecked: false}
-//
-
         $status_class = "";
         $checkbox_class = "checkbox-blank";
         if (strpos($data->status, "to_do")) {
@@ -1667,6 +1653,7 @@ class Projects extends Pre_loader {
         return array(
             $check_status,
             $title,
+            $data->max_hours . ' Hrs.',
             $data->start_date,
             $start_date,
             $data->deadline,

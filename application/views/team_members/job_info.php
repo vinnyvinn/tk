@@ -25,13 +25,14 @@
                 <label for="salary" class=" col-md-2">Monthly <?php echo lang('salary'); ?></label>
                 <div class="col-md-10">
                     <?php
-                    echo form_input(array(
-                        "id" => "salary",
-                        "name" => "salary",
-                        "value" => $job_info->salary ? to_decimal_format($job_info->salary) : "",
-                        "class" => "form-control rate-cal",
-                        "placeholder" => lang('salary')
-                    ));
+                        echo form_input(array(
+                            "id" => "salary",
+                            "name" => "salary",
+                            'type' => 'number',
+                            "value" => $job_info->salary ? $job_info->salary : "",
+                            "class" => "form-control rate-cal",
+                            "placeholder" => lang('salary')
+                        ));
                     ?>
                 </div>
             </div>
@@ -53,11 +54,31 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="salary" class=" col-md-2">Hourly Rate</label>
+                <label for="salary" class=" col-md-2">Personal Hourly Rate</label>
                 <div class="col-md-10">
                     <strong><?php echo get_setting("currency_symbol"); ?> <span id="rate">
                             <?php
                                 echo $job_info->hourly_rate ? to_decimal_format($job_info->hourly_rate) : "";
+                            ?>
+                    </span></strong>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="salary" class=" col-md-2">Administrative Hourly Cost</label>
+                <div class="col-md-10">
+                    <strong><?php echo get_setting("currency_symbol"); ?> <span id="admin-rate" data-value="<?= $rate ?>">
+                            <?php
+                                echo $rate ? number_format($rate, 2) : '0.00';
+                            ?>
+                    </span></strong>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="salary" class=" col-md-2">Total Hourly Rate</label>
+                <div class="col-md-10">
+                    <strong><?php echo get_setting("currency_symbol"); ?> <span id="total-rate">
+                            <?php
+                                echo $job_info->hourly_rate ? number_format($job_info->hourly_rate + $rate, 2) : number_format($rate, 2);
                             ?>
                     </span></strong>
                 </div>
@@ -105,10 +126,14 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('.rate-cal').on('keyup', function () {
-            var sal = parseFloat($('#salary').val().replace(',', ''));
-            var monthHours = parseFloat($('#working_hours').val().replace(',', ''));
+            var sal = parseFloat($('#salary').val().replace(',', '')) || 0;
+            var monthHours = parseFloat($('#working_hours').val().replace(',', '')) || 0;
+            var adminRate = parseFloat($('#admin-rate').data('value'));
+            var rate = (Math.round((sal/monthHours) * 100)) / 100;
 
-            $('#rate').html((sal/monthHours).toLocaleString());
+
+            $('#rate').html(rate.toLocaleString());
+            $('#total-rate').html((rate + adminRate).toLocaleString());
         });
         $("#job-info-form").appForm({
             isModal: false,

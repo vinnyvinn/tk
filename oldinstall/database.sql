@@ -546,6 +546,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `assigned_to` int(11) NOT NULL,
   `deadline` date DEFAULT NULL,
   `labels` text COLLATE utf8_unicode_ci,
+  `max_hours` int(11) NOT NULL DEFAULT '0',
   `points` tinyint(4) NOT NULL DEFAULT '1',
   `status` enum('to_do - 0%', 'in_progress - 25%', 'in_progress - 50%', 'in_progress - 75%', 'done - 100%') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'to_do - 0%',
   `start_date` date NOT NULL,

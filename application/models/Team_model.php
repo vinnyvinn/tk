@@ -9,6 +9,13 @@ class Team_model extends Crud_model {
         parent::__construct($this->table);
     }
 
+    function count() {
+        $team_table = $this->db->dbprefix('team_member_job_info');
+        $sql = 'SELECT count(id) as total FROM ' . $team_table;
+
+        return $this->db->query($sql);
+    }
+
     function get_details($options = array()) {
         $team_table = $this->db->dbprefix('team');
         $where = "";

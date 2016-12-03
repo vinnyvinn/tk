@@ -72,6 +72,7 @@
                 columns: [
                     {title: '<?php echo lang("id") ?>'},
                     {title: '<?php echo lang("title") ?>'},
+                    {title: 'Max Hrs.'},
                     {visible: false, searchable: false},
                     {title: '<?php echo lang("start_date") ?>', "iDataSort": 2},
                     {visible: false, searchable: false},

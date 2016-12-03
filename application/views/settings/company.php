@@ -122,6 +122,26 @@
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="opening_hours" class=" col-md-2">Total Monthly Admin Costs</label>
+                    <div id="time">
+                        <div class=" col-md-10">
+
+                            <?php
+                            echo form_input(array(
+                                "id" => "admin_costs",
+                                "name" => "admin_costs",
+                                'type' => 'number',
+                                "value" => get_setting('admin_costs'),
+                                "class" => "form-control",
+                                "placeholder" => 'Total Monthly Admin Costs',
+                                "data-rule-required" => true,
+                                "data-msg-required" => lang("field_required"),
+                            ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="panel-footer">
                 <button type="submit" class="btn btn-primary"><span class="fa fa-check-circle"></span> <?php echo lang('save'); ?></button>

@@ -331,10 +331,10 @@ class Team_members extends Pre_loader
                     $view_data['show_projects'] = true;
                 }
 
-
                 $view_data['tab'] = $tab; //selected tab
                 $view_data['user_info'] = $user_info;
                 $view_data['social_link'] = $this->Social_links_model->get_one($id);
+
                 $this->template->rander("team_members/view", $view_data);
             } else {
                 show_404();
@@ -355,9 +355,15 @@ class Team_members extends Pre_loader
         $options = array("id" => $user_id);
         $user_info = $this->Users_model->get_details($options)->row();
 
+        $totalUsers = $this->Team_model->count()->result()[0]->total;
+        $rate = is_numeric(get_setting('admin_costs')) ? intval(get_setting('admin_costs')) : 1;
+        $hours = is_numeric(get_setting('working_hours')) ? intval(get_setting('working_hours')) : 150;
+
+        $view_data['rate'] = round($rate / ($totalUsers * $hours), 2);
         $view_data['user_id'] = $user_id;
         $view_data['job_info'] = $this->Users_model->get_job_info($user_id);
         $view_data['job_info']->job_title = $user_info->job_title;
+
         $this->load->view("team_members/job_info", $view_data);
     }
 
