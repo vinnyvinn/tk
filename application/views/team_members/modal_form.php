@@ -1,5 +1,6 @@
 <?php echo form_open(get_uri("team_members/add_team_member"), array("id" => "team_member-form", "class" => "general-form", "role" => "form")); ?>
 <div class="modal-body clearfix">
+    <input type="hidden" name="data-type" id="data-type">
 
     <div class="form-widget">
         <div class="widget-title clearfix">
@@ -259,10 +260,15 @@
             $('#rate').html((sal/monthHors).toLocaleString());
         });
 
+        $('#data-type').val(localStorage.getItem('isPopup') == 'true' ? 'plain' : 'normal');
 
         $("#team_member-form").appForm({
             onSuccess: function(result) {
                 if (result.success) {
+                    if (localStorage.getItem('isPopup') == 'true') {
+                        postTask.updateListeners(JSON.parse(result.data));
+                        return
+                    }
                     $("#team_member-table").appTable({newData: result.data, dataId: result.id});
                 }
             },

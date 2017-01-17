@@ -162,9 +162,24 @@ class Team_members extends Pre_loader
         }
 
         if ($user_id) {
-            echo json_encode(
-                array("success" => true, "data" => $this->_row_data($user_id), 'id' => $user_id, 'message' => lang(
-                    'record_saved')));
+            if ($this->input->post('data-type') == 'plain') {
+                echo json_encode([
+                    "success" => true,
+                    "data" => json_encode([
+                        'id' => $user_id,
+                        'title' => $user_data['first_name'] . ' ' . $user_data['last_name']
+                    ]),
+                    'id' => $user_id,
+                    'message' => lang('record_saved')
+                ]);
+            } else {
+                echo json_encode([
+                    "success" => true,
+                    "data" => $this->_row_data($user_id),
+                    'id' => $user_id,
+                    'message' => lang('record_saved')
+                ]);
+            }
         } else {
             echo json_encode(array("success" => false, 'message' => lang('error_occurred')));
         }
@@ -357,7 +372,7 @@ class Team_members extends Pre_loader
 
         $totalUsers = $this->Team_model->count()->result()[0]->total;
         $rate = is_numeric(get_setting('admin_costs')) ? intval(get_setting('admin_costs')) : 1;
-        $hours = is_numeric(get_setting('working_hours')) ? intval(get_setting('working_hours')) : 150;
+        $hours = is_numeric(get_setting('working_hours')) ? intval(get_setting('working_hours')) : 1;
 
         $view_data['rate'] = round($rate / ($totalUsers * $hours), 2);
         $view_data['user_id'] = $user_id;

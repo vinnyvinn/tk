@@ -54,9 +54,10 @@ class Milestones_model extends Crud_model {
         $sql = "SELECT $milestones_table.*, total_points_table.total_points, completed_points_table.completed_points
         FROM $milestones_table
         LEFT JOIN (SELECT milestone_id, SUM(points) AS total_points FROM $tasks_table WHERE deleted=0 AND milestone_id !=0 GROUP BY milestone_id) AS  total_points_table ON total_points_table.milestone_id= $milestones_table.id
-        LEFT JOIN (SELECT milestone_id, SUM(points) AS completed_points FROM $tasks_table WHERE deleted=0 AND milestone_id !=0 AND status='done' GROUP BY milestone_id) AS  completed_points_table ON completed_points_table.milestone_id= $milestones_table.id
+        LEFT JOIN (SELECT milestone_id, SUM(points) AS completed_points FROM $tasks_table WHERE deleted=0 AND milestone_id !=0 AND status='done - 100%' GROUP BY milestone_id) AS  completed_points_table ON completed_points_table.milestone_id= $milestones_table.id
         WHERE $milestones_table.deleted=0 $where";
-        return $this->db->query($sql);         
+
+        return $this->db->query($sql);
     }
 
 }

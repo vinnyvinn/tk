@@ -24,13 +24,13 @@ if (isset($page_type) && $page_type === "full") {
             <table id="monthly-attendance-table" class="display" cellspacing="0" width="100%">    
                 <tfoot>
                     <tr>
-                        <th colspan="5" class="text-right"><?php echo lang("total") ?>:</th>
-                        <th data-current-page="5"></th>
+                        <th colspan="6" class="text-right"><?php echo lang("total") ?>:</th>
+                        <th data-current-page="6"></th>
                         <th> </th>
                     </tr>
                     <tr data-section="all_pages">
-                        <th colspan="5" class="text-right"><?php echo lang("total_of_all_pages") ?>:</th>
-                        <th data-all-page="5"></th>
+                        <th colspan="6" class="text-right"><?php echo lang("total_of_all_pages") ?>:</th>
+                        <th data-all-page="6"></th>
                         <th> </th>
                     </tr>
                 </tfoot>
@@ -44,16 +44,17 @@ if (isset($page_type) && $page_type === "full") {
                         filterParams: {user_id: "<?php echo $user_id; ?>"},
                         columns: [
                             {targets: [1], visible: false, searchable: false},
-                            {title: "<?php echo lang("in_date"); ?>", "class": "w20p"},
-                            {title: "<?php echo lang("in_time"); ?>", "class": "w20p"},
-                            {title: "<?php echo lang("out_date"); ?>", "class": "w20p"},
-                            {title: "<?php echo lang("out_time"); ?>", "class": "w20p"},
+                            {title: "Project (Task)", "class": "w15p"},
+                            {title: "<?php echo lang("in_date"); ?>", "class": "w15p"},
+                            {title: "<?php echo lang("in_time"); ?>", "class": "w10p"},
+                            {title: "<?php echo lang("out_date"); ?>", "class": "w15p"},
+                            {title: "<?php echo lang("out_time"); ?>", "class": "w10p"},
                             {title: "<?php echo lang("duration"); ?>"},
                             {title: '<i class="fa fa-bars"></i>', "class": "text-center option w100"}
                         ],
-                        printColumns: [1, 2, 3, 4, 5],
-                        xlsColumns: [1, 2, 3, 4, 5],
-                        summation: [{column: 5, dataType: 'time'}]
+                        printColumns: [1, 2, 3, 4, 5, 6],
+                        xlsColumns: [1, 2, 3, 4, 5, 6],
+                        summation: [{column: 6, dataType: 'time'}]
                     });
                 };
 

@@ -10,7 +10,7 @@ class Timesheets_model extends Crud_model {
     }
 
     function get_details($options = array()) {
-        $timesheet_table = $this->db->dbprefix('project_time');
+        $timesheet_table = $this->db->dbprefix('attendance');
         $users_table = $this->db->dbprefix('users');
         $where = "";
         $id = get_array_value($options, "id");
@@ -39,6 +39,7 @@ class Timesheets_model extends Crud_model {
         FROM $timesheet_table
         LEFT JOIN $users_table ON $users_table.id= $timesheet_table.user_id
         WHERE $timesheet_table.deleted=0 $where";
+
         return $this->db->query($sql);
     }
 

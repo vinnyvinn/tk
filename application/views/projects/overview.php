@@ -56,9 +56,11 @@ load_js(array(
         });
 
         var taskData = [
-            {label: "<?php echo lang('to_do'); ?>", data: <?php echo $task_to_do; ?>, color: "#F9A52D"},
-            {label: "<?php echo lang('in_progress'); ?>", data: <?php echo $task_in_progress; ?>, color: "#1672B9"},
-            {label: "<?php echo lang('done'); ?>", data: <?php echo $task_done; ?>, color: "#00B393"}
+            {label: "TODO - 0%", data: <?php echo $taskStatus['to_do - 0%']; ?>, color: "#f9531d"},
+            {label: "In Progress - 25%", data: <?php echo $taskStatus['in_progress - 25%']; ?>, color: "#d0c953"},
+            {label: "In Progress - 50%", data: <?php echo $taskStatus['in_progress - 50%']; ?>, color: "#9e33f9"},
+            {label: "In Progress - 75%", data: <?php echo $taskStatus['in_progress - 75%']; ?>, color: "#0ff9c9"},
+            {label: "Complete - 100%", data: <?php echo $taskStatus['done - 100%']; ?>, color: "#60dd00"}
         ];
 
         $.plot('#task-status-pai', taskData, {

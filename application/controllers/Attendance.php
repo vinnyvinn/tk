@@ -82,7 +82,7 @@ class Attendance extends Pre_loader {
         $mappedTasks = [];
 
         foreach ($tasks as $task) {
-            $mappedTasks[] = [$task->id => $task->title];
+            $mappedTasks[$task->id . '-' . $task->project_id] = $task->projectName . " ($task->title)";
         }
 
         $view_data['tasks'] = $mappedTasks;
@@ -120,10 +120,14 @@ class Attendance extends Pre_loader {
         $in_date_time = convert_date_local_to_utc($in_date_time);
         $out_date_time = convert_date_local_to_utc($out_date_time);
 
+        $taskDetails = explode('-', $this->input->post('task_id'));
+
         $data = array(
             "in_time" => $in_date_time,
             "out_time" => $out_date_time,
-            "task_id" => $this->input->post('task_id'),
+            "difference" => abs(strtotime($out_date_time) - strtotime($in_date_time)),
+            "task_id" => $taskDetails[0],
+            "project_id" => $taskDetails[1],
             "status" => "pending"
         );
 
@@ -195,6 +199,7 @@ class Attendance extends Pre_loader {
         foreach ($list_data as $data) {
             $result[] = $this->_make_row($data);
         }
+
         echo json_encode(array("data" => $result));
     }
 
@@ -245,6 +250,7 @@ class Attendance extends Pre_loader {
 
         return array(
             get_team_member_profile_link($data->user_id, $user),
+            "$data->projectName ($data->taskName)",
             format_to_date($data->in_time),
             format_to_time($data->in_time),
             $out_time ? format_to_date($out_time) : "-",

@@ -66,9 +66,16 @@
     </div>
     <div class="form-group">
         <label for="milestone_id" class=" col-md-3"><?php echo lang('milestone'); ?></label>
-        <div class="col-md-9">
+        <div class="col-md-8">
             <?php
-            echo form_dropdown("milestone_id", $milestones_dropdown, array($model_info->milestone_id), "class='select2'");
+            echo form_dropdown("milestone_id", $milestones_dropdown, array($model_info->milestone_id), ['class' => 'select2', 'id' => 'milestone_id']);
+            ?>
+        </div>
+        <div class="col-md-1">
+            <?php
+            if ($can_create_milestones) {
+                echo modal_anchor(get_uri("projects/milestone_modal_form"), "<i class='fa fa-plus-circle'></i>", array("class" => "btn btn-info btn-add", "title" => lang('add_milestone'), "data-post-project_id" => $project_id, "data-is-popup" => '1', 'data-populate' => 'milestone_id'));
+            }
             ?>
         </div>
     </div>
@@ -76,9 +83,16 @@
     <?php if ($show_assign_to_dropdown) { ?>
         <div class="form-group">
             <label for="assigned_to" class=" col-md-3"><?php echo lang('assign_to'); ?></label>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <?php
-                echo form_dropdown("assigned_to", $assign_to_dropdown, array($model_info->assigned_to), "class='select2'");
+                echo form_dropdown("assigned_to", $assign_to_dropdown, array($model_info->assigned_to), ['class' => 'select2', 'id' => 'assigned_to']);
+                ?>
+            </div>
+            <div class="col-md-1">
+                <?php
+                if ($this->login_user->is_admin) {
+                    echo modal_anchor(get_uri("team_members/modal_form"), "<i class='fa fa-plus-circle'></i>", array("class" => "btn btn-info btn-add", "title" => lang('add_team_member'), "data-is-popup" => '1', 'data-populate' => 'assigned_to'));
+                }
                 ?>
             </div>
         </div>
@@ -91,7 +105,7 @@
                     "id" => "collaborators",
                     "name" => "collaborators",
                     "value" => $model_info->collaborators,
-                    "class" => "form-control",
+                    "class" => "form-control tagged",
                     "placeholder" => lang('collaborators')
                 ));
                 ?>
@@ -123,7 +137,7 @@
                 "id" => "project_labels",
                 "name" => "labels",
                 "value" => $model_info->labels,
-                "class" => "form-control",
+                "class" => "form-control tagged",
                 "placeholder" => lang('labels')
             ));
             ?>
@@ -183,6 +197,8 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        localStorage.setItem('projectLabels', JSON.stringify(<?php echo json_encode($label_suggestions); ?>));
+        localStorage.setItem('collaborators', JSON.stringify(<?php echo json_encode($collaborators_dropdown); ?>));
         $("#task-form").appForm({
             onSuccess: function (result) {
                 $("#task-table").appTable({newData: result.data, dataId: result.id});
@@ -192,6 +208,12 @@
         $("#title").focus();
 
         setDatePicker("#start_date, #end_date, #deadline");
+//        $('#start_date').datepicker()
+//            .on('changeDate', function(e) {
+//                console.log('changed', e);
+//                // `e` here contains the extra attributes
+//            });
+
 
         $("#project_labels").select2({
             tags: <?php echo json_encode($label_suggestions); ?>
@@ -202,6 +224,5 @@
         });
 
         $('[data-toggle="tooltip"]').tooltip();
-
     });
 </script>    

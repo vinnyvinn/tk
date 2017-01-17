@@ -1,4 +1,80 @@
 $(document).ready(function () {
+
+    // manage close action on modal
+    $("#ajaxModal").on('hide.bs.modal', function (e) {
+        if (localStorage.getItem('isPopup') == 'true' && e.namespace == "bs.modal") {
+            localStorage.setItem('isPopup', 'false');
+            postTask.updateListeners({});
+        }
+    });
+
+    window.postTask = {
+        updateListeners: function (newData) {
+            localStorage.setItem('isPopup', 'false');
+            var timeOut = typeof newData.title == 'undefined' ? 100 : 1200;
+
+            setTimeout(function () {
+                $('#previousAjaxModal')
+                    .find(".modal-body")
+                    .mCustomScrollbar("destroy").removeClass('mCS_destroyed')
+                    .find(".select2, .tagged")
+                    .select2('destroy');
+                $('#previousAjaxModal').find('.select2-container').remove();
+                $('#previousAjaxModal').find('.tagged').removeAttr('style');
+
+                var modal = $("#ajaxModal");
+                modal.find('.modal-dialog').remove();
+                modal.append($("#previousAjaxModal").find('.modal-dialog').clone());
+                $("#previousAjaxModal").find('.modal-dialog').html('');
+
+                var updateId = localStorage.getItem('populates');
+                var updateField = modal.find('#' + updateId);
+                var $scroll = modal.find(".modal-body"),
+                    height = $scroll.height(),
+                    maxHeight = $(window).height() - 200;
+
+                modal.find('.select2').select2();
+
+                $("#project_labels").select2('destroy').select2({
+                    tags: JSON.parse(localStorage.getItem('projectLabels'))
+                });
+
+                $("#collaborators").select2('destroy').select2({
+                    tags: JSON.parse(localStorage.getItem('collaborators'))
+                });
+
+                $("#title").focus();
+                setDatePicker("#start_date, #end_date, #deadline");
+                $('[data-toggle="tooltip"]').tooltip();
+                if (typeof newData.title != 'undefined') {
+                    updateField.append($('<option value="' + newData.id + '" selected>' + newData.title + '</option>'));
+                    updateField.select2('data', {id: newData.id, text: newData.title});
+                }
+
+                $("#task-form").appForm({
+                    onSuccess: function (result) {
+                        $("#task-table").appTable({newData: result.data, dataId: result.id});
+                    }
+                });
+                modal.modal('show');
+
+                if (height > maxHeight) {
+                    height = maxHeight;
+                }
+                $scroll.mCustomScrollbar({setHeight: height, theme: "minimal-dark", autoExpandScrollbar: true});
+
+                // setTimeout(function () {
+                //     $(document).ready(function () {
+
+                //     });
+                // }, 1000);
+
+            }, timeOut);
+
+
+        }
+    };
+
     $.ajaxSetup({cache: false});
 
     //set locale of moment js
@@ -20,6 +96,14 @@ $(document).ready(function () {
     //set datepicker language
 
     $('body').on('click', '[data-act=ajax-modal]', function () {
+        // backup current modal
+        $('#previousAjaxModal').find('.modal-dialog').remove();
+        $("#ajaxModalContent").find(".modal-body").mCustomScrollbar("destroy").removeClass('mCS_destroyed');
+        $("#ajaxModalContent").find(".select2").select2('destroy');
+        $('#previousAjaxModal').append($("#ajaxModal .modal-dialog").clone());
+        localStorage.setItem('isPopup', $(this).attr('data-is-popup') == 1);
+        localStorage.setItem('populates', $(this).attr('data-populate'));
+
         var data = {ajaxModal: 1},
         url = $(this).attr('data-action-url'),
                 isLargeModal = $(this).attr('data-modal-lg'),
@@ -603,6 +687,8 @@ if (typeof TableTools != 'undefined') {
                                 return unformatCurrency(currentValue);
                             } else if (option.dataType === "time") {
                                 return moment.duration(currentValue).asSeconds();
+                            } else if (option.dataType === "float") {
+                                return parseFloat(currentValue);
                             } else {
                                 return currentValue;
                             }

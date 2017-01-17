@@ -84,4 +84,18 @@ class Project_members_model extends Crud_model {
         }
     }
 
+    public function bulkInsert($project, $users = array())
+    {
+        $project_members_table = $this->db->dbprefix('project_members');
+        $sql = 'INSERT INTO ' . $project_members_table . '(user_id, project_id, is_leader, deleted) VALUES ';
+
+        $users = array_map(function ($value) use ($project) {
+            return "($value, $project, 0, 0)";
+        }, $users);
+
+        $sql .= implode(',', $users);
+
+        return $this->db->query($sql);
+    }
+
 }

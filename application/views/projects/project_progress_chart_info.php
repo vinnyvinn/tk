@@ -11,17 +11,33 @@
     </div>
 
     <div class="p10 b-t b-b">
-        <?php echo lang("start_date"); ?>: <?php echo $project_info->start_date * 1 ? format_to_date($project_info->start_date) : "-"; ?>
+        <?php echo lang("start_date"); ?>: <span class="pull-right"><?php echo $project_info->start_date * 1 ? format_to_date($project_info->start_date) : "-"; ?></span>
     </div>
     <div class="p10 b-b">
-        <?php echo lang("deadline"); ?>: <?php echo $project_info->deadline * 1 ? format_to_date($project_info->deadline) : "-"; ?>
+        <?php echo lang("deadline"); ?>: <span class="pull-right"><?php echo $project_info->deadline * 1 ? format_to_date($project_info->deadline) : "-"; ?></span>
     </div>
     <div class="p10 b-b">
-        Cost: <?php echo get_setting('currency_symbol') . ' ' . number_format($project_info->price, 2); ?>
+        Project Value: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($project_info->price, 2); ?></span>
     </div>
     <?php if ($this->login_user->user_type === "staff") { ?>
+        <div class="p10 b-b">
+            Estimated Cost: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($estimateCost, 2); ?></span>
+        </div>
+        <div class="p10 b-b">
+            Current Cost: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($currentCost, 2); ?></span>
+        </div>
+        <?php if ($costVariance < 0) : ?>
+            <div class="p10 b-b bg-danger">
+                Current Loss: <span class="pull-right">(<?php echo get_setting('currency_symbol') . number_format($costVariance * -1, 2); ?>)</span>
+            </div>
+        <?php else : ?>
+            <div class="p10 b-b bg-success">
+                Current Saving: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($costVariance, 2); ?></span>
+            </div>
+        <?php endif; ?>
+
         <div class="p10">
-            <?php echo lang("client"); ?>: <?php echo anchor(get_uri("clients/view/" . $project_info->client_id), $project_info->company_name); ?>
+            <?php echo lang("client"); ?>: <span class="pull-right"><?php echo anchor(get_uri("clients/view/" . $project_info->client_id), $project_info->company_name); ?></span>
         </div>
     <?php } ?>
 </div>

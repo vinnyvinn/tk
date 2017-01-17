@@ -18,7 +18,7 @@
         <label for="start_date" class=" col-md-3 col-sm-3"><?php echo lang('start_date'); ?></label>
         <div class="col-md-4 col-sm-4 form-group">
             <?php
-            $in_time = ($model_info->start_time * 1) ? convert_date_utc_to_local($model_info->start_time) : "";
+            $in_time = ($model_info->in_time * 1) ? convert_date_utc_to_local($model_info->in_time) : "";
 
             if ($time_format_24_hours) {
                 $in_time_value = $in_time ? date("H:i", strtotime($in_time)) : "";
@@ -57,7 +57,7 @@
         <label for="end_date" class=" col-md-3 col-sm-3"><?php echo lang('end_date'); ?></label>
         <div class=" col-md-4 col-sm-4 form-group">
             <?php
-            $out_time = ($model_info->end_time * 1) ? convert_date_utc_to_local($model_info->end_time) : "";
+            $out_time = ($model_info->out_time * 1) ? convert_date_utc_to_local($model_info->out_time) : "";
 
             if ($time_format_24_hours) {
                 $out_time_value = $in_time ? date("H:i", strtotime($out_time)) : "";

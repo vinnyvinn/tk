@@ -4,6 +4,20 @@ ini_set('allow_url_fopen', 'On');
 ini_set('allow_url_include', 'On');
 ini_set('error_reporting', E_ALL);
 
+function getDatabasae() {
+
+    if (! isset($_SERVER['HTTP_HOST'])) {
+        return 'teamkazi_demo';
+    }
+    $pieces = explode('.', $_SERVER['HTTP_HOST']);
+
+    if (count($pieces) < 3) {
+        return 'teamkazi_demo';
+    }
+
+    return 'teamkazi_' . $pieces[0];
+}
+
 /**
  * CodeIgniter
  *

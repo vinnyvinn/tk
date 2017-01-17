@@ -1,5 +1,6 @@
 <?php echo form_open(get_uri("projects/save_milestone"), array("id" => "milestone-form", "class" => "general-form", "role" => "form")); ?>
 <div class="modal-body clearfix">
+    <input type="hidden" name="data-type" id="data-type">
     <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />
     <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
     <div class="form-group">
@@ -45,14 +46,18 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#data-type').val(localStorage.getItem('isPopup') == 'true' ? 'plain' : 'normal');
         $("#milestone-form").appForm({
             onSuccess: function(result) {
+                if (localStorage.getItem('isPopup') == 'true') {
+                    postTask.updateListeners(JSON.parse(result.data));
+                    return
+                }
                 $("#milestone-table").appTable({newData: result.data, dataId: result.id});
             }
         });
         $("#title").focus();
 
         setDatePicker("#due_date");
-
     });
 </script>    

@@ -24,11 +24,13 @@
             <input type="hidden" name="user_id" value="<?= $user->id; ?>" />
         <?php endif; ?>
         <div class="form-group">
-            <label for="applicant_id" class=" col-md-3"><?php echo lang('tasks'); ?></label>
+            <label for="task_id" class=" col-md-3"><?php echo lang('tasks'); ?></label>
             <div class=" col-md-9">
-                <?php
-                    echo form_dropdown("task_id", $tasks, "", "class='select2 validate-hidden' id='task_id' data-rule-required='true', data-msg-required='" . lang('field_required') . "'");
-                ?>
+                <select class='select2 validate-hidden' name="task_id" id="task_id" data-rule-required="true", data-msg-required="<?= lang('field_required') ?>">
+                    <?php foreach ($tasks as $key => $task) : ?>
+                    <option<?= $model_info->task_id . '-' . $model_info->project_id == $key ? ' selected': '' ?> value="<?= $key ?>"><?= $task ?></option>
+                    <?php endforeach; ?>
+                </select>
             </div>
         </div>
 

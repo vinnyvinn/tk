@@ -80,6 +80,7 @@ class Tasks_model extends Crud_model {
         $projects = $this->db->dbprefix('projects');
         $milestones_table = $this->db->dbprefix('milestones');
         $project_members_table = $this->db->dbprefix('project_members');
+        $attendance_table = $this->db->dbprefix('attendance');
 
         $where = "";
 
@@ -131,6 +132,7 @@ class Tasks_model extends Crud_model {
 
         $sql = "SELECT $tasks_table.*, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS assigned_to_user, $users_table.image as assigned_to_avatar, 
                     $projects.title AS project_title, $milestones_table.title AS milestone_title, IF($tasks_table.deadline='0000-00-00',$milestones_table.due_date,$tasks_table.deadline) AS deadline,
+                    (SELECT SUM($attendance_table.difference) from $attendance_table where task_id = tasks.id and deleted = 0) as logged,
                     (SELECT GROUP_CONCAT($users_table.id, '--::--', $users_table.first_name, ' ', $users_table.last_name, '--::--' , IFNULL($users_table.image,'')) FROM $users_table WHERE FIND_IN_SET($users_table.id, $tasks_table.collaborators)) AS collaborator_list  
         FROM $tasks_table
         LEFT JOIN $users_table ON $users_table.id= $tasks_table.assigned_to
@@ -145,12 +147,40 @@ class Tasks_model extends Crud_model {
     public function getTasks($userId)
     {
         $tasksTable = $this->db->dbprefix('tasks');
-        $query = 'SELECT * FROM ' . $tasksTable .
+        $projectsTable = $this->db->dbprefix('projects');
+
+        $query = 'SELECT ' . $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
+            ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id' .
             ' WHERE assigned_to = ' . $userId .
             ' OR collaborators LIKE "%,' . $userId . ',%"' .
             ' OR collaborators LIKE "' . $userId . ',%"' .
             ' OR collaborators LIKE "%,' . $userId . '"' .
             ' OR collaborators = ' . $userId;
+
+        return $this->db->query($query);
+    }
+
+    public function getCurrentCost($projectId)
+    {
+        $attendanceTable = $this->db->dbprefix('attendance');
+        $jobInfoTable = $this->db->dbprefix('team_member_job_info');
+
+        $query = 'SELECT (SUM(difference) / 3600) as time_rate, ' .
+            'SUM((difference * hourly_rate)/3600) as total_cost FROM ' . $attendanceTable .
+            ' INNER JOIN ' . $jobInfoTable . ' on ' . $jobInfoTable . '.user_id = ' . $attendanceTable . '.user_id ' .
+            'WHERE project_id = ' . $projectId . ' and ' . $attendanceTable . '.deleted = 0';
+
+        return $this->db->query($query);
+    }
+
+    public function getEstimatedCost($projectId, $individualRunningCost)
+    {
+        $tasksTable = $this->db->dbprefix('tasks');
+        $jobInfoTable = $this->db->dbprefix('team_member_job_info');
+
+        $query = "SELECT SUM(max_hours * (hourly_rate + $individualRunningCost)) as estimate FROM $tasksTable" .
+            " INNER JOIN $jobInfoTable ON $jobInfoTable.user_id = $tasksTable.assigned_to " .
+            "WHERE project_id = $projectId";
 
         return $this->db->query($query);
     }

@@ -79,7 +79,7 @@ $db['default'] = array(
     'hostname' => 'localhost',
     'username' => 'homestead',
     'password' => 'secret',
-    'database' => 'projectman',
+    'database' => getDatabasae(),
     'dbdriver' => 'mysqli',
     'dbprefix' => '',
     'pconnect' => FALSE, //set it FALSE if your site has a huge trafic and/or you are saving session data in database
@@ -95,3 +95,4 @@ $db['default'] = array(
     'failover' => array(),
     'save_queries' => TRUE
 );
+

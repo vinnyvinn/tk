@@ -181,4 +181,13 @@ class Users_model extends Crud_model {
         return $this->db->query($sql)->row();
     }
 
+    public function all_dropdown()
+    {
+        $users_table = $this->db->dbprefix('users');
+
+        $sql = "SELECT id as user_id, CONCAT(first_name,  ' ',last_name) AS member_name FROM " . $users_table;
+
+        return $this->db->query($sql);
+    }
+
 }

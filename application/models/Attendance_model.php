@@ -47,6 +47,8 @@ class Attendance_model extends Crud_model {
     function get_details($options = array()) {
         $attendnace_table = $this->db->dbprefix('attendance');
         $users_table = $this->db->dbprefix('users');
+        $tasksTable = $this->db->dbprefix('tasks');
+        $projectsTable = $this->db->dbprefix('projects');
 
         $where = "";
         $id = get_array_value($options, "id");
@@ -87,9 +89,11 @@ class Attendance_model extends Crud_model {
         }
 
 
-        $sql = "SELECT $attendnace_table.*,  CONCAT($users_table.first_name, ' ',$users_table.last_name) AS created_by_user, $users_table.image as created_by_avatar
+        $sql = "SELECT $attendnace_table.*, $projectsTable.title as projectName, $tasksTable.title as taskName, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS created_by_user, $users_table.image as created_by_avatar
         FROM $attendnace_table
         LEFT JOIN $users_table ON $users_table.id = $attendnace_table.user_id
+        LEFT JOIN $tasksTable ON $tasksTable.id = $attendnace_table.task_id
+        LEFT JOIN $projectsTable ON $projectsTable.id = $attendnace_table.project_id
         WHERE $attendnace_table.deleted=0 $where";
         return $this->db->query($sql);
     }

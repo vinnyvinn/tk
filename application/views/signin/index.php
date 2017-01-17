@@ -23,6 +23,12 @@
                 $this->load->view("signin/signin_form");
             }
             ?>
+            <div class="pull-right">
+                <a href="https://facebook.com/wizag" target="_blank"><i class="fa fa-facebook-square fa-2x"></i></a>
+                <a href="https://twitter.com/_wizag" target="_blank"><i class="fa fa-twitter-square fa-2x"></i></a>
+                <a href="https://www.linkedin.com/company/wizag" target="_blank"><i class="fa fa-linkedin-square fa-2x"></i></a>
+                <a href="wizag.biz" target="_blank"><i class="fa fa-globe fa-2x"></i></a>
+            </div>
         </div>
     </body>
 </html>

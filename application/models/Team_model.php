@@ -10,8 +10,10 @@ class Team_model extends Crud_model {
     }
 
     function count() {
-        $team_table = $this->db->dbprefix('team_member_job_info');
-        $sql = 'SELECT count(id) as total FROM ' . $team_table;
+        $teamTable = $this->db->dbprefix('team_member_job_info');
+        $usersTable = $this->db->dbprefix('users');
+        $sql = "SELECT count($teamTable.id) as total FROM " . $teamTable . ' INNER JOIN ' . $usersTable .
+            " ON $teamTable.user_id = $usersTable.id WHERE $usersTable.status = 'active'";
 
         return $this->db->query($sql);
     }
@@ -39,5 +41,4 @@ class Team_model extends Crud_model {
         WHERE $team_table.deleted=0 AND id in($team_ids)";
         return $this->db->query($sql);
     }
-
 }

@@ -20,3 +20,8 @@
         </div>
     </div>
 </div>
+
+<!-- Previous Modal -->
+<div class="modal in" id="previousAjaxModal" tabindex="-1" role="dialog" aria-labelledby="previousAjaxModal" aria-hidden="true">
+
+</div>

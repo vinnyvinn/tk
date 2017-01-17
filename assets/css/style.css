@@ -2353,3 +2353,14 @@ ins {
 ::-webkit-scrollbar-track {
     background: rgba(0,0,0,0.1);
 }
+
+.btn {
+    border-radius: 30px !important;
+}
+
+.btn-add {
+    margin-left: -20px;
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+}

@@ -51,7 +51,7 @@ class Projects_model extends Crud_model {
         FROM $projects_table
         LEFT JOIN $clients_table ON $clients_table.id= $projects_table.client_id
         LEFT JOIN (SELECT project_id, SUM(points) AS total_points FROM $tasks_table WHERE deleted=0 GROUP BY project_id) AS  total_points_table ON total_points_table.project_id= $projects_table.id
-        LEFT JOIN (SELECT project_id, SUM(points) AS completed_points FROM $tasks_table WHERE deleted=0 AND status='done' GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= $projects_table.id
+        LEFT JOIN (SELECT project_id, SUM(points) AS completed_points FROM $tasks_table WHERE deleted=0 AND status='done - 100%' GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= $projects_table.id
         $extra_join    
         WHERE $projects_table.deleted=0 $where $extra_where
         ORDER BY $projects_table.start_date DESC";
@@ -121,6 +121,38 @@ class Projects_model extends Crud_model {
         WHERE $tasks_table.deleted=0 AND $tasks_table.project_id=$project_id $where
         ORDER BY $tasks_table.start_date, $milestones_table.due_date DESC";
         return $this->db->query($sql)->result();
+    }
+
+    public function getProjectAttendance($projectId)
+    {
+        $tasksTable = $this->db->dbprefix('tasks');
+        $usersTable = $this->db->dbprefix('users');
+        $projectsTable = $this->db->dbprefix('projects');
+        $attendanceTable = $this->db->dbprefix('attendance');
+
+        $query = 'select ' . $attendanceTable .'.*, ' . $usersTable .'.* from ' . $attendanceTable .
+            ' inner join ' . $tasksTable .' on ' . $attendanceTable . '.task_id = ' . $tasksTable .
+            '.id inner join ' . $projectsTable . ' on ' . $tasksTable . '.project_id = ' . $projectsTable .
+            '.id inner join ' . $usersTable . ' on ' . $attendanceTable . '.user_id = ' . $usersTable .
+            '.id where ' . $projectsTable . '.id = ' . $projectId;
+
+        return $this->db->query($query)->result();
+    }
+
+    public function getTaskAttendance($projectId)
+    {
+        $tasksTable = $this->db->dbprefix('tasks');
+        $usersTable = $this->db->dbprefix('users');
+        $projectsTable = $this->db->dbprefix('projects');
+        $attendanceTable = $this->db->dbprefix('attendance');
+
+        $query = 'select ' . $attendanceTable .'.*, ' . $usersTable .'.* from ' . $attendanceTable .
+            ' inner join ' . $tasksTable .' on ' . $attendanceTable . '.task_id = ' . $tasksTable .
+            '.id inner join ' . $projectsTable . ' on ' . $tasksTable . '.project_id = ' . $projectsTable .
+            '.id inner join ' . $usersTable . ' on ' . $attendanceTable . '.user_id = ' . $usersTable .
+            '.id where ' . $projectsTable . '.id = ' . $projectId;
+
+        return $this->db->query($query)->result();
     }
 
 }
