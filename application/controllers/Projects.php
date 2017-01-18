@@ -1060,6 +1060,7 @@ class Projects extends Pre_loader {
 
         return array(
             get_team_member_profile_link($data->user_id, $user),
+            "$data->taskName",
             format_to_datetime($data->in_time),
             format_to_datetime($data->out_time),
             convert_seconds_to_time_format(abs(strtotime($end_time) - strtotime($start_time))),

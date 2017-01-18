@@ -10,13 +10,13 @@
         <table id="project-timesheet-table" class="display" width="100%">  
             <tfoot>
                 <tr>
-                    <th colspan="3" class="text-right"><?php echo lang("total") ?>:</th>
-                    <th class="text-left" data-current-page="3"></th>
+                    <th colspan="4" class="text-right"><?php echo lang("total") ?>:</th>
+                    <th class="text-left" data-current-page="4"></th>
                     <th> </th>
                 </tr>
                 <tr data-section="all_pages">
-                    <th colspan="3" class="text-right"><?php echo lang("total_of_all_pages") ?>:</th>
-                    <th class="text-left" data-all-page="3"></th>
+                    <th colspan="4" class="text-right"><?php echo lang("total_of_all_pages") ?>:</th>
+                    <th class="text-left" data-all-page="4"></th>
                     <th> </th>
                 </tr>
             </tfoot>
@@ -33,14 +33,15 @@
             filterDropdown: [{name: "user_id", class: "w200", options: <?php echo $project_members_dropdown; ?>}],
             columns: [
                 {title: '<?php echo lang("member") ?>'},
+                {title: 'Task'},
                 {title: '<?php echo lang("start_time") ?>'},
                 {title: '<?php echo lang("end_time") ?>'},
                 {title: '<?php echo lang("total") ?>'},
                 {title: '<i class="fa fa-bars"></i>', "class": "text-center option w100"}
             ],
-            printColumns: [0, 1, 2, 3],
-            xlsColumns: [0, 1, 2, 3],
-            summation: [{column: 3, dataType: 'time'}]
+            printColumns: [0, 1, 2, 3, 4],
+            xlsColumns: [0, 1, 2, 3, 4],
+            summation: [{column: 4, dataType: 'time'}]
         });
     });
 </script>

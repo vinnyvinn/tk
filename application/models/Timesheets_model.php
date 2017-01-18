@@ -12,6 +12,8 @@ class Timesheets_model extends Crud_model {
     function get_details($options = array()) {
         $timesheet_table = $this->db->dbprefix('attendance');
         $users_table = $this->db->dbprefix('users');
+        $tasksTable = $this->db->dbprefix('tasks');
+
         $where = "";
         $id = get_array_value($options, "id");
         if ($id) {
@@ -35,9 +37,10 @@ class Timesheets_model extends Crud_model {
             $where .= " AND $timesheet_table.status='$status'";
         }
 
-        $sql = "SELECT $timesheet_table.*,  CONCAT($users_table.first_name, ' ',$users_table.last_name) AS logged_by_user, $users_table.image as logged_by_avatar
+        $sql = "SELECT $timesheet_table.*, $tasksTable.title as taskName,  CONCAT($users_table.first_name, ' ',$users_table.last_name) AS logged_by_user, $users_table.image as logged_by_avatar
         FROM $timesheet_table
         LEFT JOIN $users_table ON $users_table.id= $timesheet_table.user_id
+        LEFT JOIN $tasksTable ON $tasksTable.id = $timesheet_table.task_id
         WHERE $timesheet_table.deleted=0 $where";
 
         return $this->db->query($sql);
