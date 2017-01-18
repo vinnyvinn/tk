@@ -31,7 +31,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#attendance-table").appTable({
-            source: '<?php echo_uri("attendance/list_data/"); ?>',
+            source: '<?php echo_uri("attendance/list_data"); ?>',
             order: [[2, "asc"]],
             dateRangeType: "daily",
             columns: [

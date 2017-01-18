@@ -63,12 +63,6 @@ $(document).ready(function () {
                 }
                 $scroll.mCustomScrollbar({setHeight: height, theme: "minimal-dark", autoExpandScrollbar: true});
 
-                // setTimeout(function () {
-                //     $(document).ready(function () {
-
-                //     });
-                // }, 1000);
-
             }, timeOut);
 
 
@@ -636,8 +630,6 @@ if (typeof TableTools != 'undefined') {
                 "type": "POST",
                 "data": settings.filterParams
             },
-            "processing": true,
-            "serverSide": true,
             sServerMethod: "POST",
             columns: settings.columns,
             bProcessing: true,
