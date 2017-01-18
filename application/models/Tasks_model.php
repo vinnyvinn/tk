@@ -144,8 +144,9 @@ class Tasks_model extends Crud_model {
         return $this->db->query($sql);
     }
 
-    public function getTasks($userId)
+    public function getTasks($user)
     {
+        $userId = $user->id;
         $tasksTable = $this->db->dbprefix('tasks');
         $projectsTable = $this->db->dbprefix('projects');
 
@@ -156,6 +157,11 @@ class Tasks_model extends Crud_model {
             ' OR collaborators LIKE "' . $userId . ',%"' .
             ' OR collaborators LIKE "%,' . $userId . '"' .
             ' OR collaborators = ' . $userId;
+
+        if ($user->is_admin) {
+            $query = 'SELECT ' . $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
+                ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id';
+        }
 
         return $this->db->query($query);
     }

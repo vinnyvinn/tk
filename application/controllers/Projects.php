@@ -1710,9 +1710,10 @@ class Projects extends Pre_loader {
 
         $status_class = "";
         $checkbox_class = "checkbox-blank";
-        if (strpos($data->status, "to_do")) {
+
+        if (strpos($data->status, "to_do") !== false) {
             $status_class = "b-warning";
-        } else if (strpos($data->status, "in_progress")) {
+        } else if (strpos($data->status, "in_progress") !== false) {
             $status_class = "b-primary";
         } else {
             $checkbox_class = "checkbox-checked";

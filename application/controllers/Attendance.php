@@ -78,7 +78,7 @@ class Attendance extends Pre_loader {
             $view_data['team_members_dropdown'] = array("" => "-") + $this->Users_model->get_dropdown_list(array("first_name", "last_name"), "id");
         }
 
-        $tasks = $this->Tasks_model->getTasks($this->login_user->id)->result();
+        $tasks = $this->Tasks_model->getTasks($this->login_user)->result();
         $mappedTasks = [];
 
         foreach ($tasks as $task) {

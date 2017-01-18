@@ -54,7 +54,7 @@ class Projects_model extends Crud_model {
         LEFT JOIN (SELECT project_id, SUM(points) AS completed_points FROM $tasks_table WHERE deleted=0 AND status='done - 100%' GROUP BY project_id) AS  completed_points_table ON completed_points_table.project_id= $projects_table.id
         $extra_join    
         WHERE $projects_table.deleted=0 $where $extra_where
-        ORDER BY $projects_table.start_date DESC";
+        ORDER BY $projects_table.title";
         return $this->db->query($sql);
     }
 

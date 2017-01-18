@@ -66,7 +66,7 @@
                 printColumns: [0, 1, 3, 6],
                 xlsColumns: [0, 1, 3, 6],
                 rowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(0)', nRow).addClass(aData[12]);
+                    $('td:eq(0)', nRow).addClass(aData[14]);
                 }
             });
         } else {
@@ -101,7 +101,7 @@
                 xlsColumns: [0, 1, 2, 3, 5, 7, 9],
                 summation: [{column: 2, dataType: 'float'},{column: 4, dataType: 'float'}],
                 rowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(0)', nRow).addClass(aData[13]);
+                    $('td:eq(0)', nRow).addClass(aData[14]);
                 }
             });
         }
