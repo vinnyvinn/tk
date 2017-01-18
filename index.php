@@ -15,6 +15,10 @@ function getDatabasae() {
         return 'teamkazi_demo';
     }
 
+    if (strtolower($pieces[0]) == 'www') {
+        return 'teamkazi_demo';
+    }
+
     return 'teamkazi_' . $pieces[0];
 }
 

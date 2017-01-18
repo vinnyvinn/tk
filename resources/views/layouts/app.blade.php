@@ -63,7 +63,7 @@
             "js/magnific-popup/jquery.magnific-popup.min.js",
             "js/notificatoin_handler.js",
             "js/general_helper.js",
-            "js/app.min.js"
+            "js/app-0000001.min.js"
         ];
     ?>
     @foreach($styles as $style)

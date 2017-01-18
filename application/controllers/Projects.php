@@ -1764,7 +1764,7 @@ class Projects extends Pre_loader {
             $options .= js_anchor("<i class='fa fa-times fa-fw'></i>", array('title' => lang('delete_task'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("projects/delete_task"), "data-action" => "delete"));
         }
 
-        $currentHours = $data->logged / 3600;
+        $currentHours = round($data->logged / 3600, 2);
 
         return array(
             $check_status,

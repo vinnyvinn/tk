@@ -632,10 +632,12 @@ if (typeof TableTools != 'undefined') {
         var datatableOptions = {
             // sAjaxSource: settings.source,
             ajax: {
-                url: settings.source,
-                type: "POST",
-                data: settings.filterParams
+                "url": settings.source,
+                "type": "POST",
+                "data": settings.filterParams
             },
+            "processing": true,
+            "serverSide": true,
             sServerMethod: "POST",
             columns: settings.columns,
             bProcessing: true,
@@ -853,6 +855,7 @@ if (typeof TableTools != 'undefined') {
                     language: "custom",
                 }).on('changeDate', function (e) {
                     var date = moment(e.date).format(settings._inputDateFormat);
+
                     settings.filterParams.start_date = date;
                     settings.filterParams.end_date = date;
                     initSingleDaySelectorText($datepicker);
