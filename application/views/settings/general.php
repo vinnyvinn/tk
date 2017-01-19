@@ -15,19 +15,6 @@
             </div>
             <div class="panel-body post-dropzone">
                 <div class="form-group">
-                    <label for="logo" class=" col-md-2"><?php echo lang('site_logo'); ?></label>
-                    <div class=" col-md-10">
-                        <div class="pull-left mr15">
-                            <img id="site-logo-preview" src="<?php echo get_file_uri(get_setting("system_file_path") . get_setting("site_logo")); ?>" alt="..." />
-                        </div>
-                        <div class="pull-left file-upload btn btn-default btn-xs">
-                            <span>...</span>
-                            <input id="site_logo_file" class="cropbox-upload upload" name="site_logo_file" type="file" data-height="40" data-width="175" data-preview-container="#site-logo-preview" data-input-field="#site_logo" />
-                        </div>
-                        <input type="hidden" id="site_logo" name="site_logo" value=""  />
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="logo" class=" col-md-2"><?php echo lang('invoice_logo'); ?></label>
                     <div class=" col-md-10">
                         <div class="pull-left mr15">

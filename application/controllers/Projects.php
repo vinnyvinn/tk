@@ -472,7 +472,7 @@ class Projects extends Pre_loader {
             $task->project_id = $new_project_id;
             $milestone_id = get_array_value($milestones_array, $task->milestone_id);
             $task->milestone_id = $milestone_id ? $milestone_id : "";
-            $task->status = "to_do";
+            $task->status = "to_do - 0%";
 
             if (!$copy_same_assignee_and_collaborators) {
                 $task->assigned_to = "";
@@ -1712,7 +1712,7 @@ class Projects extends Pre_loader {
         $status_class = "";
         $checkbox_class = "checkbox-blank";
 
-        if (strpos($data->status, "to_do") !== false) {
+        if (strpos($data->status, "to_do - 0%") !== false) {
             $status_class = "b-warning";
         } else if (strpos($data->status, "in_progress") !== false) {
             $status_class = "b-primary";
@@ -2314,7 +2314,14 @@ class Projects extends Pre_loader {
 
             $group_array = array();
             $series = array();
-            $status_class = array("to_do" => "label-warning", "in_progress" => "label-primary", "done" => "label-success");
+
+            $status_class = [
+                "to_do - 0%" => "label-warning",
+                "in_progress - 25%" => "label-primary",
+                "in_progress - 50%" => "label-primary",
+                "in_progress - 75%" => "label-primary",
+                "done - 100%" => "label-success"
+            ];
 
             foreach ($gantt_data as $data) {
 
@@ -2334,7 +2341,12 @@ class Projects extends Pre_loader {
                     $group_id = $data->assigned_to;
                     $group_array[$data->assigned_to] = array("id" => $group_id, "name" => $data->assigned_to_name);
                 }
-                $series[$group_id][] = array("name" => modal_anchor(get_uri("projects/task_view"), $data->task_title, array("title" => lang('task_info') . " #$data->task_id", "data-post-id" => $data->task_id)), "start" => $start_date, "end" => $end_date, "class" => get_array_value($status_class, $data->status));
+                $series[$group_id][] = [
+                    "name" => modal_anchor(get_uri("projects/task_view"), $data->task_title, array("title" => lang('task_info') . " #$data->task_id", "data-post-id" => $data->task_id)),
+                    "start" => $start_date,
+                    "end" => $end_date,
+                    "class" => get_array_value($status_class, $data->status)
+                ];
             }
 
             $gantt = array();
@@ -2346,6 +2358,8 @@ class Projects extends Pre_loader {
                 } else {
                     $gantt_section["name"] = get_array_value($group_value, "name");
                 }
+
+
 
                 $gantt_section["id"] = get_array_value($group_value, "id");
                 $gantt_section["series"] = get_array_value($series, get_array_value($group_value, "id"));

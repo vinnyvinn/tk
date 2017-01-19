@@ -14,9 +14,9 @@
                     <span class='label label-light mr5' title='Point'><?php echo $model_info->points; ?></span>
                     <?php
                     $status_class = "";
-                    if ($model_info->status === "to_do") {
+                    if ($model_info->status === "to_do - 0%") {
                         $status_class = "label-warning";
-                    } else if ($model_info->status === "in_progress") {
+                    } else if (strpos($new_status, "in_progress") != false) {
                         $status_class = "label-primary";
                     } else {
                         $status_class = "label-success";

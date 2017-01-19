@@ -47,8 +47,8 @@
 
     $(document).ready(function () {
         var $ganttGroupBy = $("#gantt-group-by"),
-                $ganttMilestone = $("#gantt-milestone-dropdown"),
-                $ganttMembers = $("#gantt-members-dropdown");
+            $ganttMilestone = $("#gantt-milestone-dropdown"),
+            $ganttMembers = $("#gantt-members-dropdown");
 
         $ganttGroupBy.select2();
 

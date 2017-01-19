@@ -195,7 +195,7 @@ class Tasks_model extends Crud_model {
         $tasks_table = $this->db->dbprefix('tasks');
         $sql = "SELECT COUNT($tasks_table.id) AS total
         FROM $tasks_table
-        WHERE $tasks_table.deleted=0  AND ($tasks_table.assigned_to=$user_id OR FIND_IN_SET('$user_id', $tasks_table.collaborators)) AND FIND_IN_SET($tasks_table.status,'to_do,in_progress')";
+        WHERE $tasks_table.deleted=0  AND ($tasks_table.assigned_to=$user_id OR FIND_IN_SET('$user_id', $tasks_table.collaborators)) AND FIND_IN_SET($tasks_table.status,'to_do - 0%,in_progress - 25%,in_progress - 50%,in_progress - 75%')";
         ;
         return $this->db->query($sql)->row()->total;
     }

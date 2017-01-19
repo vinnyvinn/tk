@@ -103,7 +103,7 @@ class Notification_processor extends CI_Controller {
                         $event = "project_task_reopened";
                     } else if ($new_status == "done") {
                         $event = "project_task_finished";
-                    } else if ($new_status == "in_progress") {
+                    } else if (strpos($new_status, "in_progress") != false) {
                         $event = "project_task_started";
                     }
                     $options["activity_log_id"] = ""; //remove activity log id
