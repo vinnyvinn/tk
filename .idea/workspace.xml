@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="08a8bf80-2e41-4f2e-85ad-8da5a2b68b9b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/images/favicon.png" afterPath="$PROJECT_DIR$/assets/images/favicon.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/images/logo.png" afterPath="$PROJECT_DIR$/assets/images/logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/system/_file583447f91a1fd-site-logo.png" afterPath="$PROJECT_DIR$/files/system/_file583447f91a1fd-site-logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/system/_file583447f91e3c7-invoice-logo.png" afterPath="$PROJECT_DIR$/files/system/_file583447f91e3c7-invoice-logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/system/default-invoice-logo.png" afterPath="$PROJECT_DIR$/files/system/default-invoice-logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/files/system/default-stie-logo.png" afterPath="$PROJECT_DIR$/files/system/default-stie-logo.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Notification_processor.php" afterPath="$PROJECT_DIR$/application/controllers/Notification_processor.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/controllers/Projects.php" afterPath="$PROJECT_DIR$/application/controllers/Projects.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Tasks_model.php" afterPath="$PROJECT_DIR$/application/models/Tasks_model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/projects/gantt/index.php" afterPath="$PROJECT_DIR$/application/views/projects/gantt/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/projects/tasks/view.php" afterPath="$PROJECT_DIR$/application/views/projects/tasks/view.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/views/settings/general.php" afterPath="$PROJECT_DIR$/application/views/settings/general.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Expenses_model.php" afterPath="$PROJECT_DIR$/application/models/Expenses_model.php" />
     </list>
     <ignored path="projectman.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Projects.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Projects.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Projects.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-193">
-              <caret line="762" column="25" lean-forward="false" selection-start-line="762" selection-start-column="20" selection-end-line="762" selection-end-column="25" />
+            <state relative-caret-position="241">
+              <caret line="739" column="0" lean-forward="true" selection-start-line="739" selection-start-column="0" selection-end-line="739" selection-end-column="0" />
               <folding>
                 <marker date="1484829203196" expanded="true" signature="22427:22617" ph="..." />
                 <marker date="1484829203196" expanded="false" signature="22565:22582" ph="..." />
@@ -56,6 +44,21 @@
                 <marker date="1484829203196" expanded="true" signature="46282:46472" ph="..." />
                 <marker date="1484829203196" expanded="false" signature="46420:46437" ph="..." />
                 <marker date="1484829203196" expanded="true" signature="46438:46457" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Expenses_model.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/models/Expenses_model.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="403">
+              <caret line="22" column="62" lean-forward="true" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
+              <folding>
+                <marker date="1484835424958" expanded="true" signature="1428:1994" ph="SELECT ${$ex... ${$expenses_table}" />
+                <marker date="1484835424958" expanded="true" signature="2275:2418" ph="SELECT SUM($... ${$invoice_payments_table}" />
+                <marker date="1484835424958" expanded="true" signature="2489:2610" ph="SELECT SUM($... ${$expenses_table}" />
+                <marker date="1484835424958" expanded="true" signature="2923:3192" ph="SELECT SUM($... " />
               </folding>
             </state>
           </provider>
@@ -116,7 +119,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>over</find>
       <find>index</find>
       <find>milestones</find>
       <find>status='done'</find>
@@ -146,6 +148,7 @@
       <find>get_gantt_data</find>
       <find>find in</find>
       <find>gantt_data</find>
+      <find>overv</find>
     </findStrings>
     <replaceStrings>
       <replace>-&gt;out_time</replace>
@@ -159,7 +162,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/application/controllers/Settings.php" />
         <option value="$PROJECT_DIR$/application/views/team_members/job_info.php" />
         <option value="$PROJECT_DIR$/application/views/projects/tasks/import_modal_form.php" />
         <option value="$PROJECT_DIR$/application/models/Users_model.php" />
@@ -210,6 +212,7 @@
         <option value="$PROJECT_DIR$/application/controllers/Projects.php" />
         <option value="$PROJECT_DIR$/application/models/Tasks_model.php" />
         <option value="$PROJECT_DIR$/application/helpers/widget_helper.php" />
+        <option value="$PROJECT_DIR$/application/models/Expenses_model.php" />
       </list>
     </option>
   </component>
@@ -574,12 +577,12 @@
       <workItem from="1484728789141" duration="5092000" />
       <workItem from="1484739706778" duration="496000" />
       <workItem from="1484825178509" duration="385000" />
-      <workItem from="1484825807384" duration="4782000" />
+      <workItem from="1484825807384" duration="5982000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130223000" />
+    <option name="totallyTimeSpent" value="131423000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="26" width="1366" height="742" extended-state="6" />
@@ -626,13 +629,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/models/Crud_model.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="59" column="13" lean-forward="false" selection-start-line="59" selection-start-column="13" selection-end-line="59" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Team_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -1023,8 +1019,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/controllers/Projects.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-193">
-          <caret line="762" column="25" lean-forward="false" selection-start-line="762" selection-start-column="20" selection-end-line="762" selection-end-column="25" />
+        <state relative-caret-position="241">
+          <caret line="739" column="0" lean-forward="true" selection-start-line="739" selection-start-column="0" selection-end-line="739" selection-end-column="0" />
           <folding>
             <marker date="1484829203196" expanded="true" signature="22427:22617" ph="..." />
             <marker date="1484829203196" expanded="false" signature="22565:22582" ph="..." />
@@ -1032,6 +1028,19 @@
             <marker date="1484829203196" expanded="true" signature="46282:46472" ph="..." />
             <marker date="1484829203196" expanded="false" signature="46420:46437" ph="..." />
             <marker date="1484829203196" expanded="true" signature="46438:46457" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Expenses_model.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="22" column="62" lean-forward="true" selection-start-line="22" selection-start-column="62" selection-end-line="22" selection-end-column="62" />
+          <folding>
+            <marker date="1484835424958" expanded="true" signature="1428:1994" ph="SELECT ${$ex... ${$expenses_table}" />
+            <marker date="1484835424958" expanded="true" signature="2275:2418" ph="SELECT SUM($... ${$invoice_payments_table}" />
+            <marker date="1484835424958" expanded="true" signature="2489:2610" ph="SELECT SUM($... ${$expenses_table}" />
+            <marker date="1484835424958" expanded="true" signature="2923:3192" ph="SELECT SUM($... " />
           </folding>
         </state>
       </provider>

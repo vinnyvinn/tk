@@ -15,7 +15,6 @@ class Expenses_model extends Crud_model {
         $projects_table = $this->db->dbprefix('projects');
         $users_table = $this->db->dbprefix('users');
 
-
         $where = "";
         $id = get_array_value($options, "id");
         if ($id) {
