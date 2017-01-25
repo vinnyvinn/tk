@@ -736,10 +736,9 @@ class Projects extends Pre_loader {
             $timeCost = $this->Tasks_model->getCurrentCost($project_id)->result()[0];
             $estimatedCost = $this->Tasks_model->getEstimatedCost($project_id, $individualRate)->result();
 
-            $currentCost = ($individualRate * $timeCost->time_rate) + $timeCost->total_cost;
-
-
-            $view_data['currentCost'] = $currentCost;
+            $view_data['resourceCost'] = ($individualRate * $timeCost->time_rate) + $timeCost->total_cost;
+            $view_data['expenses'] = floatval($this->Expenses_model->getProjectCost($project_id));
+            $view_data['totalCost'] = $view_data['resourceCost'] + $view_data['expenses'];
             $view_data['costVariance'] = $project_info->price - $currentCost;
             $view_data['estimateCost'] = count($estimatedCost) > 0 ? $estimatedCost[0]->estimate : 0;
 
@@ -1509,6 +1508,7 @@ class Projects extends Pre_loader {
         $this->updateResources($assigned_to, $collaborators, $project_id);
 
         $data = array(
+            'priority' => $this->input->post('priority'),
             "title" => $this->input->post('title'),
             "description" => $this->input->post('description'),
             "project_id" => $project_id,
@@ -1782,7 +1782,7 @@ class Projects extends Pre_loader {
             $deadline_text,
             $project_title,
             $assigned_to,
-            $collaborators,
+            $data->priority,
             $status,
             $options,
             $status_class

@@ -11,8 +11,14 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $('#data-type').val(localStorage.getItem('isPopup') == 'true' ? 'plain' : 'normal');
         $("#client-form").appForm({
             onSuccess: function(result) {
+                if (localStorage.getItem('isPopup') == 'true') {
+                    postTask.updateListeners(JSON.parse(result.data));
+                    return
+                }
+
                 if (result.view === "details") {
                     appAlert.success(result.message, {duration: 10000});
                     setTimeout(function() {

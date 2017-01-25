@@ -1,3 +1,4 @@
+<input type="hidden" name="data-type" id="data-type">
 <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />
 <input type="hidden" name="view" value="<?php echo isset($view) ? $view : ""; ?>" />
 <div class="form-group">

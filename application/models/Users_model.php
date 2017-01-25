@@ -183,9 +183,12 @@ class Users_model extends Crud_model {
 
     public function all_dropdown()
     {
-        $users_table = $this->db->dbprefix('users');
+        $users = $this->db->dbprefix('users');
+        $jobInfo = $this->db->dbprefix('team_member_job_info');
 
-        $sql = "SELECT id as user_id, CONCAT(first_name,  ' ',last_name) AS member_name FROM " . $users_table;
+        $sql = "SELECT {$users}.id as user_id, CONCAT(first_name,  ' ',last_name) AS member_name FROM {$users} "
+            . "INNER JOIN {$jobInfo} on {$users}.id = {$jobInfo}.user_id WHERE status = 'active' "
+            . "and disable_login = 0 and {$users}.deleted = 0 ORDER BY first_name";
 
         return $this->db->query($sql);
     }

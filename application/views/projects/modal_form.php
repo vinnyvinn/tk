@@ -20,11 +20,17 @@
     </div>
     <div class="form-group">
         <label for="client_id" class=" col-md-3"><?php echo lang('client'); ?></label>
-        <div class=" col-md-9">
+        <div class="col-md-8">
             <?php
-            echo form_dropdown("client_id", $clients_dropdown, array($model_info->client_id), "class='select2 validate-hidden' data-rule-required='true', data-msg-required='" . lang('field_required') . "'");
+            echo form_dropdown("client_id", $clients_dropdown, array($model_info->client_id), "id='client_id' class='select2 validate-hidden' data-rule-required='true', data-msg-required='" . lang('field_required') . "'");
             ?>
         </div>
+
+        <div class="col-md-1">
+            <?php echo modal_anchor(get_uri("clients/modal_form"), "<i class='fa fa-plus-circle'></i>", array("data-is-popup" => '1', 'data-populate' => 'client_id', "class" => "btn btn-info btn-add", "title" => lang('add_client'))); ?>
+        </div>
+
+
     </div>
     <div class="form-group">
         <label for="description" class=" col-md-3"><?php echo lang('description'); ?></label>
@@ -119,9 +125,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
+        localStorage.setItem('projectLabels', JSON.stringify(<?php echo json_encode($label_suggestions); ?>));
+
         $("#project-form").appForm({
             onSuccess: function (result) {
                 $("#project-table").appTable({newData: result.data, dataId: result.id});
+                setTimeout(function () {
+                    location.reload();
+                }, 100);
             }
         });
         $("#title").focus();

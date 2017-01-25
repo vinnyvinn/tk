@@ -81,4 +81,18 @@ class Expenses_model extends Crud_model {
         return $this->db->query($expenses)->result();
     }
 
+    public function getProjectCost($projectId)
+    {
+        $expenses_table = $this->db->dbprefix('expenses');
+        $expenses = "SELECT SUM($expenses_table.amount) AS total
+            FROM $expenses_table
+            WHERE $expenses_table.deleted=0 AND $expenses_table.project_id = $projectId";
+
+        $result = $this->db->query($expenses)->result();
+        $cost = 0;
+        if (count($result)) {
+            $cost = $result[0]->total;
+        }
+        return $cost;
+    }
 }

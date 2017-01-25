@@ -21,18 +21,24 @@
     </div>
     <?php if ($this->login_user->user_type === "staff") { ?>
         <div class="p10 b-b">
-            Estimated Cost: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($estimateCost, 2); ?></span>
+            Current Resource Cost: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($resourceCost, 2); ?></span>
         </div>
         <div class="p10 b-b">
-            Current Cost: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($currentCost, 2); ?></span>
+            Current Expenses: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($expenses, 2); ?></span>
+        </div>
+        <div class="p10 b-b">
+            <strong>Total Cost: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($totalCost, 2); ?></span></strong>
+        </div>
+        <div class="p10 b-b">
+            <strong>Estimated Cost: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($estimateCost, 2); ?></span></strong>
         </div>
         <?php if ($costVariance < 0) : ?>
             <div class="p10 b-b bg-danger">
-                Current Loss: <span class="pull-right">(<?php echo get_setting('currency_symbol') . number_format($costVariance * -1, 2); ?>)</span>
+                <strong>Current Loss: <span class="pull-right">(<?php echo get_setting('currency_symbol') . number_format($costVariance * -1, 2); ?>)</span></strong>
             </div>
         <?php else : ?>
             <div class="p10 b-b bg-success">
-                Current Saving: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($costVariance, 2); ?></span>
+                <strong>Current Saving: <span class="pull-right"><?php echo get_setting('currency_symbol') . number_format($costVariance, 2); ?></span></strong>
             </div>
         <?php endif; ?>
 

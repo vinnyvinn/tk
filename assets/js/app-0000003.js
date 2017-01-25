@@ -56,6 +56,15 @@ $(document).ready(function () {
                         $("#task-table").appTable({newData: result.data, dataId: result.id});
                     }
                 });
+
+                $("#project-form").appForm({
+                    onSuccess: function (result) {
+                        $("#project-table").appTable({newData: result.data, dataId: result.id});
+                        setTimeout(function () {
+                            location.reload();
+                        }, 100);
+                    }
+                });
                 modal.modal('show');
 
                 if (height > maxHeight) {

@@ -93,7 +93,7 @@
                     {title: '<?php echo lang("deadline") ?>', "iDataSort": 4},
                     {visible: false, searchable: false},
                     {title: '<?php echo lang("assigned_to") ?>', "class": "min-w150"},
-                    {title: '<?php echo lang("collaborators") ?>'},
+                    {title: 'Priority'},
                     {title: '<?php echo lang("status") ?>'},
                     {title: '<i class="fa fa-bars"></i>', visible: optionVisibility, "class": "text-center option w100"}
                 ],

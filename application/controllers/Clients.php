@@ -84,7 +84,14 @@ class Clients extends Pre_loader {
 
         $save_id = $this->Clients_model->save($data, $client_id);
         if ($save_id) {
-            echo json_encode(array("success" => true, "data" => $this->_row_data($save_id), 'id' => $save_id, 'view' => $this->input->post('view'), 'message' => lang('record_saved')));
+
+            if ($this->input->post('data-type') == 'plain') {
+                echo json_encode(["success" => true, "data" => json_encode(['id' => $save_id, 'title' => $data['company_name']]), 'id' => $save_id, 'message' => lang('record_saved')]);
+            } else {
+                echo json_encode(array("success" => true, "data" => $this->_row_data($save_id), 'id' => $save_id, 'view' => $this->input->post('view'), 'message' => lang('record_saved')));
+            }
+
+
         } else {
             echo json_encode(array("success" => false, 'message' => lang('error_occurred')));
         }

@@ -160,6 +160,17 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="priority" class=" col-md-3">Priority</label>
+        <div class="col-md-9">
+            <select name="priority" id="priority" class="form-control">
+                <option<?= $model_info->priority == 'High' ? ' selected' : '' ?> value="High">High</option>
+                <option<?= $model_info->priority == 'Normal' ? ' selected' : '' ?> value="Normal">Normal</option>
+                <option<?= $model_info->priority == 'Low' ? ' selected' : '' ?> value="Low">Low</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label for="start_date" class=" col-md-3"><?php echo lang('start_date'); ?></label>
         <div class=" col-md-9">
             <?php
@@ -187,6 +198,7 @@
             ?>
         </div>
     </div>
+
 </div>
 
 <div class="modal-footer">
