@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Task;
+use Carbon\Carbon;
 use Excel;
 use Illuminate\Http\Request;
 use Response;
@@ -46,9 +47,9 @@ class TaskController extends Controller
             ]), [
                 'title' => $row['title'],
                 'description' => $row['description'],
-                'max_hours' => $row['hours'],
-                'start_date' => $row['start_date'],
-                'deadline' => $row['deadline']
+                'max_hours' => is_null($row['hours']) ? 0 : $row['hours'],
+                'start_date' => is_null($row['start_date']) ? null : Carbon::parse($row['start_date']),
+                'deadline' => is_null($row['start_date']) ? null : Carbon::parse($row['deadline'])
             ]);
         }
 

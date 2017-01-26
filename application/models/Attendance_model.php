@@ -95,6 +95,7 @@ class Attendance_model extends Crud_model {
         LEFT JOIN $tasksTable ON $tasksTable.id = $attendnace_table.task_id
         LEFT JOIN $projectsTable ON $projectsTable.id = $attendnace_table.project_id
         WHERE $attendnace_table.deleted=0 $where";
+
         return $this->db->query($sql);
     }
 
@@ -188,6 +189,29 @@ class Attendance_model extends Crud_model {
         $info->timesheet_total = $this->db->query($timesheet_sql)->row()->total_sec;
 
         return $info;
+    }
+
+    public function getTaskAttendance($startDate, $endDate)
+    {
+        $attendnace_table = $this->db->dbprefix('attendance');
+        $users_table = $this->db->dbprefix('users');
+        $tasksTable = $this->db->dbprefix('tasks');
+        $projectsTable = $this->db->dbprefix('projects');
+
+        $where = "";
+        $offset = convert_seconds_to_time_format(get_timezone_offset());
+        $where .= " AND DATE(ADDTIME($attendnace_table.in_time,'$offset'))>='$startDate'";
+        $where .= " AND DATE(ADDTIME($attendnace_table.in_time,'$offset'))<='$endDate'";
+
+        $sql = "SELECT SUM(difference) as clockedHours, $projectsTable.title as projectName, $tasksTable.title as taskName, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS created_by_user, $users_table.image as created_by_avatar
+        FROM $attendnace_table
+        LEFT JOIN $users_table ON $users_table.id = $attendnace_table.user_id
+        LEFT JOIN $tasksTable ON $tasksTable.id = $attendnace_table.task_id
+        LEFT JOIN $projectsTable ON $projectsTable.id = $attendnace_table.project_id
+        WHERE $attendnace_table.deleted=0 $where
+         GROUP BY $attendnace_table.user_id, tasks.id";
+
+        return $this->db->query($sql);
     }
 
 }

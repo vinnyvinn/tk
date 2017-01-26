@@ -701,6 +701,8 @@ if (typeof TableTools != 'undefined') {
                             pageTotal = toCurrency(pageTotal, option.currencySymbol);
                         } else if (option.dataType === "time") {
                             pageTotal = secondsToTimeFormat(pageTotal);
+                        } else if (option.dataType === "float") {
+                            pageTotal = pageTotal.toFixed(2);
                         }
                         $(instance).find("[data-current-page=" + option.column + "]").html(pageTotal);
 
