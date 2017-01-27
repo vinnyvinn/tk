@@ -6,18 +6,6 @@
         </div>
         <div class="table-responsive">
             <table id="attendance-table" class="display" cellspacing="0" width="100%">            
-                <tfoot>
-                    <tr>
-                        <th colspan="6" class="text-right"><?php echo lang("total") ?>:</th>
-                        <th data-current-page="6"></th>
-                        <th> </th>
-                    </tr>
-                    <tr data-section="all_pages">
-                        <th colspan="6" class="text-right"><?php echo lang("total_of_all_pages") ?>:</th>
-                        <th data-all-page="6"></th>
-                        <th> </th>
-                    </tr>
-                </tfoot>
             </table>
         </div>
     </div>
@@ -35,15 +23,36 @@
                 {title: "<?php echo lang("team_member"); ?>", "class": "w15p"},
                 {visible: false, searchable: false},
                 {title: "Task", "class": "w15p"},
-                {title: "<?php echo lang("in_time"); ?>", "class": "w10p"},
-                {title: "<?php echo lang("out_date"); ?>", "class": "w15p"},
-                {title: "<?php echo lang("out_time"); ?>", "class": "w10p"},
-                {title: "<?php echo lang("duration"); ?>"},
-                {title: '<i class="fa fa-bars"></i>', "class": "text-center option w100"}
+                {title: "Duration", "class": "w10p text-right"},
             ],
-            printColumns: [0, 1, 2, 3, 4, 5, 6],
-            xlsColumns: [0, 1, 2, 3, 4, 5, 6],
-            summation: [{column: 6, dataType: 'time'}]
+            printColumns: [0, 1, 2, 3],
+            xlsColumns: [0, 1, 2, 3],
+            "drawCallback": function ( settings ) {
+                var api = this.api();
+                var rows = api.rows({page:'current'}).nodes();
+                var last=null;
+                var totals = 0;
+
+                api.column(1, {page:'current'}).data().each(function (group, i) {
+                    totals += parseFloat($(rows).eq(i).find('td').eq(2).html());
+                    if (last !== group) {
+//                        $(rows).eq(i).before(
+//                            '<tr class="group">' +
+//                            '<td></td>' +
+//                            '<td><strong>Total: </strong></td>' +
+//                            '<td class="text-right"><strong>'+totals +'</strong></td>' +
+//                            '</tr>'
+//                        );
+//
+                        $(rows).eq(i)
+                            .before('<tr class="group"><td colspan="4">'+group+'</td></tr>');
+
+
+                        totals = 0;
+                        last = group;
+                    }
+                } );
+            }
         });
     });
 </script>    

@@ -40,11 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="left_menu.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="left_menu.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/views/includes/left_menu.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="109" column="91" lean-forward="false" selection-start-line="109" selection-start-column="91" selection-end-line="109" selection-end-column="91" />
+            <state relative-caret-position="2449">
+              <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
               <folding>
                 <element signature="e#2616#3484#0#PHP" expanded="false" />
                 <element signature="e#3748#5172#0#PHP" expanded="false" />
@@ -56,8 +56,8 @@
       <file leaf-file-name="Attendance.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/controllers/Attendance.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7440">
-              <caret line="313" column="47" lean-forward="false" selection-start-line="313" selection-start-column="47" selection-end-line="313" selection-end-column="47" />
+            <state relative-caret-position="210">
+              <caret line="314" column="0" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
               <folding>
                 <element signature="e#5424#6435#0#PHP" expanded="false" />
                 <element signature="e#7213#7650#0#PHP" expanded="false" />
@@ -68,51 +68,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/attendance/task-summary/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="86">
-              <caret line="29" column="41" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+            <state relative-caret-position="210">
+              <caret line="38" column="26" lean-forward="false" selection-start-line="38" selection-start-column="26" selection-end-line="45" selection-end-column="2" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TaskController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/TaskController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="155">
-              <caret line="51" column="97" lean-forward="false" selection-start-line="51" selection-start-column="97" selection-end-line="51" selection-end-column="97" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app-0000003.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/assets/js/app-0000003.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11656">
-              <caret line="474" column="49" lean-forward="false" selection-start-line="474" selection-start-column="47" selection-end-line="474" selection-end-column="53" />
-              <folding>
-                <element signature="e#11317#11785#0" expanded="false" />
-                <element signature="e#11873#13628#0" expanded="false" />
-                <element signature="e#13903#15905#0" expanded="false" />
-                <marker date="1485337285520" expanded="true" signature="33812:33824" ph="..." />
-                <marker date="1485337285520" expanded="true" signature="55724:55731" ph="×" />
-                <marker date="1485337285520" expanded="true" signature="56053:56064" ph="..." />
-                <marker date="1485337285520" expanded="true" signature="59714:59752" ph="..." />
-                <marker date="1485337285520" expanded="true" signature="62094:62500" ph="..." />
-                <marker date="1485337285520" expanded="false" signature="62172:62179" ph="×" />
-                <marker date="1485337285520" expanded="true" signature="62274:62456" ph="..." />
-                <marker date="1485337285520" expanded="true" signature="62356:62408" ph="..." />
-                <marker date="1485337285520" expanded="true" signature="62771:62778" ph="×" />
-                <marker date="1485337285520" expanded="true" signature="62875:63433" ph="..." />
-                <marker date="1485337285520" expanded="true" signature="63010:63397" ph="..." />
-                <marker date="1485337285520" expanded="true" signature="63079:63352" ph="..." />
-                <marker date="1485337285520" expanded="false" signature="63163:63170" ph="×" />
-                <marker date="1485337285520" expanded="true" signature="63260:63308" ph="..." />
-                <marker date="1485337285520" expanded="true" signature="66240:66252" ph="..." />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -145,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tasks_list_data</find>
       <find>settings.summ</find>
       <find>all_ta</find>
       <find>my_tasks_list_data</find>
@@ -175,6 +135,7 @@
       <find>to</find>
       <find>dateRangeType</find>
       <find>get_details</find>
+      <find>dataTable</find>
     </findStrings>
     <replaceStrings>
       <replace>-&gt;out_time</replace>
@@ -234,12 +195,12 @@
         <option value="$PROJECT_DIR$/application/views/projects/tasks/index.php" />
         <option value="$PROJECT_DIR$/application/controllers/Projects.php" />
         <option value="$PROJECT_DIR$/application/models/Users_model.php" />
-        <option value="$PROJECT_DIR$/assets/js/app-0000003.js" />
         <option value="$PROJECT_DIR$/application/models/Attendance_model.php" />
-        <option value="$PROJECT_DIR$/application/controllers/Attendance.php" />
-        <option value="$PROJECT_DIR$/application/views/attendance/task-summary/index.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/TaskController.php" />
         <option value="$PROJECT_DIR$/application/views/includes/left_menu.php" />
+        <option value="$PROJECT_DIR$/assets/js/app-0000003.js" />
+        <option value="$PROJECT_DIR$/application/controllers/Attendance.php" />
+        <option value="$PROJECT_DIR$/application/views/attendance/task-summary/index.php" />
       </list>
     </option>
   </component>
@@ -272,7 +233,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -505,6 +465,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -655,21 +616,22 @@
       <workItem from="1485329220982" duration="4802000" />
       <workItem from="1485337069016" duration="830000" />
       <workItem from="1485416595181" duration="6342000" />
-      <workItem from="1485430818126" duration="353000" />
+      <workItem from="1485430818126" duration="3569000" />
+      <workItem from="1485511249659" duration="5178000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147878000" />
+    <option name="totallyTimeSpent" value="156272000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="742" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16363636" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1659091" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3281493" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1014,33 +976,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/app-0000003.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11656">
-          <caret line="474" column="49" lean-forward="false" selection-start-line="474" selection-start-column="47" selection-end-line="474" selection-end-column="53" />
-          <folding>
-            <element signature="e#11317#11785#0" expanded="false" />
-            <element signature="e#11873#13628#0" expanded="false" />
-            <element signature="e#13903#15905#0" expanded="false" />
-            <marker date="1485337285520" expanded="true" signature="33812:33824" ph="..." />
-            <marker date="1485337285520" expanded="true" signature="55724:55731" ph="×" />
-            <marker date="1485337285520" expanded="true" signature="56053:56064" ph="..." />
-            <marker date="1485337285520" expanded="true" signature="59714:59752" ph="..." />
-            <marker date="1485337285520" expanded="true" signature="62094:62500" ph="..." />
-            <marker date="1485337285520" expanded="false" signature="62172:62179" ph="×" />
-            <marker date="1485337285520" expanded="true" signature="62274:62456" ph="..." />
-            <marker date="1485337285520" expanded="true" signature="62356:62408" ph="..." />
-            <marker date="1485337285520" expanded="true" signature="62771:62778" ph="×" />
-            <marker date="1485337285520" expanded="true" signature="62875:63433" ph="..." />
-            <marker date="1485337285520" expanded="true" signature="63010:63397" ph="..." />
-            <marker date="1485337285520" expanded="true" signature="63079:63352" ph="..." />
-            <marker date="1485337285520" expanded="false" signature="63163:63170" ph="×" />
-            <marker date="1485337285520" expanded="true" signature="63260:63308" ph="..." />
-            <marker date="1485337285520" expanded="true" signature="66240:66252" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/Attendance_model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3689">
@@ -1063,31 +998,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/Attendance.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7440">
-          <caret line="313" column="47" lean-forward="false" selection-start-line="313" selection-start-column="47" selection-end-line="313" selection-end-column="47" />
-          <folding>
-            <element signature="e#5424#6435#0#PHP" expanded="false" />
-            <element signature="e#7213#7650#0#PHP" expanded="false" />
-            <element signature="e#7691#7880#0#PHP" expanded="false" />
-            <element signature="e#7925#9546#0#PHP" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/projects/tasks/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2728">
           <caret line="88" column="56" lean-forward="false" selection-start-line="88" selection-start-column="20" selection-end-line="88" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/attendance/task-summary/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="29" column="41" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
           <folding />
         </state>
       </provider>
@@ -1102,12 +1016,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/views/includes/left_menu.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="109" column="91" lean-forward="false" selection-start-line="109" selection-start-column="91" selection-end-line="109" selection-end-column="91" />
+        <state relative-caret-position="2449">
+          <caret line="111" column="0" lean-forward="false" selection-start-line="111" selection-start-column="0" selection-end-line="111" selection-end-column="0" />
           <folding>
             <element signature="e#2616#3484#0#PHP" expanded="false" />
             <element signature="e#3748#5172#0#PHP" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/js/app-0000003.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="738" column="49" lean-forward="false" selection-start-line="738" selection-start-column="49" selection-end-line="738" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/Attendance.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="314" column="0" lean-forward="false" selection-start-line="314" selection-start-column="0" selection-end-line="314" selection-end-column="0" />
+          <folding>
+            <element signature="e#5424#6435#0#PHP" expanded="false" />
+            <element signature="e#7213#7650#0#PHP" expanded="false" />
+            <element signature="e#7691#7880#0#PHP" expanded="false" />
+            <element signature="e#7925#9546#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/attendance/task-summary/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="38" column="26" lean-forward="false" selection-start-line="38" selection-start-column="26" selection-end-line="45" selection-end-column="2" />
+          <folding />
         </state>
       </provider>
     </entry>

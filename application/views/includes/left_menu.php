@@ -108,7 +108,7 @@
                 if (get_setting("module_attendance") == "1" && ($this->login_user->is_admin || $access_timecard)) {
                     $attendanceSubs = [];
                     $attendanceSubs [] = ["name" => "View Attendance", "url" => "attendance"];
-//                    $attendanceSubs [] = ["name" => "Task Summary", "url" => "attendance/task_summary"];
+                    $attendanceSubs [] = ["name" => "Task Summary", "url" => "attendance/task_summary"];
 
                     $sidebar_menu[] = array("name" => "attendance", "url" => "attendance", "class" => "fa-clock-o font-16", "submenu" => $attendanceSubs);
                 } else if (get_setting("module_attendance") == "1") {

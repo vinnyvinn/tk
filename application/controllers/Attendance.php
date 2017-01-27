@@ -312,10 +312,6 @@ class Attendance extends Pre_loader {
             $data->projectName,
             $data->taskName,
             round($data->clockedHours / 3600, 2),
-            $out_time ? format_to_date($out_time) : "-",
-            $out_time ? format_to_time($out_time) : "-",
-            convert_seconds_to_time_format(abs($to_time - $from_time)),
-            $option_links
         );
     }
 

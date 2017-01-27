@@ -735,7 +735,8 @@ if (typeof TableTools != 'undefined') {
             },
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 settings.rowCallback(nRow, aData, iDisplayIndex, iDisplayIndexFull);
-            }
+            },
+            "drawCallback": settings.drawCallback
         };
 
         if (!settings.hideTools) {
