@@ -18,7 +18,7 @@
         $("#attendance-table").appTable({
             source: '<?php echo_uri("attendance/task_summary_data"); ?>',
             order: [[1, "asc"]],
-            dateRangeType: "weekly",
+            dateRangeType: "custom",
             columns: [
                 {title: "<?php echo lang("team_member"); ?>", "class": "w15p"},
                 {visible: false, searchable: false},

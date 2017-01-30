@@ -594,6 +594,10 @@ if (typeof TableTools != 'undefined') {
                 var range = getWeekRange();
                 settings.filterParams.start_date = range.firstDateOfWeek;
                 settings.filterParams.end_date = range.lastDateOfWeek;
+            } else if (settings.dateRangeType === "custom") {
+                var range = getWeekRange();
+                settings.filterParams.start_date = range.firstDateOfWeek;
+                settings.filterParams.end_date = range.lastDateOfWeek;
             }
         };
 
@@ -830,10 +834,68 @@ if (typeof TableTools != 'undefined') {
                     + '<button data-act="datepicker" class="btn btn-default" style="margin: -1px"></button>'
                     + '<button data-act="next"  class="btn btn-default date-range-selector"><i class="fa fa-chevron-right"></i></button>'
                     + '</div>';
+            if (settings.dateRangeType === "custom") {
+                dateRangeFilterDom = '<div class="mr15 DTTT_container">'
+                    + '<div class="input-group input-daterange">'
+                    + '<input type="text" class="form-control" id="from_date"><div class="input-group-addon">to</div>'
+                    + '<input type="text" class="form-control" id="to_date">'
+                    + '</div>'
+                    + '</div>';
+            }
+
             $instanceWrapper.find(".custom-toolbar").append(dateRangeFilterDom);
 
             var $datepicker = $instanceWrapper.find("[data-act='datepicker']"),
                     $dateRangeSelector = $instanceWrapper.find(".date-range-selector");
+
+            //init custom selector
+            if (settings.dateRangeType === "custom") {
+                var initCustomSelectorText = function () {
+                    var from = moment(settings.filterParams.start_date).format("DD MMMM YYYY"),
+                        to = moment(settings.filterParams.end_date).format("DD MMMM YYYY");
+
+                    $instanceWrapper.find("#from_date").val(from).datepicker({
+                        format: "dd MM yyyy",
+                        autoclose: true,
+                        weekStart: AppHelper.settings.firstDayOfWeek
+                    });
+
+                    $instanceWrapper.find("#to_date").val(to).datepicker({
+                        format: "dd MM yyyy",
+                        autoclose: true,
+                        weekStart: AppHelper.settings.firstDayOfWeek,
+                        startDate: from
+                    });
+                };
+
+                prepareDefaultDateRangeFilterParams();
+                initCustomSelectorText();
+
+                $instanceWrapper.find("#from_date").datepicker({
+                    format: settings._inputDateFormat,
+                    autoclose: true,
+                    calendarWeeks: true,
+                    language: "custom",
+                    weekStart: AppHelper.settings.firstDayOfWeek
+                }).on('changeDate', function (e) {
+                    settings.filterParams.start_date = moment(e.date).format(settings._inputDateFormat);
+                    initCustomSelectorText();
+                    $instance.appTable({reload: true, filterParams: settings.filterParams});
+                    $instanceWrapper.find("#to_date").datepicker('setStartDate', e.date);
+                });
+
+                $instanceWrapper.find("#to_date").datepicker({
+                    format: settings._inputDateFormat,
+                    autoclose: true,
+                    calendarWeeks: true,
+                    language: "custom",
+                    weekStart: AppHelper.settings.firstDayOfWeek
+                }).on('changeDate', function (e) {
+                    settings.filterParams.end_date = moment(e.date).format(settings._inputDateFormat);
+                    initCustomSelectorText();
+                    $instance.appTable({reload: true, filterParams: settings.filterParams});
+                });
+            }
 
             //init single day selector
             if (settings.dateRangeType === "daily") {
@@ -879,7 +941,6 @@ if (typeof TableTools != 'undefined') {
                     $instance.appTable({reload: true, filterParams: settings.filterParams});
                 });
             }
-
 
             //init month selector
             if (settings.dateRangeType === "monthly") {
