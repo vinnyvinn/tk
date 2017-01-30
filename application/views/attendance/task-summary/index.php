@@ -31,27 +31,49 @@
                 var api = this.api();
                 var rows = api.rows({page:'current'}).nodes();
                 var last=null;
-                var totals = 0;
+                var colonne = 4;
+                var totale = new Array();
+                totale['Totale']= new Array();
+                var groupid = -1;
+                var subtotale = new Array();
 
                 api.column(1, {page:'current'}).data().each(function (group, i) {
-                    totals += parseFloat($(rows).eq(i).find('td').eq(2).html());
                     if (last !== group) {
-//                        $(rows).eq(i).before(
-//                            '<tr class="group">' +
-//                            '<td></td>' +
-//                            '<td><strong>Total: </strong></td>' +
-//                            '<td class="text-right"><strong>'+totals +'</strong></td>' +
-//                            '</tr>'
-//                        );
-//
-                        $(rows).eq(i)
-                            .before('<tr class="group"><td colspan="4">'+group+'</td></tr>');
-
-                        totals = 0;
+                        groupid++;
+                        $(rows).eq(i).before('<tr class="group"><td>'+group+'</td></tr>');
                         last = group;
                     }
-                } );
+
+                    var val = api.row(api.row($(rows).eq( i )).index()).data();      //current order index
+
+                    $.each(val,function(index2,val2){
+                        if (index2 != 3) return true;
+                        if (typeof subtotale[groupid] =='undefined'){
+                            subtotale[groupid] = new Array();
+                        }
+                        if (typeof subtotale[groupid][index2] =='undefined'){
+                            subtotale[groupid][index2] = 0;
+                        }
+                        if (typeof totale['Totale'][index2] =='undefined') {
+                            totale['Totale'][index2] = 0;
+                        }
+                        valore = Number(val2);
+                        subtotale[groupid][index2] += valore;
+                        totale['Totale'][index2] += valore;
+                    });
+                });
+
+                $('tbody').find('.group').each(function (i) {
+                    var rowCount = $(this).nextUntil('.group').length;
+                    var subtd = '';
+                    var totalHours = 0;
+                    totalHours = (Math.round(subtotale[i][3] * 100))/100;
+                    rowCount = rowCount > 1 ? rowCount + ' Tasks' : rowCount + ' Task';
+                    subtd += '<td><strong>'+rowCount+'</strong></td>';
+                    subtd += '<td class="text-right"><strong>'+ totalHours +' Hours</strong></td>';
+                    $(this).append(subtd);
+                });
             }
         });
     });
-</script>    
+</script>

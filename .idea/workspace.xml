@@ -43,41 +43,41 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/attendance/task-summary/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="620">
-              <caret line="20" column="34" lean-forward="false" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+            <state relative-caret-position="191">
+              <caret line="65" column="58" lean-forward="false" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app-0000003.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="app-0000003.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/assets/js/app-0000003.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="867" column="23" lean-forward="true" selection-start-line="867" selection-start-column="23" selection-end-line="867" selection-end-column="23" />
+            <state relative-caret-position="279">
+              <caret line="861" column="62" lean-forward="false" selection-start-line="861" selection-start-column="62" selection-end-line="861" selection-end-column="62" />
               <folding>
-                <element signature="e#39980#42242#0" expanded="false" />
-                <element signature="e#42330#44486#0" expanded="false" />
-                <element signature="e#44574#47349#0" expanded="false" />
-                <element signature="e#44639#45212#0" expanded="false" />
-                <marker date="1485756131464" expanded="true" signature="34114:34126" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="58844:58851" ph="×" />
-                <marker date="1485756131464" expanded="true" signature="59173:59184" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="62834:62872" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="65214:65620" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="65292:65299" ph="×" />
-                <marker date="1485756131464" expanded="true" signature="65394:65576" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="65476:65528" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="65891:65898" ph="×" />
-                <marker date="1485756131464" expanded="true" signature="65995:66553" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="66130:66517" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="66199:66472" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="66283:66290" ph="×" />
-                <marker date="1485756131464" expanded="true" signature="66380:66428" ph="..." />
-                <marker date="1485756131464" expanded="true" signature="69360:69372" ph="..." />
+                <element signature="e#39890#42152#0" expanded="false" />
+                <element signature="e#42240#44396#0" expanded="false" />
+                <element signature="e#44484#47259#0" expanded="false" />
+                <element signature="e#44549#45122#0" expanded="false" />
+                <marker date="1485756319141" expanded="true" signature="34114:34126" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="58754:58761" ph="×" />
+                <marker date="1485756319141" expanded="true" signature="59083:59094" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="62744:62782" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="65124:65530" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="65202:65209" ph="×" />
+                <marker date="1485756319141" expanded="true" signature="65304:65486" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="65386:65438" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="65801:65808" ph="×" />
+                <marker date="1485756319141" expanded="true" signature="65905:66463" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="66040:66427" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="66109:66382" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="66193:66200" ph="×" />
+                <marker date="1485756319141" expanded="true" signature="66290:66338" ph="..." />
+                <marker date="1485756319141" expanded="true" signature="69270:69282" ph="..." />
               </folding>
             </state>
           </provider>
@@ -180,8 +180,8 @@
         <option value="$PROJECT_DIR$/application/views/team_members/daily_attendance.php" />
         <option value="$PROJECT_DIR$/application/views/team_members/attendance_info.php" />
         <option value="$PROJECT_DIR$/application/controllers/Team_members.php" />
-        <option value="$PROJECT_DIR$/application/views/attendance/task-summary/index.php" />
         <option value="$PROJECT_DIR$/assets/js/app-0000003.js" />
+        <option value="$PROJECT_DIR$/application/views/attendance/task-summary/index.php" />
       </list>
     </option>
   </component>
@@ -519,12 +519,12 @@
       <workItem from="1485416595181" duration="6342000" />
       <workItem from="1485430818126" duration="3569000" />
       <workItem from="1485511249659" duration="5178000" />
-      <workItem from="1485750553633" duration="5051000" />
+      <workItem from="1485750553633" duration="6708000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161323000" />
+    <option name="totallyTimeSpent" value="162980000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="742" extended-state="6" />
@@ -965,39 +965,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/attendance/task-summary/index.php">
+    <entry file="file://$PROJECT_DIR$/assets/js/app-0000003.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="20" column="34" lean-forward="false" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding />
+        <state relative-caret-position="279">
+          <caret line="861" column="62" lean-forward="false" selection-start-line="861" selection-start-column="62" selection-end-line="861" selection-end-column="62" />
+          <folding>
+            <element signature="e#39890#42152#0" expanded="false" />
+            <element signature="e#42240#44396#0" expanded="false" />
+            <element signature="e#44484#47259#0" expanded="false" />
+            <element signature="e#44549#45122#0" expanded="false" />
+            <marker date="1485756319141" expanded="true" signature="34114:34126" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="58754:58761" ph="×" />
+            <marker date="1485756319141" expanded="true" signature="59083:59094" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="62744:62782" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="65124:65530" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="65202:65209" ph="×" />
+            <marker date="1485756319141" expanded="true" signature="65304:65486" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="65386:65438" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="65801:65808" ph="×" />
+            <marker date="1485756319141" expanded="true" signature="65905:66463" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="66040:66427" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="66109:66382" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="66193:66200" ph="×" />
+            <marker date="1485756319141" expanded="true" signature="66290:66338" ph="..." />
+            <marker date="1485756319141" expanded="true" signature="69270:69282" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/js/app-0000003.js">
+    <entry file="file://$PROJECT_DIR$/application/views/attendance/task-summary/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="867" column="23" lean-forward="true" selection-start-line="867" selection-start-column="23" selection-end-line="867" selection-end-column="23" />
-          <folding>
-            <element signature="e#39980#42242#0" expanded="false" />
-            <element signature="e#42330#44486#0" expanded="false" />
-            <element signature="e#44574#47349#0" expanded="false" />
-            <element signature="e#44639#45212#0" expanded="false" />
-            <marker date="1485756131464" expanded="true" signature="34114:34126" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="58844:58851" ph="×" />
-            <marker date="1485756131464" expanded="true" signature="59173:59184" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="62834:62872" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="65214:65620" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="65292:65299" ph="×" />
-            <marker date="1485756131464" expanded="true" signature="65394:65576" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="65476:65528" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="65891:65898" ph="×" />
-            <marker date="1485756131464" expanded="true" signature="65995:66553" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="66130:66517" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="66199:66472" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="66283:66290" ph="×" />
-            <marker date="1485756131464" expanded="true" signature="66380:66428" ph="..." />
-            <marker date="1485756131464" expanded="true" signature="69360:69372" ph="..." />
-          </folding>
+        <state relative-caret-position="191">
+          <caret line="65" column="58" lean-forward="false" selection-start-line="65" selection-start-column="58" selection-end-line="65" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>

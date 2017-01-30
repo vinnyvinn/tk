@@ -851,8 +851,7 @@ if (typeof TableTools != 'undefined') {
             //init custom selector
             if (settings.dateRangeType === "custom") {
                 var initCustomSelectorText = function () {
-                    var from = moment(settings.filterParams.start_date).format("DD MMMM YYYY"),
-                        to = moment(settings.filterParams.end_date).format("DD MMMM YYYY");
+                    var from = moment(settings.filterParams.start_date).format("DD MMMM YYYY");
 
                     $instanceWrapper.find("#from_date").val(from).datepicker({
                         format: "dd MM yyyy",
@@ -860,7 +859,7 @@ if (typeof TableTools != 'undefined') {
                         weekStart: AppHelper.settings.firstDayOfWeek
                     });
 
-                    $instanceWrapper.find("#to_date").val(to).datepicker({
+                    $instanceWrapper.find("#to_date").val(from).datepicker({
                         format: "dd MM yyyy",
                         autoclose: true,
                         weekStart: AppHelper.settings.firstDayOfWeek,
