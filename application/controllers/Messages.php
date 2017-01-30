@@ -44,7 +44,7 @@ class Messages extends Pre_loader {
         }
 
 
-        $view_data['users_dropdown'] = array("" => "-");
+        $view_data['users_dropdown'] = [];
         if ($user_id) {
             $view_data['message_user_info'] = $this->Users_model->get_one($user_id);
         } else {
@@ -175,22 +175,29 @@ class Messages extends Pre_loader {
 
     /* send new message */
 
-    function send_message() {
-
+    function send_message()
+    {
         $target_path = get_setting("timeline_file_path");
         $files_data = move_files_from_temp_dir_to_permanent_dir($target_path, "message");
+        $done = false;
 
-        $message_data = array(
-            "from_user_id" => $this->login_user->id,
-            "to_user_id" => $this->input->post('to_user_id'),
-            "subject" => $this->input->post('subject'),
-            "message" => $this->input->post('message'),
-            "created_at" => get_current_utc_time(),
-            "files" => $files_data,
-            "deleted_by_users" => "",
-        );
+        if (is_array($this->input->post('to_user_id'))) {
+            foreach ($this->input->post('to_user_id') as $receiver) {
+                $message_data = array(
+                    "from_user_id" => $this->login_user->id,
+                    "to_user_id" => $receiver,
+                    "subject" => $this->input->post('subject'),
+                    "message" => $this->input->post('message'),
+                    "created_at" => get_current_utc_time(),
+                    "files" => $files_data,
+                    "deleted_by_users" => "",
+                );
 
-        if ($this->Messages_model->save($message_data)) {
+                $done = $this->Messages_model->save($message_data);
+            }
+        }
+
+        if ($done) {
             echo json_encode(array("success" => true, 'message' => lang('message_sent')));
         } else {
             echo json_encode(array("success" => false, 'message' => lang('error_occurred')));

@@ -12,7 +12,7 @@
                     <input type="hidden" name="to_user_id" value="<?php echo $message_user_info->id; ?>" />
                     <?php
                 } else {
-                    echo form_dropdown("to_user_id", $users_dropdown, array(), "class='select2 validate-hidden' id='to_user_id' data-rule-required='true', data-msg-required='" . lang('field_required') . "'");
+                    echo form_dropdown("to_user_id[]", $users_dropdown, array(), "multiple class='select2 validate-hidden' id='to_user_id' data-rule-required='true' data-msg-required='" . lang('field_required') . "'");
                 }
                 ?>
             </div>

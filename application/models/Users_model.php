@@ -165,8 +165,9 @@ class Users_model extends Crud_model {
         $sql = "SELECT $users_table.id,$users_table.client_id, $users_table.user_type, $users_table.first_name, $users_table.last_name, $clients_table.company_name
         FROM $users_table
         LEFT JOIN $clients_table ON $clients_table.id = $users_table.client_id
-        WHERE $users_table.deleted=0 $where
+        WHERE $users_table.deleted=0 AND $users_table.disable_login = 0 AND $users_table.status = 'active' $where
         ORDER BY $users_table.user_type, $users_table.first_name ASC";
+
         return $this->db->query($sql);
     }
 
