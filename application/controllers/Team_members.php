@@ -625,6 +625,12 @@ class Team_members extends Pre_loader
         $this->load->view("team_members/weekly_attendance");
     }
 
+    //show daily attendance list of a team member
+    function daily_attendance()
+    {
+        $this->load->view("team_members/daily_attendance");
+    }
+
     //show leave list of a team member
     function leave_info($applicant_id)
     {

@@ -18,7 +18,8 @@ if (isset($page_type) && $page_type === "full") {
                 }
                 ?></h4></li>
         <li><a id="monthly-attendance-button"  role="presentation" class="active" href="javascript:;" data-target="#team_member-monthly-attendance"><?php echo lang("monthly"); ?></a></li>
-        <li><a role="presentation" href="<?php echo_uri("team_members/weekly_attendance/"); ?>" data-target="#team_member-weekly-attendance"><?php echo lang('weekly'); ?></a></li>    </ul>
+        <li><a role="presentation" href="<?php echo_uri("team_members/weekly_attendance/"); ?>" data-target="#team_member-weekly-attendance"><?php echo lang('weekly'); ?></a></li>
+        <li><a role="presentation" href="<?php echo_uri("team_members/daily_attendance/"); ?>" data-target="#team_member-daily-attendance"><?php echo lang('daily'); ?></a></li>    </ul>
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane fade" id="team_member-monthly-attendance">
             <table id="monthly-attendance-table" class="display" cellspacing="0" width="100%">    
@@ -65,5 +66,6 @@ if (isset($page_type) && $page_type === "full") {
             </script>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="team_member-weekly-attendance"></div>
+        <div role="tabpanel" class="tab-pane fade" id="team_member-daily-attendance"></div>
     </div>
 </div>

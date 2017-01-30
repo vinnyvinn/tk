@@ -47,7 +47,6 @@
                         $(rows).eq(i)
                             .before('<tr class="group"><td colspan="4">'+group+'</td></tr>');
 
-
                         totals = 0;
                         last = group;
                     }
