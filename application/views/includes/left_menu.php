@@ -103,12 +103,21 @@
                 }
 
 
-                $sidebar_menu[] = array("name" => "team_members", "url" => "team_members", "class" => "fa-user font-16");
-
-                if (get_setting("module_attendance") == "1" && ($this->login_user->is_admin || $access_timecard)) {
+                if ($this->login_user->is_admin) {
                     $attendanceSubs = [];
                     $attendanceSubs [] = ["name" => "View Attendance", "url" => "attendance"];
                     $attendanceSubs [] = ["name" => "Task Summary", "url" => "attendance/task_summary"];
+
+                    $sidebar_menu[] = array("name" => "Team", "url" => "team_members", "class" => "fa-user font-16", "submenu" => $attendanceSubs);
+                } else if (get_setting("module_attendance") == "1") {
+                    $sidebar_menu[] = array("name" => "team_members", "url" => "team_members", "class" => "fa-user font-16");
+                }
+
+                if (get_setting("module_attendance") == "1" && ($this->login_user->is_admin || $access_timecard)) {
+                    $attendanceSubs = [];
+                    $attendanceSubs [] = ["name" => "Attendance", "url" => "attendance"];
+                    $attendanceSubs [] = ["name" => "Task Summary", "url" => "attendance/task_summary"];
+                    $attendanceSubs [] = ["name" => "Day Summary", "url" => "attendance/days_summary"];
 
                     $sidebar_menu[] = array("name" => "attendance", "url" => "attendance", "class" => "fa-clock-o font-16", "submenu" => $attendanceSubs);
                 } else if (get_setting("module_attendance") == "1") {

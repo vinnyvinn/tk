@@ -267,6 +267,13 @@ class Attendance extends Pre_loader {
         $this->template->rander("attendance/task-summary/index");
     }
 
+    public function days_summary()
+    {
+        $this->check_module_availability("module_attendance");
+
+        $this->template->rander("attendance/days-summary/index");
+    }
+
     public function task_summary_data()
     {
         $startDate = $this->input->post('start_date');
@@ -283,34 +290,40 @@ class Attendance extends Pre_loader {
         echo json_encode(array("data" => $result));
     }
 
+    public function days_summary_data()
+    {
+        $startDate = $this->input->post('start_date');
+        $endDate = $this->input->post('end_date');
+
+        $list_data = $this->Attendance_model->getAttendanceHours($startDate, $endDate)->result();
+
+        $result = array();
+        foreach ($list_data as $data) {
+            $result[] = $this->makeDaySummaryRow($data);
+        }
+
+        echo json_encode(array("data" => $result));
+    }
+
     private function makeTaskSummaryRow($data) {
         $image_url = get_avatar($data->created_by_avatar);
         $user = "<span class='avatar avatar-xs mr10'><img src='$image_url' alt=''></span> $data->created_by_user";
-        $out_time = $data->out_time;
-        if (!($out_time * 1)) {
-            $out_time = "";
-        }
-
-        $to_time = strtotime($data->out_time);
-        if (!$out_time) {
-            $to_time = strtotime($data->in_time);
-        }
-        $from_time = strtotime($data->in_time);
-
-        $option_links = modal_anchor(get_uri("attendance/modal_form"), "<i class='fa fa-pencil'></i>", array("class" => "edit", "title" => lang('edit_attendance'), "data-post-id" => $data->id))
-            . js_anchor("<i class='fa fa-times fa-fw'></i>", array('title' => lang('delete_attendance'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("attendance/delete"), "data-action" => "delete"));
-
-        if ($this->access_type != "all") {
-            //don't show options links for none admin user's own records
-            if ($data->user_id === $this->login_user->id) {
-                $option_links = "";
-            }
-        }
 
         return array(
             get_team_member_profile_link($data->user_id, $user),
             $data->projectName,
             $data->taskName,
+            round($data->clockedHours / 3600, 2),
+        );
+    }
+
+    private function makeDaySummaryRow($data) {
+        $image_url = get_avatar($data->created_by_avatar);
+        $user = "<span class='avatar avatar-xs mr10'><img src='$image_url' alt=''></span> $data->created_by_user";
+
+        return array(
+            get_team_member_profile_link($data->user_id, $user),
+            $data->dayDescription,
             round($data->clockedHours / 3600, 2),
         );
     }

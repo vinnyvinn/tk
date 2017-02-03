@@ -214,4 +214,24 @@ class Attendance_model extends Crud_model {
         return $this->db->query($sql);
     }
 
+    public function getAttendanceHours($startDate, $endDate)
+    {
+        $attendanceTable = $this->db->dbprefix('attendance');
+        $usersTable = $this->db->dbprefix('users');
+
+        $where = "";
+        $offset = convert_seconds_to_time_format(get_timezone_offset());
+        $where .= " AND DATE(ADDTIME($attendanceTable.in_time,'$offset'))>='$startDate'";
+        $where .= " AND DATE(ADDTIME($attendanceTable.in_time,'$offset'))<='$endDate'";
+
+        $sql = "SELECT user_id, DATE_FORMAT(in_time, '%a %D %b %Y') as dayDescription, "
+            . "DATE(in_time) as inTime, DATE(out_time) as outTime, SUM(difference) as clockedHours, "
+            ."CONCAT($usersTable.first_name, ' ',$usersTable.last_name) AS created_by_user, "
+            . "$usersTable.image as created_by_avatar "
+            . "FROM $attendanceTable LEFT JOIN $usersTable ON $usersTable.id = $attendanceTable.user_id "
+            . "WHERE $attendanceTable.deleted = 0 $where GROUP BY user_id, inTime ORDER BY user_id";
+
+        return $this->db->query($sql);
+    }
+
 }
