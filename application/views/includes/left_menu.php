@@ -105,8 +105,8 @@
 
                 if ($this->login_user->is_admin) {
                     $attendanceSubs = [];
-                    $attendanceSubs [] = ["name" => "View Attendance", "url" => "attendance"];
-                    $attendanceSubs [] = ["name" => "Task Summary", "url" => "attendance/task_summary"];
+                    $attendanceSubs [] = ["name" => "Team Members", "url" => "team_members"];
+//                    $attendanceSubs [] = ["name" => "Task Summary", "url" => "attendance/task_summary"];
 
                     $sidebar_menu[] = array("name" => "Team", "url" => "team_members", "class" => "fa-user font-16", "submenu" => $attendanceSubs);
                 } else if (get_setting("module_attendance") == "1") {
