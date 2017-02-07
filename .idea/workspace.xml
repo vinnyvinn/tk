@@ -70,21 +70,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="general.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/views/settings/general.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="115" column="47" lean-forward="true" selection-start-line="115" selection-start-column="47" selection-end-line="115" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/views/projects/tasks/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="88" column="40" lean-forward="false" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="40" />
+            <state relative-caret-position="503">
+              <caret line="97" column="73" lean-forward="false" selection-start-line="97" selection-start-column="73" selection-end-line="97" selection-end-column="73" />
               <folding>
                 <element signature="e#1467#3624#0#HTML" expanded="false" />
               </folding>
@@ -280,9 +270,9 @@
         <option value="$PROJECT_DIR$/application/views/includes/left_menu.php" />
         <option value="$PROJECT_DIR$/oldinstall/database.sql" />
         <option value="$PROJECT_DIR$/application/views/projects/tasks/modal_form.php" />
-        <option value="$PROJECT_DIR$/application/views/projects/tasks/index.php" />
         <option value="$PROJECT_DIR$/application/controllers/Projects.php" />
         <option value="$PROJECT_DIR$/application/views/settings/general.php" />
+        <option value="$PROJECT_DIR$/application/views/projects/tasks/index.php" />
       </list>
     </option>
   </component>
@@ -561,12 +551,12 @@
       <workItem from="1485750553633" duration="8467000" />
       <workItem from="1486100718165" duration="5186000" />
       <workItem from="1486385100600" duration="772000" />
-      <workItem from="1486465967317" duration="4447000" />
+      <workItem from="1486465967317" duration="4553000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="175144000" />
+    <option name="totallyTimeSpent" value="175250000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="742" extended-state="6" />
@@ -995,20 +985,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/projects/tasks/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="88" column="40" lean-forward="false" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="40" />
-          <folding>
-            <element signature="e#1467#3624#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/helpers/general_helper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="514" column="13" lean-forward="false" selection-start-line="514" selection-start-column="13" selection-end-line="514" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/settings/general.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="115" column="47" lean-forward="true" selection-start-line="115" selection-start-column="47" selection-end-line="115" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -1028,11 +1016,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/settings/general.php">
+    <entry file="file://$PROJECT_DIR$/application/views/projects/tasks/index.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="115" column="47" lean-forward="true" selection-start-line="115" selection-start-column="47" selection-end-line="115" selection-end-column="47" />
-          <folding />
+        <state relative-caret-position="503">
+          <caret line="97" column="73" lean-forward="false" selection-start-line="97" selection-start-column="73" selection-end-line="97" selection-end-column="73" />
+          <folding>
+            <element signature="e#1467#3624#0#HTML" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

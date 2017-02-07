@@ -95,7 +95,7 @@
                     {visible: false, searchable: false},
                     {title: '<?php echo lang("assigned_to") ?>', "class": "min-w150"},
                     {title: 'Priority'},
-                    {title: '<?php echo lang("status") ?>'},
+                    {title: '<?php echo lang("status") ?>', "class": "w100"},
                     {title: 'Date Created'},
                     {title: '<i class="fa fa-bars"></i>', visible: optionVisibility, "class": "text-center option w80"}
                 ],
