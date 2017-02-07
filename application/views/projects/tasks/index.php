@@ -61,12 +61,13 @@
                     {visible: false, searchable: false},
                     {visible: false, searchable: false},
                     {title: '<?php echo lang("status") ?>'},
+                    {visible: false, searchable: false},
                     {title: '<i class="fa fa-bars"></i>', visible: optionVisibility, "class": "text-center option w100"}
                 ],
                 printColumns: [0, 1, 3, 6],
                 xlsColumns: [0, 1, 3, 6],
                 rowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(0)', nRow).addClass(aData[14]);
+                    $('td:eq(0)', nRow).addClass(aData[15]);
                 }
             });
         } else {
@@ -83,9 +84,9 @@
                 ],
                 columns: [
                     {title: '<?php echo lang("id") ?>'},
-                    {title: '<?php echo lang("title") ?>'},
-                    {title: 'Max Hrs.', 'class': 'text-right'},
-                    {title: 'Current Hrs.', 'class': 'text-right'},
+                    {title: '<?php echo lang("title") ?>', "class": "w150"},
+                    {visible: false, searchable: false},
+                    {title: 'Actual (Max) Hrs.', 'class': 'text-center'},
                     {visible: false, searchable: false},
                     {visible: false, searchable: false},
                     {title: '<?php echo lang("start_date") ?>', "iDataSort": 2},
@@ -95,13 +96,14 @@
                     {title: '<?php echo lang("assigned_to") ?>', "class": "min-w150"},
                     {title: 'Priority'},
                     {title: '<?php echo lang("status") ?>'},
-                    {title: '<i class="fa fa-bars"></i>', visible: optionVisibility, "class": "text-center option w100"}
+                    {title: 'Date Created'},
+                    {title: '<i class="fa fa-bars"></i>', visible: optionVisibility, "class": "text-center option w80"}
                 ],
                 printColumns: [0, 1, 2, 3, 5, 7, 9],
                 xlsColumns: [0, 1, 2, 3, 5, 7, 9],
-                summation: [{column: 2, dataType: 'float'},{column: 4, dataType: 'float'}],
+                summation: [{column: 4, dataType: 'float'}],
                 rowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(0)', nRow).addClass(aData[14]);
+                    $('td:eq(0)', nRow).addClass(aData[15]);
                 }
             });
         }

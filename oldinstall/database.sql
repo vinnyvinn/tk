@@ -553,6 +553,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   `status` enum('to_do - 0%', 'in_progress - 25%', 'in_progress - 50%', 'in_progress - 75%', 'done - 100%') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'to_do - 0%',
   `start_date` date NOT NULL,
   `priority` VARCHAR(100) NOT NULL DEFAULT 'Normal',
+  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `collaborators` text COLLATE utf8_unicode_ci NOT NULL,
   `deleted` tinyint(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)

@@ -164,7 +164,7 @@
         <div class="col-md-9">
             <select name="priority" id="priority" class="form-control">
                 <option<?= $model_info->priority == 'High' ? ' selected' : '' ?> value="High">High</option>
-                <option<?= $model_info->priority == 'Normal' ? ' selected' : '' ?> value="Normal">Normal</option>
+                <option<?= $model_info->priority == 'Normal' || $model_info->priority == '' ? ' selected' : '' ?> value="Normal">Normal</option>
                 <option<?= $model_info->priority == 'Low' ? ' selected' : '' ?> value="Low">Low</option>
             </select>
         </div>

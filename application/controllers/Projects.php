@@ -1698,9 +1698,7 @@ class Projects extends Pre_loader {
         $assigned_to = "-";
 
         if ($data->assigned_to) {
-            $image_url = get_avatar($data->assigned_to_avatar);
-            $assigned_to_user = "<span class='avatar avatar-xs mr10'><img src='$image_url' alt='...'></span> $data->assigned_to_user";
-            $assigned_to = get_team_member_profile_link($data->assigned_to, $assigned_to_user);
+            $assigned_to = get_team_member_profile_link($data->assigned_to, $data->assigned_to_user);
         }
 
         $collaborators = $this->_get_collaborators($data->collaborator_list);
@@ -1768,13 +1766,15 @@ class Projects extends Pre_loader {
 
         $currentHours = round($data->logged / 3600, 2);
 
+        $data->created_at = format_to_date($data->created_at);
+
         return array(
             $check_status,
             $title,
             $data->max_hours,
             ($currentHours <= $data->max_hours) && ($data->max_hours > 0) ?
-                '<span class="text-success">' . $currentHours. '</span>' :
-                '<span class="text-danger">' . $currentHours. '</span>',
+                '<span class="text-success">' . $currentHours . ' (' . $data->max_hours . ')</span>' :
+                '<span class="text-danger">' . $currentHours . ' (' . $data->max_hours . ')</span>',
             $currentHours,
             $data->start_date,
             $start_date,
@@ -1784,6 +1784,7 @@ class Projects extends Pre_loader {
             $assigned_to,
             $data->priority,
             $status,
+            $data->created_at,
             $options,
             $status_class
         );
