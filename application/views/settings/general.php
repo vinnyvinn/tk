@@ -110,7 +110,9 @@
                         echo form_dropdown(
                                 "date_format", array(
                             "d F Y" => 'd F Y',
-                            "d, F Y" => 'd,F -Y',
+                            "d, F Y" => 'd, F Y',
+                            "d M Y" => 'd M Y',
+                            "d, M Y" => 'd, M Y',
                             "d-m-Y" => "d-m-Y",
                             "m-d-Y" => "m-d-Y",
                             "Y-m-d" => "Y-m-d",
