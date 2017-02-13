@@ -123,19 +123,17 @@
                 }
             });
 
-//            var table = $("#task-table").DataTable();
-
-//            $('#task-table th').on('click', function () {
-//                console.log('clicked');
-//                var currentOrder = table.order()[0];
-//                console.log(currentOrder);
-//                if (currentOrder[0] === 2 && currentOrder[1] === 'asc' ) {
-//                    table.order([2, 'desc']).draw();
-//                }
-//                else {
-//                    table.order([2, 'asc']).draw();
-//                }
-//            });
+            var table = $("#task-table").DataTable();
+            $('#task-table tbody').on( 'click', 'tr.group', function () {
+                var currentOrder = table.order()[0];
+                console.log(currentOrder);
+                if (currentOrder[0] === 1 && currentOrder[1] === 'asc' ) {
+                    table.order([1, 'desc']).draw();
+                }
+                else {
+                    table.order([1, 'asc']).draw();
+                }
+            });
         }
     });
 </script>
