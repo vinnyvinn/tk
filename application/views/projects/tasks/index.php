@@ -12,14 +12,14 @@
     </div>
     <div class="table-responsive">
         <table id="task-table" class="display" width="100%">
-            <tfoot>
-            <tr>
-                <th colspan="2" class="text-right"><?php echo lang("total") ?>:</th>
-                <th data-current-page="2"></th>
-                <th data-current-page="4"></th>
-                <th></th>
-            </tr>
-            </tfoot>
+<!--            <tfoot>-->
+<!--            <tr>-->
+<!--                <th colspan="2" class="text-right">--><?php //echo lang("total") ?><!--:</th>-->
+<!--                <th data-current-page="2"></th>-->
+<!--                <th data-current-page="4"></th>-->
+<!--                <th></th>-->
+<!--            </tr>-->
+<!--            </tfoot>-->
         </table>
     </div>
 </div>
@@ -103,7 +103,7 @@
                 ],
                 printColumns: [0, 1, 2, 3, 5, 7, 9],
                 xlsColumns: [0, 1, 2, 3, 5, 7, 9],
-                summation: [{column: 4, dataType: 'float'}],
+//                summation: [{column: 4, dataType: 'float'}],
                 rowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                     $('td:eq(0)', nRow).addClass(aData[16]);
                 },
