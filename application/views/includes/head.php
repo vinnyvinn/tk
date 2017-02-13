@@ -18,7 +18,7 @@
         "assets/js/magnific-popup/magnific-popup.css",
         "assets/js/malihu-custom-scrollbar/jquery.mCustomScrollbar.min.css",
         "assets/css/font.css",
-        "assets/css/style.css",
+        "assets/css/style-0000001.css",
         "assets/css/custom-style.css",
     ));
     load_js(array(
@@ -38,7 +38,7 @@
         "assets/js/magnific-popup/jquery.magnific-popup.min.js",
         "assets/js/notificatoin_handler.js",
         "assets/js/general_helper.js",
-        "assets/js/app-0000003.js"
+        "assets/js/app-0000004.js"
     ));
     ?>
 </head>
