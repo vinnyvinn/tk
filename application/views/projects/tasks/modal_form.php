@@ -23,6 +23,18 @@
         </div>
     <?php endif; ?>
     <div class="form-group">
+        <label for="title" class=" col-md-3">Sub-Task Of</label>
+        <div class=" col-md-9">
+            <select name="parent_id" id="parent_id" class="form-control select2">
+                <option value="0" <?= $model_info->parent_id == 0 ? ' selected' : ''; ?>>None</option>
+                <?php foreach ($tasks_dropdown as $task) : ?>
+                    <option<?= $model_info->parent_id == $task->id ? ' selected' : ''; ?> value="<?= $task->id; ?>"><?= $task->title; ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label for="title" class=" col-md-3"><?php echo lang('title'); ?></label>
         <div class=" col-md-9">
             <?php

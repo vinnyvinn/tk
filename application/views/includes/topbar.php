@@ -24,11 +24,32 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li class="hidden-xs">
-                <?php echo js_anchor("<i class='fa fa-bell-o'></i>", array("id" => "web-notification-icon", "class" => "dropdown-toggle", "data-toggle" => "dropdown")); ?>
+                <div class="form-group" id="projectJump">
+                    <select data-placeholder="Jump To Project" name="projectsJumpLink" id="projectsJumpLink" class="form-control select2 input-sm">
+                        <option selected>Jump To Project (F4)</option>
+                        <?php foreach ($projects as $project) : ?>
+                            <option value="/projects/view/<?= $project->id; ?>"><?= $project->title; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
                 <div class="dropdown-menu aside-xl m0 p0 font-100p" style="width: 400px;" >
                     <div class="dropdown-details panel bg-white m0">
                         <div class="list-group">
                             <span class="list-group-item inline-loader p10"></span>                          
+                        </div>
+                    </div>
+                    <div class="panel-footer text-sm text-center">
+                        <?php echo anchor("notifications", lang('see_all')); ?>
+                    </div>
+                </div>
+            </li>
+
+            <li class="hidden-xs">
+                <?php echo js_anchor("<i class='fa fa-bell-o'></i>", array("id" => "web-notification-icon", "class" => "dropdown-toggle", "data-toggle" => "dropdown")); ?>
+                <div class="dropdown-menu aside-xl m0 p0 font-100p" style="width: 400px;" >
+                    <div class="dropdown-details panel bg-white m0">
+                        <div class="list-group">
+                            <span class="list-group-item inline-loader p10"></span>
                         </div>
                     </div>
                     <div class="panel-footer text-sm text-center">
@@ -77,6 +98,20 @@
 <script type="text/javascript">
     $(document).ready(function () {
         //load message notifications
+        $('#projectsJumpLink')
+            .select2({
+                placeholder: 'Jump To Project (F4)'
+            })
+            .on('change', function () {
+                window.location = $(this).val();
+            });
+
+        $(document).keyup(function (e) {
+            if (e.which == 115) {
+                // KEY F4
+                $('#projectsJumpLink').select2('open');
+            }
+        });
 
         var messageOptions = {},
                 notificationOptions = {},

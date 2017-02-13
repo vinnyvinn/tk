@@ -739,7 +739,7 @@ class Projects extends Pre_loader {
             $view_data['resourceCost'] = ($individualRate * $timeCost->time_rate) + $timeCost->total_cost;
             $view_data['expenses'] = floatval($this->Expenses_model->getProjectCost($project_id));
             $view_data['totalCost'] = $view_data['resourceCost'] + $view_data['expenses'];
-            $view_data['costVariance'] = $project_info->price - $currentCost;
+            $view_data['costVariance'] = $project_info->price - $view_data['totalCost'];
             $view_data['estimateCost'] = count($estimatedCost) > 0 ? $estimatedCost[0]->estimate : 0;
 
 
@@ -1378,8 +1378,8 @@ class Projects extends Pre_loader {
         }
 
         $view_data['milestones_dropdown'] = array(0 => "None") + $this->Milestones_model->get_dropdown_list(array("title"), "id", array("project_id" => $project_id));
+        $view_data['tasks_dropdown'] = $this->Tasks_model->getProjectTasks($project_id);
 
-//        $project_members = $this->Project_members_model->get_project_members_dropdown_list($project_id)->result();
         $project_members = $this->Users_model->all_dropdown()->result();
         $project_members_dropdown = array("" => "-");
         $collaborators_dropdown = array();
@@ -1508,6 +1508,7 @@ class Projects extends Pre_loader {
         $this->updateResources($assigned_to, $collaborators, $project_id);
 
         $data = array(
+            'parent_id' => $this->input->post('parent_id'),
             'priority' => $this->input->post('priority'),
             "title" => $this->input->post('title'),
             "description" => $this->input->post('description'),
@@ -1602,7 +1603,25 @@ class Projects extends Pre_loader {
         }
     }
 
-    /* list of tasks, prepared for datatable  */
+    public function groupTasks($array)
+    {
+        $grouped = [];
+        foreach ($array as $value) {
+            $grouped[$value->parentTask] [] = $value;
+        }
+
+        $filtered = [];
+        foreach ($grouped as $title => $group) {
+            if (count($group) > 1) {
+                $group = array_filter($group, function ($item) use ($title) {
+                    return $item->title != $title;
+                });
+            }
+            $filtered = array_merge($filtered, $group);
+        }
+
+        return $filtered;
+    }
 
     function tasks_list_data($project_id = 0) {
         $this->init_project_permission_checker($project_id);
@@ -1616,7 +1635,8 @@ class Projects extends Pre_loader {
         $options = array("project_id" => $project_id, "assigned_to" => $this->input->post('assigned_to'), "status" => $status, "milestone_id" => $milestone_id);
         $list_data = $this->Tasks_model->get_details($options)->result();
         $result = array();
-        foreach ($list_data as $data) {
+        $mapped = $this->groupTasks($list_data);
+        foreach ($mapped as $data) {
             $result[] = $this->_make_task_row($data, "project_tasks");
         }
 
@@ -1770,6 +1790,7 @@ class Projects extends Pre_loader {
 
         return array(
             $check_status,
+            $data->parentTask,
             $title,
             $data->max_hours,
             ($currentHours <= $data->max_hours) && ($data->max_hours > 0) ?

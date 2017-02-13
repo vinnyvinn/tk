@@ -512,7 +512,7 @@ if (typeof TableTools != 'undefined') {
 
         // reload
         if (settings.reload) {
-            var table = $(this).dataTable();
+            window._table = table = $(this).dataTable();
             var instanceSettings = window.InstanceCollection[$(this).selector];
             if (!instanceSettings) {
                 instanceSettings = settings;
@@ -523,7 +523,7 @@ if (typeof TableTools != 'undefined') {
 
         // add/edit row
         if (settings.newData) {
-            var table = $(this).dataTable();
+            window._table = table = $(this).dataTable();
             if (settings.dataId) {
                 //check for existing row; if found, delete the row; 
 
@@ -552,7 +552,6 @@ if (typeof TableTools != 'undefined') {
         settings._exportable = settings.xlsColumns.length + settings.pdfColumns.length + settings.printColumns.length;
         settings._firstDayOfWeek = AppHelper.settings.firstDayOfWeek || 0;
         settings._inputDateFormat = "YYYY-MM-DD";
-
 
         var getWeekRange = function (date) {
             //set first and last day of week
@@ -1296,7 +1295,6 @@ if (typeof TableTools != 'undefined') {
             this.oApi._fnAddData(oSettings, data);
             this.fnDraw(this);
         };
-
     };
 })(jQuery);
 

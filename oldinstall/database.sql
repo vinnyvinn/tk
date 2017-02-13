@@ -541,6 +541,7 @@ CREATE TABLE IF NOT EXISTS `social_links` (
 
 CREATE TABLE IF NOT EXISTS `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parent_id` INT(11) NULL DEFAULT '0',
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `description` mediumtext COLLATE utf8_unicode_ci,
   `project_id` int(11) NOT NULL,

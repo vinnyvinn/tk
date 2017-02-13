@@ -2364,3 +2364,13 @@ ins {
     height: 32px;
     padding: 6px;
 }
+
+#projectJump {
+    margin-top: 10px;
+    margin-bottom: 0 !important;
+    width: 300px;
+}
+
+#projectJump select {
+    border-radius: 0 !important;
+}

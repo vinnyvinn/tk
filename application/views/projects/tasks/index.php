@@ -48,7 +48,8 @@
                     {text: 'Done', name: "status", value: "done - 100%", isChecked: false}
                 ],
                 columns: [
-                    {title: '<?php echo lang("id") ?>'},
+                    {title: ''},
+                    {visible: false, searchable: false},
                     {title: '<?php echo lang("title") ?>'},
                     {visible: false, searchable: false},
                     {visible: false, searchable: false},
@@ -67,7 +68,7 @@
                 printColumns: [0, 1, 3, 6],
                 xlsColumns: [0, 1, 3, 6],
                 rowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(0)', nRow).addClass(aData[15]);
+                    $('td:eq(0)', nRow).addClass(aData[16]);
                 }
             });
         } else {
@@ -83,7 +84,8 @@
                     {text: 'Done', name: "status", value: "done - 100%", isChecked: true}
                 ],
                 columns: [
-                    {title: '<?php echo lang("id") ?>'},
+                    {title: ''},
+                    {visible: false, searchable: false},
                     {title: '<?php echo lang("title") ?>', "class": "w150"},
                     {visible: false, searchable: false},
                     {title: 'Actual (Max) Hrs.', 'class': 'text-center'},
@@ -103,9 +105,37 @@
                 xlsColumns: [0, 1, 2, 3, 5, 7, 9],
                 summation: [{column: 4, dataType: 'float'}],
                 rowCallback: function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                    $('td:eq(0)', nRow).addClass(aData[15]);
+                    $('td:eq(0)', nRow).addClass(aData[16]);
+                },
+                "drawCallback": function () {
+                    var api = this.api();
+                    var rows = api.rows( {page:'current'} ).nodes();
+                    var last=null;
+
+                    api.column(1, {page:'current'} ).data().each( function ( group, i ) {
+                        if ( last !== group ) {
+                            $(rows).eq( i ).before(
+                                '<tr class="group"><td colspan="10"><strong>'+group+'</strong></td></tr>'
+                            );
+                            last = group;
+                        }
+                    } );
                 }
             });
+
+//            var table = $("#task-table").DataTable();
+
+//            $('#task-table th').on('click', function () {
+//                console.log('clicked');
+//                var currentOrder = table.order()[0];
+//                console.log(currentOrder);
+//                if (currentOrder[0] === 2 && currentOrder[1] === 'asc' ) {
+//                    table.order([2, 'desc']).draw();
+//                }
+//                else {
+//                    table.order([2, 'asc']).draw();
+//                }
+//            });
         }
     });
 </script>
