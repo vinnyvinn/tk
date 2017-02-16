@@ -4,19 +4,21 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 require_once("Pre_loader.php");
 
-class Tickets extends Pre_loader {
+class Tickets extends Pre_loader
+{
 
-    function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->init_permission_checker("ticket");
     }
 
     // load ticket list view
-    function index() {
+    public function index()
+    {
         $this->check_module_availability("module_ticket");
 
         if ($this->login_user->user_type === "staff") {
-
             //prepare ticket label filter list
             $label_suggestions = array(array("id" => "", "text" => "- " . lang("label") . " -"));
             $labels = explode(",", $this->Tickets_model->get_label_suggestions());
@@ -32,7 +34,6 @@ class Tickets extends Pre_loader {
             $view_data['ticket_labels_dropdown'] = json_encode($label_suggestions);
 
             //prepare assign to filter list
-
             $assigned_to_dropdown = array(array("id" => "", "text" => "- " . lang("assigned_to") . " -"));
 
             $assigned_to_list = $this->Users_model->get_dropdown_list(array("first_name", "last_name"), "id", array("deleted" => 0, "user_type" => "staff"));
@@ -44,14 +45,15 @@ class Tickets extends Pre_loader {
 
             $this->template->rander("tickets/index", $view_data);
         } else {
-            $view_data['client_id'] = $this->login_user->client_id;
+            $view_data['projects_dropdown'] = $this->Projects_model->getAll($this->login_user->client_id);
             $view_data['page_type'] = "full";
             $this->template->rander("clients/tickets/index", $view_data);
         }
     }
 
     //load new tickt modal 
-    function modal_form() {
+    public function modal_form()
+    {
         validate_submitted_data(array(
             "id" => "numeric"
         ));
@@ -61,21 +63,25 @@ class Tickets extends Pre_loader {
             redirect("forbidden");
         }
 
-
-
         $view_data['ticket_types_dropdown'] = $this->Ticket_types_model->get_dropdown_list(array("title"), "id");
-
         $view_data['model_info'] = $this->Tickets_model->get_one($this->input->post('id'));
-        $view_data['client_id'] = $this->input->post('client_id');
+        $view_data['project_id'] = $this->input->post('project_id');
         if ($this->login_user->user_type == "client") {
-            $view_data['client_id'] = $this->login_user->client_id;
+            $view_data['projects_dropdown'] = $this->Projects_model->getAll($this->login_user->client_id);
         } else {
-            $view_data['clients_dropdown'] = $this->Clients_model->get_dropdown_list(array("company_name"));
+            $view_data['projects_dropdown'] = $this->Projects_model->getAll();
         }
 
-
         //prepare assign to list
-        $assigned_to_dropdown = array("" => "-") + $this->Users_model->get_dropdown_list(array("first_name", "last_name"), "id", array("deleted" => 0, "user_type" => "staff"));
+        $assigned_to_dropdown = array("" => "-") + $this->Users_model
+                ->get_dropdown_list(
+                    ["first_name", "last_name"],
+                    "id",
+                    ['status' => 'active', "deleted" => 0, "user_type" => "staff"]
+                );
+
+        sort($assigned_to_dropdown, SORT_STRING);
+
         $view_data['assigned_to_dropdown'] = $assigned_to_dropdown;
 
         //prepare label suggestions
@@ -96,45 +102,28 @@ class Tickets extends Pre_loader {
     }
 
     // add a new ticket
-    function save() {
+    public function save()
+    {
         $id = $this->input->post('id');
 
-        if ($id) {
-            validate_submitted_data(array(
-                "ticket_type_id" => "required|numeric"
-            ));
-        } else {
-            validate_submitted_data(array(
-                "client_id" => "required|numeric",
-                "ticket_type_id" => "required|numeric"
-            ));
-        }
-
-
-        $client_id = $this->input->post('client_id');
-
-        $this->access_only_allowed_members_or_client_contact($client_id);
+        validate_submitted_data(array(
+            "ticket_type_id" => "required|numeric"
+        ));
 
         $ticket_type_id = $this->input->post('ticket_type_id');
         $assigned_to = $this->input->post('assigned_to');
 
-        //if this logged in user is a client then overwrite the client id
-        if ($this->login_user->user_type === "client") {
-            $client_id = $this->login_user->client_id;
-            $assigned_to = 0;
-        }
-
-
         $now = get_current_utc_time();
         $ticket_data = array(
             "title" => $this->input->post('title'),
-            "client_id" => $client_id,
+            "project_id" => $this->input->post('project_id'),
             "ticket_type_id" => $ticket_type_id,
             "created_by" => $this->login_user->id,
             "created_at" => $now,
             "last_activity_at" => $now,
             "labels" => $this->input->post('labels'),
-            "assigned_to" => $assigned_to ? $assigned_to : 0
+            "assigned_to" => $assigned_to ? $assigned_to : 0,
+            "external_reference" => $this->input->post('external_reference')
         );
 
         if ($id) {
@@ -144,7 +133,7 @@ class Tickets extends Pre_loader {
             }
 
             //remove not updateable fields
-            unset($ticket_data['client_id']);
+            unset($ticket_data['project_id']);
             unset($ticket_data['created_by']);
             unset($ticket_data['created_at']);
             unset($ticket_data['last_activity_at']);
@@ -158,7 +147,6 @@ class Tickets extends Pre_loader {
 
 
         if ($ticket_id) {
-
             //ticket added. now add a comment in this ticket
             if (!$id) {
                 $comment_data = array(
@@ -183,18 +171,21 @@ class Tickets extends Pre_loader {
 
     /* upload a file */
 
-    function upload_file() {
+    public function upload_file ()
+    {
         upload_file_to_temp();
     }
 
     /* check valid file for ticket */
 
-    function validate_ticket_file() {
+    public function validate_ticket_file ()
+    {
         return validate_post_file($this->input->post("file_name"));
     }
 
     // list of tickets, prepared for datatable 
-    function list_data() {
+    public function list_data()
+    {
         $this->access_only_allowed_members();
 
         $status = $this->input->post("status");
@@ -211,7 +202,7 @@ class Tickets extends Pre_loader {
     }
 
     // list of tickets of a specific client, prepared for datatable 
-    function ticket_list_data_of_client($client_id) {
+    public function ticket_list_data_of_client($client_id) {
         $this->access_only_allowed_members_or_client_contact($client_id);
 
         $options = array("client_id" => $client_id, "access_type" => $this->access_type);
@@ -268,15 +259,13 @@ class Tickets extends Pre_loader {
             $assigned_to = get_team_member_profile_link($data->assigned_to, $assigned_to_user);
         }
 
-
-
-
         return array(
             $data->id,
             $title,
-            $data->company_name ? anchor(get_uri("clients/view/" . $data->client_id), $data->company_name) : "-",
+            $data->projectTitle ? anchor(get_uri("projects/view/" . $data->projectId), $data->projectTitle) : "",
             $data->ticket_type,
             $assigned_to,
+            $data->external_reference,
             $data->last_activity_at,
             format_to_relative_time($data->last_activity_at),
             $ticket_status
@@ -284,31 +273,32 @@ class Tickets extends Pre_loader {
     }
 
     // load ticket details view 
-    function view($ticket_id = 0) {
+    public function view($ticket_id = 0)
+    {
+        if (! $ticket_id) {
+            return;
+        }
+
+        $options = array("id" => $ticket_id);
+        $options["access_type"] = $this->access_type;
+
+        $ticket_info = $this->Tickets_model->get_details($options)->row();
+        $this->access_only_allowed_members_or_client_contact($ticket_info->client_id);
 
 
-        if ($ticket_id) {
-            $options = array("id" => $ticket_id);
-            $options["access_type"] = $this->access_type;
+        if ($ticket_info) {
+            $view_data['ticket_info'] = $ticket_info;
 
-            $ticket_info = $this->Tickets_model->get_details($options)->row();
-            $this->access_only_allowed_members_or_client_contact($ticket_info->client_id);
+            $comments_options = array("ticket_id" => $ticket_id);
+            $view_data['comments'] = $this->Ticket_comments_model->get_details($comments_options)->result();
 
-
-            if ($ticket_info) {
-                $view_data['ticket_info'] = $ticket_info;
-
-                $comments_options = array("ticket_id" => $ticket_id);
-                $view_data['comments'] = $this->Ticket_comments_model->get_details($comments_options)->result();
-
-                $this->template->rander("tickets/view", $view_data);
-            } else {
-                show_404();
-            }
+            $this->template->rander("tickets/view", $view_data);
+        } else {
+            show_404();
         }
     }
 
-    function save_comment() {
+    public function save_comment() {
         $ticket_id = $this->input->post('ticket_id');
         $now = get_current_utc_time();
 
@@ -355,7 +345,7 @@ class Tickets extends Pre_loader {
         }
     }
 
-    function save_ticket_status($ticket_id = 0, $status = "closed") {
+    public function save_ticket_status($ticket_id = 0, $status = "closed") {
 
         $status = ($status == "closed") ? "closed" : "open";
 
@@ -364,6 +354,7 @@ class Tickets extends Pre_loader {
         );
 
         $save_id = $this->Tickets_model->save($data, $ticket_id);
+
         if ($save_id) {
             $options = array("id" => $ticket_id, "access_type" => $this->access_type);
 
@@ -387,10 +378,92 @@ class Tickets extends Pre_loader {
 
     /* download files by zip */
 
-    function download_comment_files($id) {
+    public function download_comment_files($id) {
 
         $files = $this->Ticket_comments_model->get_one($id)->files;
         download_app_files(get_setting("timeline_file_path"), $files);
+    }
+
+    public function observation_modal() {
+        validate_submitted_data(array(
+            "id" => "numeric"
+        ));
+
+        //client should not be able to edit ticket
+        if ($this->login_user->user_type === "client" && $this->input->post('id')) {
+            redirect("forbidden");
+        }
+        $view_data = [];
+        $view_data['id'] = $this->input->post('id');
+
+        $this->load->view('tickets/observation_modal_form', $view_data);
+    }
+
+    private function createTask($title, $assignedTo, $projectId, $ticketId, $parent = 0, $label = 'Ticket')
+    {
+        $taskInfo = [
+            "title" => $title,
+            'assigned_to' => $assignedTo,
+            'parent_id' => $parent,
+            'priority' => 'High',
+            "description" => '',
+            "project_id" => $projectId,
+            "milestone_id" => 0,
+            "points" => 1,
+            "status" => 'to_do - 0%',
+            "labels" => $label,
+            "max_hours" => 0,
+            "start_date" => date('Y-m-d'),
+            "deadline" => "0000-00-00",
+            "ticket_id" => $ticketId
+        ];
+
+        return $this->Tasks_model->save($taskInfo);
+    }
+
+    private function firstOrCreateParent($title, $assignedTo, $projectId, $ticketId, $parent = 0)
+    {
+        $tasks = $this->Tasks_model->get_all_where([
+            'title' => $title,
+            'ticket_id' => $ticketId
+        ])->result();
+
+        if (count($tasks) > 0) {
+            return $tasks[0]->id;
+        }
+
+        return $this->createTask($title, $assignedTo, $projectId, $ticketId, $parent);
+    }
+
+    public function save_observations()
+    {
+        $id = $this->input->post('id');
+        $ticketInfo = $this->Tickets_model->get_details(['id' => $id])->row();
+        $parentId = $this->firstOrCreateParent(
+            $ticketInfo->title,
+            $ticketInfo->assigned_to,
+            $ticketInfo->project_id,
+            $ticketInfo->id
+        );
+
+        $observationTypes = $this->input->post('observationTypes');
+        foreach ($this->input->post('observations') as $key => $observation) {
+            $this->createTask(
+                $observation,
+                $ticketInfo->assigned_to,
+                $ticketInfo->project_id,
+                $ticketInfo->id,
+                $parentId,
+                'Ticket,' . $observationTypes[$key]
+            );
+        }
+
+        $files_data = move_files_from_temp_dir_to_permanent_dir(get_setting("timeline_file_path"), "ticket");
+
+        echo json_encode([
+            "success" => true,
+            'message' => lang('record_saved')
+        ]);
     }
 
 }

@@ -5,7 +5,7 @@
 
 
         <div class="form-group">
-            <label for="title" class=" col-md-3"><?php echo lang('title'); ?></label>
+            <label for="title" class=" col-md-3"><?php echo lang('subject'); ?></label>
             <div class=" col-md-9">
                 <?php
                 echo form_input(array(
@@ -13,7 +13,7 @@
                     "name" => "title",
                     "value" => $model_info->title,
                     "class" => "form-control",
-                    "placeholder" => lang('title'),
+                    "placeholder" => lang('subject'),
                     "autofocus" => true,
                     "data-rule-required" => true,
                     "data-msg-required" => lang("field_required"),
@@ -23,22 +23,18 @@
         </div>
         <?php if (!$model_info->id) { ?>
             <!-- client can't be changed during editing -->
-            <?php if ($client_id) { ?>
-                <input type="hidden" name="client_id" value="<?php echo $client_id; ?>" />
+            <?php if ($project_id) { ?>
+                <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
             <?php } else { ?>
                 <div class="form-group">
-                    <label for="client_id" class=" col-md-3"><?php echo lang('client'); ?></label>
-                    <div class="col-md-8">
-                        <?php
-                        echo form_dropdown("client_id", $clients_dropdown, array(""), "id='client_id' class='select2 validate-hidden' data-rule-required='true', data-msg-required='" . lang('field_required') . "'");
-                        ?>
+                    <label for="project_id" class=" col-md-3"><?php echo lang('project'); ?></label>
+                    <div class="col-md-9">
+                        <select name="project_id" id="project_id" class='select2 validate-hidden' data-rule-required='true' data-msg-required='<?= lang('field_required') ?>'>
+                            <?php foreach ($projects_dropdown as $project) : ?>
+                                <option value="<?= $project->id ?>"><?= $project->title ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
-
-                    <div class="col-md-1">
-                        <?php echo modal_anchor(get_uri("clients/modal_form"), "<i class='fa fa-plus-circle'></i>", array("data-is-popup" => '1', 'data-populate' => 'client_id', "class" => "btn btn-info btn-add", "title" => lang('add_client'))); ?>
-                    </div>
-
-
                 </div>
             <?php } ?>
         <?php } ?>
@@ -47,6 +43,22 @@
             <div class="col-md-9">
                 <?php
                 echo form_dropdown("ticket_type_id", $ticket_types_dropdown, array(""), "class='select2'");
+                ?>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="external_reference" class=" col-md-3">External Reference</label>
+            <div class=" col-md-9">
+                <?php
+                echo form_textarea(array(
+                    "id" => "external_reference",
+                    "name" => "external_reference",
+                    "class" => "form-control",
+                    "placeholder" => 'External Reference',
+                    "data-rule-required" => false,
+                    "data-msg-required" => lang("field_required"),
+                ));
                 ?>
             </div>
         </div>

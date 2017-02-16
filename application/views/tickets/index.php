@@ -22,16 +22,17 @@
             filterDropdown: [{name: "ticket_label", class: "w200", options: <?php echo $ticket_labels_dropdown; ?>}, {name: "assigned_to", class: "w200", options: <?php echo $assigned_to_dropdown; ?>}],
             columns: [
                 {title: '<?php echo lang("ticket_id") ?>', "class": "w10p"},
-                {title: '<?php echo lang("title") ?>', "class": "w40p"},
-                {title: '<?php echo lang("client") ?>', "class": "w15p"},
+                {title: '<?php echo lang("subject") ?>', "class": "w40p"},
+                {title: '<?php echo lang("project") ?>', "class": "w15p"},
                 {title: '<?php echo lang("ticket_type") ?>', "class": "w10p"},
-                {title: '<?php echo lang("assigned_to") ?>', "class": "w10p"},
+                {title: '<?php echo lang("assigned_to") ?>', "class": "w40p"},
+                {title: 'External Reference', "class": "w10p"},
                 {visible: false, searchable: false},
                 {title: '<?php echo lang("last_activity") ?>', "iDataSort": 5, "class": "w10p"},
                 {title: '<?php echo lang("status") ?>', "class": "w5p"}
             ],
-            printColumns: [0, 1, 2, 3, 4, 6, 7],
-            xlsColumns: [0, 1, 2, 3, 4, 6, 7]
+            printColumns: [0, 1, 2, 3, 4, 6, 7, 8],
+            xlsColumns: [0, 1, 2, 3, 4, 6, 7, 8]
         });
     });
 </script>

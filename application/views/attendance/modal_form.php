@@ -3,7 +3,7 @@
     <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />
 
     <div class="clearfix">
-        <?php if ($user->isAdmin) : ?>
+        <?php if ($user->is_admin) : ?>
         <div class="form-group">
             <label for="applicant_id" class=" col-md-3"><?php echo lang('team_member'); ?></label>
             <div class=" col-md-9">

@@ -598,7 +598,8 @@ CREATE TABLE IF NOT EXISTS `team_member_job_info` (
 
 CREATE TABLE IF NOT EXISTS `tickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `client_id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `external_reference` TEXT NOT NULL,
   `ticket_type_id` int(11) NOT NULL,
   `title` text COLLATE utf8_unicode_ci NOT NULL,
   `created_by` int(11) NOT NULL,

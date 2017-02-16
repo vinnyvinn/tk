@@ -152,8 +152,10 @@ class Tasks_model extends Crud_model {
         $tasksTable = $this->db->dbprefix('tasks');
         $projectsTable = $this->db->dbprefix('projects');
 
-        $query = 'SELECT ' . $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
-            ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id' .
+        $query = 'SELECT IF(' . $tasksTable . '.parent_id = 0, CONCAT(' . $tasksTable . '.title, ' . $tasksTable . '.id), CONCAT(parent.title, parent.id)) as parentTask, ' .
+            $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
+            ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id ' .
+            'LEFT JOIN ' . $tasksTable . ' as parent ON ' . $tasksTable .'.parent_id=parent.id ' .
             ' WHERE assigned_to = ' . $userId .
             ' OR collaborators LIKE "%,' . $userId . ',%"' .
             ' OR collaborators LIKE "' . $userId . ',%"' .
@@ -161,8 +163,10 @@ class Tasks_model extends Crud_model {
             ' OR collaborators = ' . $userId;
 
         if ($user->is_admin) {
-            $query = 'SELECT ' . $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
-                ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id';
+            $query = 'SELECT IF(' . $tasksTable . '.parent_id = 0, CONCAT(' . $tasksTable . '.title, ' . $tasksTable . '.id), CONCAT(parent.title, parent.id)) as parentTask, ' .
+                $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
+                ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id ' .
+                'LEFT JOIN ' . $tasksTable . ' as parent ON ' . $tasksTable .'.parent_id=parent.id ';
         }
 
         return $this->db->query($query);

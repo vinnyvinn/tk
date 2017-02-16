@@ -155,4 +155,18 @@ class Projects_model extends Crud_model {
         return $this->db->query($query)->result();
     }
 
+    public function getAll($clientId = null)
+    {
+        $projectsTable = $this->db->dbprefix('projects');
+
+        $where  = '';
+        if ($clientId) {
+            $where = ' AND client_id = ' . $clientId;
+        }
+
+        $query = 'select * from ' . $projectsTable .' where deleted = 0' . $where . ' order by title';
+
+        return $this->db->query($query)->result();
+    }
+
 }

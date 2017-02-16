@@ -79,6 +79,9 @@ class Attendance extends Pre_loader {
         }
 
         $tasks = $this->Tasks_model->getTasks($this->login_user)->result();
+
+        $tasks = $this->groupTasks($tasks);
+
         $mappedTasks = [];
 
         foreach ($tasks as $task) {
@@ -89,6 +92,29 @@ class Attendance extends Pre_loader {
         $view_data['user'] = $this->login_user;
 
         $this->load->view('attendance/modal_form', $view_data);
+    }
+
+
+    public function groupTasks($array)
+    {
+        $grouped = [];
+        $count = 0;
+        foreach ($array as $value) {
+            $count++;
+            $grouped[$value->projectName . $value->parentTask] [] = $value;
+        }
+
+        $filtered = [];
+        foreach ($grouped as $title => $group) {
+            if (count($group) > 1) {
+                $group = array_filter($group, function ($item) use ($title) {
+                    return $item->projectName . $item->title != $title;
+                });
+            }
+            $filtered = array_merge($filtered, $group);
+        }
+
+        return $filtered;
     }
 
     //add/edit attendance record

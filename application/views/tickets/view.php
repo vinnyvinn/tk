@@ -18,6 +18,12 @@
                         <?php if ($ticket_info->status === "closed") { ?>
                             <li role="presentation"><?php echo ajax_anchor(get_uri("tickets/save_ticket_status/$ticket_info->id/open"), "<i class='fa fa-check-circle'></i> " . lang('mark_as_open'), array("class" => "", "title" => lang('mark_as_open'), "data-reload-on-success" => "1")); ?> </li>
                         <?php } else { ?>
+                            <li role="presentation">
+                                <?php echo modal_anchor(get_uri("tickets/observation_modal"), "<i class='fa fa-eye'></i> Add Issues", array( "title" => lang('Add observations noted'), "data-post-view" => "details", "data-post-id" => $ticket_info->id)); ?>
+                            </li>
+                            <li role="presentation">
+                                <?php echo modal_anchor(get_uri("tickets/solution_modal"), "<i class='fa fa-check'></i> Add Solutions", array( "title" => lang('Add solutions to issues'), "data-post-view" => "details", "data-post-id" => $ticket_info->id)); ?>
+                            </li>
                             <li role="presentation"><?php echo ajax_anchor(get_uri("tickets/save_ticket_status/$ticket_info->id/closed"), "<i class='fa fa-check-circle'></i> " . lang('mark_as_closed'), array("class" => "", "title" => lang('mark_project_as_open'), "data-reload-on-success" => "1")); ?> </li>
                         <?php } ?>
                     </ul>
