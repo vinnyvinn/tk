@@ -97,6 +97,7 @@ class Attendance extends Pre_loader {
 
     public function groupTasks($array)
     {
+        return $array;
         $grouped = [];
         $count = 0;
         foreach ($array as $value) {

@@ -1605,6 +1605,7 @@ class Projects extends Pre_loader {
 
     public function groupTasks($array)
     {
+        return $array;
         $grouped = [];
         foreach ($array as $value) {
             $grouped[$value->parentTask] [] = $value;
