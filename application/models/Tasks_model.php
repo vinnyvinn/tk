@@ -156,11 +156,11 @@ class Tasks_model extends Crud_model {
             $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
             ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id ' .
             'LEFT JOIN ' . $tasksTable . ' as parent ON ' . $tasksTable .'.parent_id=parent.id ' .
-            ' WHERE assigned_to = ' . $userId .
-            ' OR collaborators LIKE "%,' . $userId . ',%"' .
-            ' OR collaborators LIKE "' . $userId . ',%"' .
-            ' OR collaborators LIKE "%,' . $userId . '"' .
-            ' OR collaborators = ' . $userId;
+            ' WHERE '. $tasksTable . '.assigned_to = ' . $userId .
+            ' OR '. $tasksTable . '.collaborators LIKE "%,' . $userId . ',%"' .
+            ' OR '. $tasksTable . '.collaborators LIKE "' . $userId . ',%"' .
+            ' OR '. $tasksTable . '.collaborators LIKE "%,' . $userId . '"' .
+            ' OR '. $tasksTable . '.collaborators = ' . $userId;
 
         if ($user->is_admin) {
             $query = 'SELECT IF(' . $tasksTable . '.parent_id = 0, CONCAT(' . $tasksTable . '.title, ' . $tasksTable . '.id), CONCAT(parent.title, parent.id)) as parentTask, ' .
