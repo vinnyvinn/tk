@@ -80,7 +80,7 @@ class Tickets extends Pre_loader
                     ['status' => 'active', "deleted" => 0, "user_type" => "staff"]
                 );
 
-        sort($assigned_to_dropdown, SORT_STRING);
+        asort($assigned_to_dropdown, SORT_STRING);
 
         $view_data['assigned_to_dropdown'] = $assigned_to_dropdown;
 
@@ -194,6 +194,7 @@ class Tickets extends Pre_loader
         $options = array("status" => $status, "access_type" => $this->access_type, "ticket_label" => $ticket_label, "assigned_to" => $assigned_to);
 
         $list_data = $this->Tickets_model->get_details($options)->result();
+
         $result = array();
         foreach ($list_data as $data) {
             $result[] = $this->_make_row($data);
