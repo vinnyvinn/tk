@@ -28,32 +28,6 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="show_logo_in_signin_page" class=" col-md-2"><?php echo lang('show_logo_in_signin_page'); ?></label>
-                    <div class="col-md-10">
-                        <?php
-                        echo form_dropdown(
-                                "show_logo_in_signin_page", array(
-                            "no" => lang("no"),
-                            "yes" => lang("yes")
-                                ), get_setting('show_logo_in_signin_page'), "class='select2 mini'"
-                        );
-                        ?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="show_background_image_in_signin_page" class=" col-md-2"><?php echo lang('show_background_image_in_signin_page'); ?></label>
-                    <div class="col-md-10">
-                        <?php
-                        echo form_dropdown(
-                                "show_background_image_in_signin_page", array(
-                            "no" => lang("no"),
-                            "yes" => lang("yes")
-                                ), get_setting('show_background_image_in_signin_page'), "class='select2 mini'"
-                        );
-                        ?>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class=" col-md-2"><?php echo lang('signin_page_background'); ?></label>
                     <div class=" col-md-10">
                         <div class="pull-left mr15">
@@ -65,22 +39,6 @@
                         <div class="pull-left upload-file-button btn btn-default btn-xs">
                             <span>...</span>
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="app_title" class=" col-md-2"><?php echo lang('app_title'); ?></label>
-                    <div class=" col-md-10">
-                        <?php
-                        echo form_input(array(
-                            "id" => "app_title",
-                            "name" => "app_title",
-                            "value" => get_setting('app_title'),
-                            "class" => "form-control",
-                            "placeholder" => lang('app_title'),
-                            "data-rule-required" => true,
-                            "data-msg-required" => lang("field_required"),
-                        ));
-                        ?>
                     </div>
                 </div>
                 <div class="form-group">
@@ -227,36 +185,6 @@
                         ?>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="scrollbar" class=" col-md-2"><?php echo lang('scrollbar'); ?></label>
-                    <div class="col-md-10">
-                        <?php
-                        echo form_dropdown(
-                                "scrollbar", array(
-                            "jquery" => "jQuery",
-                            "native" => "Native"
-                                ), get_setting('scrollbar'), "class='select2 mini'"
-                        );
-                        ?>
-                    </div>
-                </div>
-<!--                <div class="form-group">-->
-<!--                    <label for="item_purchase_code" class=" col-md-2">--><?php //echo lang('item_purchase_code'); ?><!--</label>-->
-<!--                    <div class=" col-md-10">-->
-<!--                        --><?php
-//                        echo form_input(array(
-//                            "id" => "item_purchase_code",
-//                            "name" => "item_purchase_code",
-//                            "value" => get_setting('item_purchase_code'),
-//                            "class" => "form-control",
-//                            "placeholder" => "Envato Purchase Code",
-//                            "data-rule-required" => true,
-//                            "data-msg-required" => lang("field_required"),
-//                        ));
-//                        ?>
-<!--                    </div>-->
-<!--                </div>-->
-
             </div>
             <div class="panel-footer">
                 <button type="submit" class="btn btn-primary"><span class="fa fa-check-circle"></span> <?php echo lang('save'); ?></button>
