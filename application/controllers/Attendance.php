@@ -80,8 +80,6 @@ class Attendance extends Pre_loader {
 
         $tasks = $this->Tasks_model->getTasks($this->login_user)->result();
 
-        $tasks = $this->groupTasks($tasks);
-
         $mappedTasks = [];
 
         foreach ($tasks as $task) {

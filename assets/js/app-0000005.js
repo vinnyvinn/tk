@@ -1258,7 +1258,7 @@ if (typeof TableTools != 'undefined') {
         };
 
         window.InstanceCollection = window.InstanceCollection || {};
-        window.InstanceCollection["#" + this.id] = settings;
+        window.InstanceCollection["#" + $(this).attr('id')] = settings;
 
 
 

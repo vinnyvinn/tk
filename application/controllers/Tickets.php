@@ -260,6 +260,12 @@ class Tickets extends Pre_loader
             $assigned_to = get_team_member_profile_link($data->assigned_to, $assigned_to_user);
         }
 
+        $options = "";
+        if ($this->login_user->user_type == "staff" && $data->status !== "closed") {
+            $options .= modal_anchor(get_uri("tickets/modal_form"), "<i class='fa fa-pencil'></i>", array("class" => "edit", "title" => lang('ticket'), "data-post-view" => "details", "data-post-id" => $data->id));
+            $options .= js_anchor("<i class='fa fa-times fa-fw'></i>", array('title' => lang('delete_task'), "class" => "delete", "data-id" => $data->id, "data-action-url" => get_uri("tickets/delete_ticket"), "data-action" => "delete"));
+        }
+
         return array(
             $data->id,
             $title,
@@ -269,9 +275,37 @@ class Tickets extends Pre_loader
             $data->external_reference,
             $data->last_activity_at,
             format_to_relative_time($data->last_activity_at),
-            $ticket_status
+            $ticket_status,
+            $options
         );
     }
+
+    function delete_ticket() {
+        $id = $this->input->post('id');
+        $info = $this->Tickets_model->get_one($id);
+
+        if ($this->login_user->user_type != "staff" || $info->status == 'closed') {
+            redirect("forbidden");
+        }
+
+        if ($this->input->post('undo')) {
+            if ($this->Tickets_model->delete($id, true)) {
+                echo json_encode(array("success" => true, "data" => $this->_ticket_row($id), "message" => lang('record_undone')));
+            } else {
+                echo json_encode(array("success" => false, lang('error_occurred')));
+            }
+        } else {
+            if ($this->Tickets_model->delete($id)) {
+                echo json_encode(array("success" => true, 'message' => lang('record_deleted')));
+
+                $task_info = $this->Tickets_model->get_one($id);
+                log_notification("project_task_deleted", array("ticket_id" => $task_info->project_id, "task_id" => $id));
+            } else {
+                echo json_encode(array("success" => false, 'message' => lang('record_cannot_be_deleted')));
+            }
+        }
+    }
+
 
     // load ticket details view 
     public function view($ticket_id = 0)
@@ -467,6 +501,12 @@ class Tickets extends Pre_loader
         ]);
     }
 
+    private function _ticket_row($id)
+    {
+        return $this->_make_row($this->Tickets_model->get_details([
+            'id' => $id
+        ])->row());
+    }
 }
 
 /* End of file tickets.php */

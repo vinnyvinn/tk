@@ -29,7 +29,8 @@
                 {title: 'External Reference', "class": "w10p"},
                 {visible: false, searchable: false},
                 {title: '<?php echo lang("last_activity") ?>', "iDataSort": 5, "class": "w10p"},
-                {title: '<?php echo lang("status") ?>', "class": "w5p"}
+                {title: '<?php echo lang("status") ?>', "class": "w5p"},
+                {title: '<i class="fa fa-bars"></i>', "class": "text-center option w80"}
             ],
             printColumns: [0, 1, 2, 3, 4, 6, 7, 8],
             xlsColumns: [0, 1, 2, 3, 4, 6, 7, 8]

@@ -539,6 +539,17 @@ CREATE TABLE IF NOT EXISTS `social_links` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
+CREATE TABLE IF NOT EXISTS `main_tasks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci NOT NULL,
+  `description` TEXT NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `deleted` tinyint(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+ALTER TABLE `main_tasks` ADD CONSTRAINT `PROJECTS_FK` FOREIGN KEY (`project_id`) REFERENCES `projects`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 CREATE TABLE IF NOT EXISTS `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parent_id` INT(11) NULL DEFAULT '0',
@@ -560,6 +571,7 @@ CREATE TABLE IF NOT EXISTS `tasks` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
+ALTER TABLE `tasks` ADD CONSTRAINT `MAIN_TAKS_FK` FOREIGN KEY (`parent_id`) REFERENCES `main_tasks`(`id`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 CREATE TABLE IF NOT EXISTS `taxes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

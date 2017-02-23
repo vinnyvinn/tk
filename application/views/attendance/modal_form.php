@@ -129,7 +129,6 @@
                 } else {
                     $("#attendance-table").appTable({reload: true});
                 }
-
             }
         });
         if ($("#attendance_user_id").length) {

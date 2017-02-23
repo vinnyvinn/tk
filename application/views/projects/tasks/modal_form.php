@@ -2,7 +2,24 @@
 <div class="modal-body clearfix">
     <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />
     <?php if($project_id) : ?>
-    <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
+        <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
+        <div class="form-group">
+            <label for="title" class=" col-md-3">Sub-Task Of</label>
+            <div class=" col-md-8">
+                <select name="parent_id" id="parent_id" class="form-control select2">
+                    <option value="0" <?= $model_info->parent_id == 0 || is_null($model_info->parent_id) ? ' selected' : ''; ?>>None</option>
+                    <?php foreach ($tasks_dropdown as $task) : ?>
+                        <option<?= $model_info->parent_id == $task->id ? ' selected' : ''; ?> value="<?= $task->id; ?>"><?= $task->title; ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <div class="col-md-1">
+
+                <?php
+                echo modal_anchor(get_uri("projects/main_task_modal_form"), "<i class='fa fa-plus-circle'></i>", array("class" => "btn btn-info btn-add", "title" => 'Add Main Task', "data-is-popup" => '1', 'data-populate' => 'parent_id', "data-post-project_id" => $project_id));
+                ?>
+            </div>
+        </div>
     <?php else : ?>
         <div class="form-group">
             <label for="title" class=" col-md-3"><?php echo lang('title'); ?></label>
@@ -22,17 +39,7 @@
             </div>
         </div>
     <?php endif; ?>
-    <div class="form-group">
-        <label for="title" class=" col-md-3">Sub-Task Of</label>
-        <div class=" col-md-9">
-            <select name="parent_id" id="parent_id" class="form-control select2">
-                <option value="0" <?= $model_info->parent_id == 0 ? ' selected' : ''; ?>>None</option>
-                <?php foreach ($tasks_dropdown as $task) : ?>
-                    <option<?= $model_info->parent_id == $task->id ? ' selected' : ''; ?> value="<?= $task->id; ?>"><?= $task->title; ?></option>
-                <?php endforeach; ?>
-            </select>
-        </div>
-    </div>
+
 
     <div class="form-group">
         <label for="title" class=" col-md-3"><?php echo lang('title'); ?></label>

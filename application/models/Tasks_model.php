@@ -81,6 +81,7 @@ class Tasks_model extends Crud_model {
         $milestones_table = $this->db->dbprefix('milestones');
         $project_members_table = $this->db->dbprefix('project_members');
         $attendance_table = $this->db->dbprefix('attendance');
+        $mainTasksTable = $this->db->dbprefix('main_tasks');
 
         $where = "";
 
@@ -129,7 +130,7 @@ class Tasks_model extends Crud_model {
             $extra_left_join = " LEFT JOIN $project_members_table ON $tasks_table.project_id= $project_members_table.project_id AND $project_members_table.deleted=0 AND $project_members_table.user_id=$project_member_id";
         }
 
-        $sql = "SELECT IF($tasks_table.parent_id = 0, $tasks_table.title, parent.title) as parentTask, $tasks_table.*, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS assigned_to_user,
+        $sql = "SELECT parent.title as parentTask, $tasks_table.*, CONCAT($users_table.first_name, ' ',$users_table.last_name) AS assigned_to_user,
                 $users_table.image as assigned_to_avatar, $projects.title AS project_title,
                  $milestones_table.title AS milestone_title, IF($tasks_table.deadline='0000-00-00',
                  $milestones_table.due_date,$tasks_table.deadline) AS deadline,
@@ -139,7 +140,7 @@ class Tasks_model extends Crud_model {
         LEFT JOIN $users_table ON $users_table.id= $tasks_table.assigned_to
         LEFT JOIN $projects ON $tasks_table.project_id=$projects.id 
         LEFT JOIN $milestones_table ON $tasks_table.milestone_id=$milestones_table.id 
-        LEFT JOIN $tasks_table as parent ON $tasks_table.parent_id=parent.id 
+        LEFT JOIN $mainTasksTable as parent ON $tasks_table.parent_id=parent.id 
         $extra_left_join
         WHERE $tasks_table.deleted=0 $where ORDER BY parentTask";
 
@@ -152,10 +153,8 @@ class Tasks_model extends Crud_model {
         $tasksTable = $this->db->dbprefix('tasks');
         $projectsTable = $this->db->dbprefix('projects');
 
-        $query = 'SELECT IF(' . $tasksTable . '.parent_id = 0, CONCAT(' . $tasksTable . '.title, ' . $tasksTable . '.id), CONCAT(parent.title, parent.id)) as parentTask, ' .
-            $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
+        $query = 'SELECT ' . $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
             ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id ' .
-            'LEFT JOIN ' . $tasksTable . ' as parent ON ' . $tasksTable .'.parent_id=parent.id ' .
             ' WHERE '. $tasksTable . '.assigned_to = ' . $userId .
             ' OR '. $tasksTable . '.collaborators LIKE "%,' . $userId . ',%"' .
             ' OR '. $tasksTable . '.collaborators LIKE "' . $userId . ',%"' .
@@ -163,10 +162,8 @@ class Tasks_model extends Crud_model {
             ' OR '. $tasksTable . '.collaborators = ' . $userId;
 
         if ($user->is_admin) {
-            $query = 'SELECT IF(' . $tasksTable . '.parent_id = 0, CONCAT(' . $tasksTable . '.title, ' . $tasksTable . '.id), CONCAT(parent.title, parent.id)) as parentTask, ' .
-                $tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
-                ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id ' .
-                'LEFT JOIN ' . $tasksTable . ' as parent ON ' . $tasksTable .'.parent_id=parent.id ';
+            $query = 'SELECT ' .$tasksTable . '.*, ' . $projectsTable . '.title as projectName FROM ' . $tasksTable .
+                ' INNER JOIN ' . $projectsTable . ' ON ' . $projectsTable . '.id = ' . $tasksTable . '.project_id';
         }
 
         return $this->db->query($query);

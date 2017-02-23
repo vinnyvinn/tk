@@ -292,7 +292,6 @@ class Projects extends Pre_loader {
             }
         }
 
-
         $view_data['model_info'] = $this->Projects_model->get_one($project_id);
         if ($client_id) {
             $view_data['model_info']->client_id = $client_id;
@@ -1356,14 +1355,25 @@ class Projects extends Pre_loader {
         $this->load->view('projects/tasks/view', $view_data);
     }
 
+    public function main_task_modal_form()
+    {
+        $projectId = $this->input->post('project_id') ? $this->input->post('project_id') : $view_data['model_info']->project_id;
+        $this->init_project_permission_checker($projectId);
+
+        if (!$this->can_create_tasks()) {
+            redirect("forbidden");
+        }
+        $viewData['project_id'] = $projectId;
+
+        $this->load->view('projects/tasks/main_task_modal_form', $viewData);
+    }
+
     /* task add/edit modal */
 
     function task_modal_form() {
-
         $id = $this->input->post('id');
         $view_data['model_info'] = $this->Tasks_model->get_one($id);
         $project_id = $this->input->post('project_id') ? $this->input->post('project_id') : $view_data['model_info']->project_id;
-
 
         $this->init_project_permission_checker($project_id);
 
@@ -1378,7 +1388,7 @@ class Projects extends Pre_loader {
         }
 
         $view_data['milestones_dropdown'] = array(0 => "None") + $this->Milestones_model->get_dropdown_list(array("title"), "id", array("project_id" => $project_id));
-        $view_data['tasks_dropdown'] = $this->Tasks_model->getProjectTasks($project_id);
+        $view_data['tasks_dropdown'] = $this->MainTask->forProject($project_id);
 
         $project_members = $this->Users_model->all_dropdown()->result();
         $project_members_dropdown = array("" => "-");
@@ -1551,6 +1561,57 @@ class Projects extends Pre_loader {
         }
     }
 
+    function save_main_task() {
+        $project_id = $this->input->post('project_id');
+        $id = $this->input->post('id');
+
+        $this->init_project_permission_checker($project_id);
+
+        if ($id) {
+            if (!$this->can_edit_tasks()) {
+                redirect("forbidden");
+            }
+        } else {
+            if (!$this->can_create_tasks()) {
+                redirect("forbidden");
+            }
+        }
+
+        $data = array(
+            "title" => $this->input->post('title'),
+            "description" => $this->input->post('description'),
+            "project_id" => $project_id,
+        );
+
+        $save_id = $this->MainTask->save($data, $id);
+        if ($save_id) {
+            if ($id) {
+                //updated
+                log_notification("project_main_task_updated", array("project_id" => $project_id, "main_task_id" => $save_id, "activity_log_id" => get_array_value($data, "activity_log_id")));
+            } else {
+                //created
+                log_notification("project_main_task_created", array("project_id" => $project_id, "main_task_id" => $save_id));
+            }
+            if ($this->input->post('data-type') == 'plain') {
+                echo json_encode([
+                    "success" => true,
+                    "data" => json_encode(['id' => $save_id, 'title' => $data['title']]),
+                    'id' => $save_id,
+                    'message' => lang('record_saved')
+                ]);
+            } else {
+                echo json_encode([
+                    "success" => true,
+                    "data" => $this->_task_row_data($save_id),
+                    'id' => $save_id,
+                    'message' => lang('record_saved')
+                ]);
+            }
+        } else {
+            echo json_encode(array("success" => false, 'message' => lang('error_occurred')));
+        }
+    }
+
     /* upadate a task status */
 
     function save_task_status($id = 0) {
@@ -1575,7 +1636,6 @@ class Projects extends Pre_loader {
     /* delete or undo a task */
 
     function delete_task() {
-
         $id = $this->input->post('id');
         $info = $this->Tasks_model->get_one($id);
 
@@ -1603,27 +1663,6 @@ class Projects extends Pre_loader {
         }
     }
 
-    public function groupTasks($array)
-    {
-        return $array;
-        $grouped = [];
-        foreach ($array as $value) {
-            $grouped[$value->parentTask] [] = $value;
-        }
-
-        $filtered = [];
-        foreach ($grouped as $title => $group) {
-            if (count($group) > 1) {
-                $group = array_filter($group, function ($item) use ($title) {
-                    return $item->title != $title;
-                });
-            }
-            $filtered = array_merge($filtered, $group);
-        }
-
-        return $filtered;
-    }
-
     function tasks_list_data($project_id = 0) {
         $this->init_project_permission_checker($project_id);
 
@@ -1636,8 +1675,7 @@ class Projects extends Pre_loader {
         $options = array("project_id" => $project_id, "assigned_to" => $this->input->post('assigned_to'), "status" => $status, "milestone_id" => $milestone_id);
         $list_data = $this->Tasks_model->get_details($options)->result();
         $result = array();
-        $mapped = $this->groupTasks($list_data);
-        foreach ($mapped as $data) {
+        foreach ($list_data as $data) {
             $result[] = $this->_make_task_row($data, "project_tasks");
         }
 
@@ -1703,6 +1741,7 @@ class Projects extends Pre_loader {
         }
         return $collaborators;
     }
+
     private function _make_task_row($data) {
         $title = modal_anchor(get_uri("projects/task_view"), $data->title, array("title" => lang('task_info') . " #$data->id", "data-post-id" => $data->id));
         $task_labels = "";
@@ -1791,7 +1830,7 @@ class Projects extends Pre_loader {
 
         return array(
             $check_status,
-            $data->parentTask,
+            $data->parentTask ? $data->parentTask : 'Main Tasks',
             $title,
             $data->max_hours,
             ($currentHours <= $data->max_hours) && ($data->max_hours > 0) ?

@@ -39,15 +39,16 @@
                     $sidebar_menu[] = array("name" => "clients", "url" => "clients", "class" => "fa-briefcase");
                 }
 
-                $openProjects = [];
-                $openProjects [] = ["name" => "All Projects", "url" => "projects/all_projects"];
+//                $openProjects = [];
+//                $openProjects [] = ["name" => "All Projects", "url" => "projects/all_projects"];
+//
+//                foreach ($projects as $project) {
+//                    $openProjects[] = ['name' => $project->title, 'url' => 'projects/view/' . $project->id];
+//                }
+//
+//                $sidebar_menu[] = array("name" => "projects", "url" => "projects", "class" => "fa-th-large", "submenu" => $openProjects);
 
-                foreach ($projects as $project) {
-                    $openProjects[] = ['name' => $project->title, 'url' => 'projects/view/' . $project->id];
-                }
-
-                $sidebar_menu[] = array("name" => "projects", "url" => "projects", "class" => "fa-th-large", "submenu" => $openProjects);
-
+                $sidebar_menu[] = ["name" => "All Projects", "class" => "fa-th-large", "url" => "projects/all_projects"];
                 $sidebar_menu[] = array("name" => "Your Tasks", "url" => "projects/all_tasks", "class" => "fa-check", "devider" => true);
 
                 if (get_setting("module_estimate") && get_setting("module_estimate_request") && ($this->login_user->is_admin || $access_estimate)) {
