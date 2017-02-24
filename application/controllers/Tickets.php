@@ -458,16 +458,22 @@ class Tickets extends Pre_loader
 
     private function firstOrCreateParent($title, $assignedTo, $projectId, $ticketId, $parent = 0)
     {
-        $tasks = $this->Tasks_model->get_all_where([
+        $tasks = $this->MainTask->get_all_where([
             'title' => $title,
-            'ticket_id' => $ticketId
+            'project_id' => $projectId
         ])->result();
 
         if (count($tasks) > 0) {
             return $tasks[0]->id;
         }
 
-        return $this->createTask($title, $assignedTo, $projectId, $ticketId, $parent);
+        $data = array(
+            "title" => 'Ticket: ' . $title,
+            "description" => '',
+            "project_id" => $projectId,
+        );
+
+        return $this->MainTask->save($data);
     }
 
     public function save_observations()
