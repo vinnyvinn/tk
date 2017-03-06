@@ -18,20 +18,6 @@
             ?>
         </div>
     </div>
-    <div class="form-group">
-        <label for="description" class="col-md-4"><?php echo lang('description'); ?></label>
-        <div class=" col-md-8">
-            <?php
-            echo form_textarea(array(
-                "id" => "description",
-                "name" => "description",
-                "value" => $model_info->description,
-                "class" => "form-control",
-                "placeholder" => lang('description'),
-            ));
-            ?>
-        </div>
-    </div>
     <?php if ($model_info->online_payable == 1) { ?>
         <div class="form-group">
             <label for="available_on_invoice" class="col-md-4"><?php echo lang('available_on_invoice'); ?>
@@ -102,6 +88,21 @@
         }
     }
     ?>
+
+    <div class="form-group">
+        <label for="description" class="col-md-12"><?php echo lang('description'); ?></label>
+        <div class=" col-md-12">
+            <?php
+            echo form_textarea(array(
+                "id" => "description",
+                "name" => "description",
+                "value" => $model_info->description,
+                "class" => "form-control wysiwyg",
+                "placeholder" => lang('description'),
+            ));
+            ?>
+        </div>
+    </div>
 
 </div>
 

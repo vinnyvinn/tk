@@ -8,7 +8,7 @@
         <?php
         echo form_textarea(array(
             "name" => "description",
-            "class" => "form-control",
+            "class" => "form-control wysiwyg",
             "placeholder" => lang('write_a_reply'),
             "data-rule-required" => true,
             "data-msg-required" => lang("field_required"),

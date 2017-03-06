@@ -18,6 +18,7 @@
         "assets/js/magnific-popup/magnific-popup.css",
         "assets/js/malihu-custom-scrollbar/jquery.mCustomScrollbar.min.css",
         "assets/css/font.css",
+        "assets/js/summernote/summernote.css",
         "assets/css/style-0000001.css",
         "assets/css/custom-style.css",
     ));
@@ -38,7 +39,8 @@
         "assets/js/magnific-popup/jquery.magnific-popup.min.js",
         "assets/js/notificatoin_handler.js",
         "assets/js/general_helper.js",
-        "assets/js/app-0000005.js"
+        "assets/js/summernote/summernote.min.js",
+        "assets/js/app-0000006.js"
     ));
     ?>
 </head>

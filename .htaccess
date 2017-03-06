@@ -18,6 +18,12 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
+
+
+<Files ".env">
+    Order Deny,Allow
+    Deny from all
+</Files>
 #
 ## ######################################################################
 ## # WEB PERFORMANCE                                                    #

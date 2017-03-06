@@ -47,32 +47,16 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label for="external_reference" class=" col-md-3">External Reference</label>
-            <div class=" col-md-9">
-                <?php
-                echo form_textarea(array(
-                    "id" => "external_reference",
-                    "name" => "external_reference",
-                    "class" => "form-control",
-                    "placeholder" => 'External Reference',
-                    "data-rule-required" => false,
-                    "data-msg-required" => lang("field_required"),
-                ));
-                ?>
-            </div>
-        </div>
-
         <?php if (!$model_info->id) { ?>
             <!-- description can't be changed during editing -->
             <div class="form-group">
-                <label for="description" class=" col-md-3"><?php echo lang('description'); ?></label>
-                <div class=" col-md-9">
+                <label for="description" class=" col-md-12"><?php echo lang('description'); ?></label>
+                <div class=" col-md-12">
                     <?php
                     echo form_textarea(array(
                         "id" => "description",
                         "name" => "description",
-                        "class" => "form-control",
+                        "class" => "form-control wysiwyg",
                         "placeholder" => lang('description'),
                         "data-rule-required" => true,
                         "data-msg-required" => lang("field_required"),
@@ -109,7 +93,24 @@
             </div>
         <?php } ?>
 
-        <?php $this->load->view("includes/dropzone_preview"); ?>    
+        <?php $this->load->view("includes/dropzone_preview"); ?>
+
+        <div class="form-group">
+            <label for="external_reference" class=" col-md-12">External Reference</label>
+            <div class=" col-md-12">
+                <?php
+                echo form_textarea(array(
+                    "id" => "external_reference",
+                    "name" => "external_reference",
+                    "class" => "form-control wysiwyg",
+                    "placeholder" => 'External Reference',
+                    "data-rule-required" => false,
+                    "data-msg-required" => lang("field_required"),
+                ));
+                ?>
+            </div>
+        </div>
+
         <div class="row">
             <div class="modal-footer">
 

@@ -20,20 +20,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="estimate_item_description" class="col-md-3"><?php echo lang('description'); ?></label>
-        <div class=" col-md-9">
-            <?php
-            echo form_textarea(array(
-                "id" => "estimate_item_description",
-                "name" => "estimate_item_description",
-                "value" => $model_info->description ? $model_info->description : "",
-                "class" => "form-control",
-                "placeholder" => lang('description')
-            ));
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label for="estimate_item_quantity" class=" col-md-3"><?php echo lang('quantity'); ?></label>
         <div class="col-md-9">
             <?php
@@ -79,6 +65,22 @@
             ?>
         </div>
     </div>
+
+    <div class="form-group">
+        <label for="estimate_item_description" class="col-md-12"><?php echo lang('description'); ?></label>
+        <div class=" col-md-12">
+            <?php
+            echo form_textarea(array(
+                "id" => "estimate_item_description",
+                "name" => "estimate_item_description",
+                "value" => $model_info->description ? $model_info->description : "",
+                "class" => "form-control wysiwyg",
+                "placeholder" => lang('description')
+            ));
+            ?>
+        </div>
+    </div>
+
 </div>
 
 <div class="modal-footer">

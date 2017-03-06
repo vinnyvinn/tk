@@ -24,21 +24,6 @@
         <div class="col-md-12">
             <div class="notepad">
                 <?php
-                echo form_textarea(array(
-                    "id" => "description",
-                    "name" => "description",
-                    "value" => $model_info->description,
-                    "class" => "form-control",
-                    "placeholder" => lang('description') . "...",
-                ));
-                ?>
-            </div>
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-12">
-            <div class="notepad">
-                <?php
                 echo form_input(array(
                     "id" => "note_labels",
                     "name" => "labels",
@@ -50,6 +35,23 @@
             </div>
         </div>
     </div>
+
+    <div class="form-group">
+        <div class="col-md-12">
+            <div class="notepad">
+                <?php
+                echo form_textarea(array(
+                    "id" => "description",
+                    "name" => "description",
+                    "value" => $model_info->description,
+                    "class" => "form-control wysiwyg",
+                    "placeholder" => lang('description') . "...",
+                ));
+                ?>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <div class="modal-footer">

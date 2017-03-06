@@ -57,21 +57,6 @@
                 ?>
             </div>
         </div>
-        <div class="form-group">
-            <label for="description" class=" col-md-3"><?php echo lang('description'); ?></label>
-            <div class=" col-md-9">
-                <?php
-                echo form_textarea(array(
-                    "id" => "description",
-                    "name" => "description",
-                    "value" => $model_info->description ? $model_info->description : "",
-                    "class" => "form-control",
-                    "placeholder" => lang('description')
-                ));
-                ?>
-
-            </div>
-        </div>
 
         <div class="form-group">
             <label for="expense_project_id" class=" col-md-3"><?php echo lang('project'); ?></label>
@@ -91,7 +76,24 @@
             </div>
         </div>
 
-        <?php $this->load->view("includes/dropzone_preview"); ?>    
+        <?php $this->load->view("includes/dropzone_preview"); ?>
+
+        <div class="form-group">
+            <label for="description" class=" col-md-12"><?php echo lang('description'); ?></label>
+            <div class=" col-md-12">
+                <?php
+                echo form_textarea(array(
+                    "id" => "description",
+                    "name" => "description",
+                    "value" => $model_info->description ? $model_info->description : "",
+                    "class" => "form-control wysiwyg",
+                    "placeholder" => lang('description')
+                ));
+                ?>
+
+            </div>
+        </div>
+
         <div class="modal-footer">
             <div class="row">
                 <button class="btn btn-default upload-file-button pull-left btn-sm round" type="button" style="color:#7988a2"><i class='fa fa-camera'></i> <?php echo lang("upload_file"); ?></button>

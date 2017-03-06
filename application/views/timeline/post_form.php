@@ -11,7 +11,7 @@
             echo form_textarea(array(
                 "id" => "post_description",
                 "name" => "description",
-                "class" => "form-control white",
+                "class" => "form-control white wysiwyg",
                 "placeholder" => lang('post_placeholder_text'),
                 "data-rule-required" => true,
                 "data-msg-required" => lang("field_required"),

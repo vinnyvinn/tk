@@ -19,20 +19,6 @@
             ?>
         </div>
     </div>
-    <div class="form-group">
-
-        <div class=" col-md-12">
-            <?php
-            echo form_textarea(array(
-                "id" => "description",
-                "name" => "description",
-                "value" => $model_info->description,
-                "placeholder" => lang('description'),
-                "class" => "form-control"
-            ));
-            ?>
-        </div>
-    </div>
 
     <div class="clearfix">
         <label for="start_date" class="col-md-2"><?php echo lang('start_date'); ?></label>
@@ -93,6 +79,22 @@
             </div>
         </div>
     </div>
+
+    <div class="form-group">
+
+        <div class=" col-md-12">
+            <?php
+            echo form_textarea(array(
+                "id" => "description",
+                "name" => "description",
+                "value" => $model_info->description,
+                "placeholder" => lang('description'),
+                "class" => "form-control"
+            ));
+            ?>
+        </div>
+    </div>
+
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="fa fa-close"></span> <?php echo lang('close'); ?></button>

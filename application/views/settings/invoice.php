@@ -54,14 +54,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="invoice_footer" class=" col-md-2"><?php echo lang('invoice_footer'); ?></label>
-                    <div class=" col-md-10">
+                    <label for="invoice_footer" class=" col-md-12"><?php echo lang('invoice_footer'); ?></label>
+                    <div class=" col-md-12">
                         <?php
                         echo form_textarea(array(
                             "id" => "invoice_footer",
                             "name" => "invoice_footer",
                             "value" => get_setting("invoice_footer"),
-                            "class" => "form-control"
+                            "class" => "form-control wysiwyg"
                         ));
                         ?>
                     </div>

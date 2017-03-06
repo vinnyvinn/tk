@@ -60,7 +60,7 @@
                 "id" => "message",
                 "name" => "message",
                 "value" => $message,
-                "class" => "form-control"
+                "class" => "form-control wysiwyg"
             ));
             ?>
         </div>

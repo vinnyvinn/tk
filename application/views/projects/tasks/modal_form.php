@@ -59,20 +59,6 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="description" class=" col-md-3"><?php echo lang('description'); ?></label>
-        <div class=" col-md-9">
-            <?php
-            echo form_textarea(array(
-                "id" => "description",
-                "name" => "description",
-                "value" => $model_info->description,
-                "class" => "form-control",
-                "placeholder" => lang('description'),
-            ));
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label for="points" class="col-md-3"><?php echo lang('points'); ?>
             <span class="help" data-toggle="tooltip" title="<?php echo lang('task_point_help_text'); ?>"><i class="fa fa-question-circle"></i></span>
         </label>
@@ -213,6 +199,21 @@
                 "value" => $model_info->deadline * 1 ? $model_info->deadline : "",
                 "class" => "form-control",
                 "placeholder" => "YYYY-MM-DD"
+            ));
+            ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="description" class=" col-md-12"><?php echo lang('description'); ?></label>
+        <div class=" col-md-12">
+            <?php
+            echo form_textarea(array(
+                "id" => "description",
+                "name" => "description",
+                "value" => $model_info->description,
+                "class" => "form-control wysiwyg",
+                "placeholder" => lang('description'),
             ));
             ?>
         </div>

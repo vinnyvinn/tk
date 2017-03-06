@@ -65,14 +65,14 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="estimate_note" class=" col-md-3"><?php echo lang('note'); ?></label>
-        <div class=" col-md-9">
+        <label for="estimate_note" class=" col-md-12"><?php echo lang('note'); ?></label>
+        <div class=" col-md-12">
             <?php
             echo form_textarea(array(
                 "id" => "estimate_note",
                 "name" => "estimate_note",
                 "value" => $model_info->note ? $model_info->note : "",
-                "class" => "form-control",
+                "class" => "form-control wysiwyg",
                 "placeholder" => lang('note')
             ));
             ?>

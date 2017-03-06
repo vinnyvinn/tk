@@ -18,22 +18,6 @@
             ?>
         </div>
     </div>
-    <div class="form-group">
-        <label for="description" class=" col-md-3"><?php echo lang('description'); ?></label>
-        <div class=" col-md-9">
-            <?php
-            echo form_textarea(array(
-                "id" => "description",
-                "name" => "description",
-                "value" => $model_info->description,
-                "class" => "form-control",
-                "placeholder" => lang('description'),
-                "data-rule-required" => true,
-                "data-msg-required" => lang("field_required"),
-            ));
-            ?>
-        </div>
-    </div>
 
     <div class="clearfix">
         <label for="start_date" class=" col-md-3 col-sm-3"><?php echo lang('start_date'); ?></label>
@@ -71,7 +55,6 @@
             ?>
         </div>
     </div>
-
 
     <div class="clearfix">
         <label for="end_date" class=" col-md-3 col-sm-3"><?php echo lang('end_date'); ?></label>
@@ -190,7 +173,22 @@
         </div>
     </div>
 
-
+    <div class="form-group">
+        <label for="description" class=" col-md-12"><?php echo lang('description'); ?></label>
+        <div class=" col-md-12">
+            <?php
+            echo form_textarea(array(
+                "id" => "description",
+                "name" => "description",
+                "value" => $model_info->description,
+                "class" => "form-control wysiwyg",
+                "placeholder" => lang('description'),
+                "data-rule-required" => true,
+                "data-msg-required" => lang("field_required"),
+            ));
+            ?>
+        </div>
+    </div>
 
 </div>
 

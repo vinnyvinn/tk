@@ -81,7 +81,7 @@
                     echo form_textarea(array(
                         "id" => "reply_message",
                         "name" => "reply_message",
-                        "class" => "form-control",
+                        "class" => "form-control wysiwyg",
                         "placeholder" => lang('write_a_reply'),
                         "data-rule-required" => true,
                         "data-msg-required" => lang("field_required"),

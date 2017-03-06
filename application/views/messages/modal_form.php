@@ -34,11 +34,17 @@
         </div>
         <div class="form-group">
             <div class="col-md-12">
+                <?php $this->load->view("includes/dropzone_preview"); ?> 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
                 <?php
                 echo form_textarea(array(
                     "id" => "message",
                     "name" => "message",
-                    "class" => "form-control",
+                    "class" => "form-control wysiwyg",
                     "placeholder" => lang('write_a_message'),
                     "data-rule-required" => true,
                     "data-msg-required" => lang("field_required"),
@@ -47,12 +53,7 @@
                 ?>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-md-12">
-                <?php $this->load->view("includes/dropzone_preview"); ?> 
-            </div>
-        </div>
-           
+
     </div>
     <div class="modal-footer">
         <button class="btn btn-default upload-file-button pull-left btn-sm round" type="button" style="color:#7988a2"><i class='fa fa-camera'></i> <?php echo lang("upload_file"); ?></button>

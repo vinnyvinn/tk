@@ -52,28 +52,28 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="address" class=" col-md-2"><?php echo lang('mailing_address'); ?></label>
-                <div class=" col-md-10">
+                <label for="address" class=" col-md-12"><?php echo lang('mailing_address'); ?></label>
+                <div class=" col-md-12">
                     <?php
                     echo form_textarea(array(
                         "id" => "address",
                         "name" => "address",
                         "value" => $user_info->address,
-                        "class" => "form-control",
+                        "class" => "form-control wysiwyg",
                         "placeholder" => lang('mailing_address')
                     ));
                     ?>
                 </div>
             </div>
             <div class="form-group">
-                <label for="alternative_address" class=" col-md-2"><?php echo lang('alternative_address'); ?></label>
-                <div class=" col-md-10">
+                <label for="alternative_address" class=" col-md-12"><?php echo lang('alternative_address'); ?></label>
+                <div class=" col-md-12">
                     <?php
                     echo form_textarea(array(
                         "id" => "alternative_address",
                         "name" => "alternative_address",
                         "value" => $user_info->alternative_address,
-                        "class" => "form-control",
+                        "class" => "form-control wysiwyg",
                         "placeholder" => lang('alternative_address')
                     ));
                     ?>

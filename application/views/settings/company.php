@@ -31,20 +31,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="company_address" class=" col-md-2"><?php echo lang('address'); ?></label>
-                    <div class=" col-md-10">
-                        <?php
-                        echo form_textarea(array(
-                            "id" => "company_address",
-                            "name" => "company_address",
-                            "value" => get_setting("company_address"),
-                            "class" => "form-control",
-                            "placeholder" => lang('address'),
-                        ));
-                        ?>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label for="company_phone" class=" col-md-2"><?php echo lang('phone'); ?></label>
                     <div class=" col-md-10">
                         <?php
@@ -142,6 +128,22 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label for="company_address" class=" col-md-12"><?php echo lang('address'); ?></label>
+                    <div class=" col-md-11">
+                        <?php
+                        echo form_textarea(array(
+                            "id" => "company_address",
+                            "name" => "company_address",
+                            "value" => get_setting("company_address"),
+                            "class" => "form-control wysiwyg",
+                            "placeholder" => lang('address'),
+                        ));
+                        ?>
+                    </div>
+                </div>
+
             </div>
             <div class="panel-footer">
                 <button type="submit" class="btn btn-primary"><span class="fa fa-check-circle"></span> <?php echo lang('save'); ?></button>

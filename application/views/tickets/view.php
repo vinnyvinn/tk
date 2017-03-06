@@ -49,7 +49,7 @@
                         echo form_textarea(array(
                             "id" => "description",
                             "name" => "description",
-                            "class" => "form-control",
+                            "class" => "form-control wysiwyg",
                             "placeholder" => lang('write_a_comment'),
                             "data-rule-required" => true,
                             "data-msg-required" => lang("field_required"),

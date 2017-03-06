@@ -1,3 +1,24 @@
+var tinySetup = {
+    selector: '.wysiwyg',
+    height: 200,
+    theme: 'modern',
+    plugins: [
+        'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+        'searchreplace wordcount visualblocks visualchars code fullscreen',
+        'insertdatetime media nonbreaking save table contextmenu directionality',
+        'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
+    ],
+    toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+    toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
+    image_advtab: true,
+    templates: [
+        { title: 'Test template 1', content: 'Test 1' },
+        { title: 'Test template 2', content: 'Test 2' }
+    ],
+    content_css: [
+        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+    ]
+};
 $(document).ready(function () {
 
     // manage close action on modal
@@ -10,6 +31,7 @@ $(document).ready(function () {
 
     window.postTask = {
         updateListeners: function (newData) {
+            $('.modal-dialog').not('.main-modal').remove();
             localStorage.setItem('isPopup', 'false');
             var timeOut = typeof newData.title == 'undefined' ? 100 : 1200;
 
@@ -65,6 +87,9 @@ $(document).ready(function () {
                         }, 100);
                     }
                 });
+
+                $('.modal-dialog').not('.main-modal').remove();
+
                 modal.modal('show');
 
                 if (height > maxHeight) {
@@ -73,7 +98,6 @@ $(document).ready(function () {
                 $scroll.mCustomScrollbar({setHeight: height, theme: "minimal-dark", autoExpandScrollbar: true});
 
             }, timeOut);
-
 
         }
     };
@@ -84,7 +108,7 @@ $(document).ready(function () {
     moment.locale(AppLanugage.locale);
 
     //set locale for datepicker
-    ;
+
     (function ($) {
         $.fn.datepicker.dates['custom'] = {
             days: AppLanugage.days,
@@ -100,6 +124,10 @@ $(document).ready(function () {
 
     $('body').on('click', '[data-act=ajax-modal]', function () {
         // backup current modal
+        $('textarea').summernote('destroy');
+        $('.modal-dialog').not('.main-modal').remove();
+        $('.note-editor').remove();
+
         $('#previousAjaxModal').find('.modal-dialog').remove();
         $("#ajaxModalContent").find(".modal-body").mCustomScrollbar("destroy").removeClass('mCS_destroyed');
         $("#ajaxModalContent").find(".select2").select2('destroy');
@@ -133,16 +161,15 @@ $(document).ready(function () {
                 }
             });
         });
+
         ajaxModalXhr = $.ajax({
             url: url,
             data: data,
             cache: false,
             type: 'POST',
             success: function (response) {
-                $("#ajaxModal").find(".modal-dialog").removeClass("mini-modal");
-                if (isLargeModal === "1") {
-                    $("#ajaxModal").find(".modal-dialog").addClass("modal-lg");
-                }
+                $("#ajaxModal").find(".modal-dialog").removeClass("mini-modal").addClass("modal-lg");
+
                 $("#ajaxModalContent").html(response);
 
                 var $scroll = $("#ajaxModalContent").find(".modal-body"),
@@ -154,6 +181,9 @@ $(document).ready(function () {
                         $scroll.mCustomScrollbar({setHeight: height, theme: "minimal-dark", autoExpandScrollbar: true});
                     }
                 }
+
+                // tinymce.init(tinySetup);
+                initWYSIWYGEditor('textarea');
             },
             statusCode: {
                 404: function () {
@@ -166,6 +196,8 @@ $(document).ready(function () {
                 appAlert.error("500: Internal Server Error.", {container: '.modal-body', animate: false});
             }
         });
+
+        $('.modal-dialog').not('.main-modal').remove();
         return false;
     });
 
@@ -1797,4 +1829,5 @@ secondsToTimeFormat = function (sec) {
     var time = hours + ':' + minutes + ':' + seconds;
     return time;
 };
+
 

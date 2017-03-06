@@ -19,21 +19,6 @@
     </div>
 </div>
 <div class="form-group">
-    <label for="address" class="<?php echo $label_column; ?>"><?php echo lang('address'); ?></label>
-    <div class="<?php echo $field_column; ?>">
-        <?php
-        echo form_textarea(array(
-            "id" => "address",
-            "name" => "address",
-            "value" => $model_info->address ? $model_info->address : "",
-            "class" => "form-control",
-            "placeholder" => lang('address')
-        ));
-        ?>
-
-    </div>
-</div>
-<div class="form-group">
     <label for="city" class="<?php echo $label_column; ?>"><?php echo lang('city'); ?></label>
     <div class="<?php echo $field_column; ?>">
         <?php
@@ -174,6 +159,23 @@
 
 
 <?php } ?>
+
+<div class="form-group">
+    <label for="address" class="col-sm-12"><?php echo lang('address'); ?></label>
+    <div class="col-sm-12">
+        <?php
+        echo form_textarea(array(
+            "id" => "address",
+            "name" => "address",
+            "value" => $model_info->address ? $model_info->address : "",
+            "class" => "form-control wysiwyg",
+            "placeholder" => lang('address')
+        ));
+        ?>
+
+    </div>
+</div>
+
 
 <script type="text/javascript">
     $(document).ready(function () {

@@ -36,6 +36,5 @@ if (isset($success_message)) {
 ?>
             </script>
         </div>
-
     </body>
 </html>

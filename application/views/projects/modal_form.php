@@ -33,21 +33,6 @@
 
     </div>
     <div class="form-group">
-        <label for="description" class=" col-md-3"><?php echo lang('description'); ?></label>
-        <div class=" col-md-9">
-            <?php
-            echo form_textarea(array(
-                "id" => "description",
-                "name" => "description",
-                "value" => $model_info->description,
-                "class" => "form-control",
-                "placeholder" => lang('description'),
-                "style" => "height:150px;",
-            ));
-            ?>
-        </div>
-    </div>
-    <div class="form-group">
         <label for="start_date" class=" col-md-3"><?php echo lang('start_date'); ?></label>
         <div class=" col-md-9">
             <?php
@@ -115,6 +100,23 @@
             </div>
         </div>
     <?php } ?>
+
+    <div class="form-group">
+        <label for="description" class=" col-md-12"><?php echo lang('description'); ?></label>
+        <div class=" col-md-12">
+            <?php
+            echo form_textarea(array(
+                "id" => "description",
+                "name" => "description",
+                "value" => $model_info->description,
+                "class" => "form-control wysiwyg",
+                "placeholder" => lang('description'),
+                "style" => "height:150px;",
+            ));
+            ?>
+        </div>
+    </div>
+
 </div>
 
 <div class="modal-footer">

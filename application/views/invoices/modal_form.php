@@ -82,20 +82,6 @@
             ?>
         </div>
     </div>
-    <div class="form-group">
-        <label for="invoice_note" class=" col-md-3"><?php echo lang('note'); ?></label>
-        <div class=" col-md-9">
-            <?php
-            echo form_textarea(array(
-                "id" => "invoice_note",
-                "name" => "invoice_note",
-                "value" => $model_info->note ? $model_info->note : "",
-                "class" => "form-control",
-                "placeholder" => lang('note')
-            ));
-            ?>
-        </div>
-    </div>
 
     <?php if ($estimate_id) { ?>
         <div class="form-group">
@@ -108,6 +94,22 @@
             </label>
         </div>
     <?php } ?>
+
+    <div class="form-group">
+        <label for="invoice_note" class=" col-md-12"><?php echo lang('note'); ?></label>
+        <div class=" col-md-12">
+            <?php
+            echo form_textarea(array(
+                "id" => "invoice_note",
+                "name" => "invoice_note",
+                "value" => $model_info->note ? $model_info->note : "",
+                "class" => "form-control wysiwyg",
+                "placeholder" => lang('note')
+            ));
+            ?>
+        </div>
+    </div>
+
 </div>
 
 <div class="modal-footer">

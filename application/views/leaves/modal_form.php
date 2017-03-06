@@ -146,13 +146,13 @@
     </div>
 
     <div class="form-group">
-        <label for="reason" class=" col-md-3"><?php echo lang('reason'); ?></label>
-        <div class=" col-md-9">
+        <label for="reason" class=" col-md-12"><?php echo lang('reason'); ?></label>
+        <div class=" col-md-12">
             <?php
             echo form_textarea(array(
                 "id" => "reason",
                 "name" => "reason",
-                "class" => "form-control",
+                "class" => "form-control wysiwyg",
                 "placeholder" => lang('reason'),
                 "data-rule-required" => true,
                 "data-msg-required" => lang("field_required"),
