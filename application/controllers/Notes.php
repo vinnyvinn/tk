@@ -128,14 +128,14 @@ class Notes extends Pre_loader {
         $options = array();
 
         if ($type == "project" && $id) {
-            $options["created_by"] = $this->login_user->id;
+            // $options["created_by"] = $this->login_user->id;
             $options["project_id"] = $id;
         } else if ($type == "client" && $id) {
             $options["client_id"] = $id;
         } else if ($type == "user" && $id) {
             $options["user_id"] = $id;
         } else {
-            $options["created_by"] = $this->login_user->id;
+            // $options["created_by"] = $this->login_user->id;
             $options["my_notes"] = true;
         }
 

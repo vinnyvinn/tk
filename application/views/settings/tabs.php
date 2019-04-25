@@ -10,6 +10,8 @@
     <li role="presentation" class="<?php echo ($active_tab == 'team') ? 'active' : ''; ?>"><a href="<?php echo_uri("team"); ?>"><?php echo lang("team"); ?></a></li>
     <li role="presentation" class="<?php echo ($active_tab == 'leave_types') ? 'active' : ''; ?>"><a href="<?php echo_uri("leave_types"); ?>"><?php echo lang("leave_types"); ?></a></li>
     <li role="presentation" class="<?php echo ($active_tab == 'ticket_types') ? 'active' : ''; ?>"><a href="<?php echo_uri("ticket_types"); ?>"><?php echo lang("ticket_types"); ?></a></li>
+    <li role="presentation" class="<?php echo ($active_tab == 'tasks_status') ? 'active' : ''; ?>"><a href="<?php echo_uri("settings/tasks_status"); ?>">Tasks Status</a></li>
+    <li role="presentation" class="<?php echo ($active_tab == 'task_dates') ? 'active' : ''; ?>"><a href="<?php echo_uri("settings/task_dates"); ?>">Task Dates</a></li>
     <li role="presentation" class="<?php echo ($active_tab == 'expense_categories') ? 'active' : ''; ?>"><a href="<?php echo_uri("expense_categories"); ?>"><?php echo lang("expense_categories"); ?></a></li>
     <li role="presentation" class="<?php echo ($active_tab == 'taxes') ? 'active' : ''; ?>"><a href="<?php echo_uri("taxes"); ?>"><?php echo lang("taxes"); ?></a></li>
     <li role="presentation" class="<?php echo ($active_tab == 'invoice') ? 'active' : ''; ?>"><a href="<?php echo_uri("settings/invoice"); ?>"><?php echo lang("invoice"); ?></a></li>

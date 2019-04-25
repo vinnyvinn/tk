@@ -1829,5 +1829,3 @@ secondsToTimeFormat = function (sec) {
     var time = hours + ':' + minutes + ':' + seconds;
     return time;
 };
-
-

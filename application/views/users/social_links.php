@@ -179,6 +179,9 @@
             isModal: false,
             onSuccess: function(result) {
                 appAlert.success(result.message, {duration: 10000});
+                setTimeout(function () {
+                    window.location.href = '<?php echo get_uri("team_members/index"); ?>';
+                }, 100);
             }
         });
     });

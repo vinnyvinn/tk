@@ -13,11 +13,13 @@
                     <?php } ?>
 
                     <?php echo $project_info->title; ?>
+                  
                 </h1>
 
                 <div class="title-button-group" id="project-timer-box">
                     <?php if ($can_create_projects) { ?>
                         <span class="dropdown inline-block">
+                            <?php echo modal_anchor(get_uri("projects/task_modal_form"), "<i class='fa fa-plus-circle'></i> " . lang('add_task'), array("class" => "btn btn-default", "title" => lang('add_task'), "data-post-project_id" => $project_info->id)); ?>
                             <button class="btn btn-default dropdown-toggle  mt0 mb0" type="button" data-toggle="dropdown" aria-expanded="true">
                                 <i class='fa fa-cogs'></i> <?php echo lang('actions'); ?>
                                 <span class="caret"></span>
@@ -63,8 +65,18 @@
                     <?php } ?>
                     <li><a role="presentation" href="<?php echo_uri("projects/overview/" . $project_info->id); ?>" data-target="#project-overview-section"><?php echo lang('overview'); ?></a></li>
 
-                <?php } else { ?>
-                    <?php if ($show_tasks) { ?>
+                <?php }
+                elseif ($this->login_user->user_type === "client"){?>
+                    <li><a role="presentation" href="<?php echo_uri("projects/tasks/" . $project_info->id); ?>" data-target="#project-tasks-section"><?php echo lang('tasks'); ?></a></li>
+                    <li><a role="presentation" href="<?php echo_uri("projects/milestones/" . $project_info->id); ?>" data-target="#project-milestones-section"> <?php echo lang('milestones'); ?></a></li>
+                    <li><a role="presentation" href="<?php echo_uri("projects/gantt/" . $project_info->id); ?>" data-target="#project-gantt-section"> <?php echo lang('gantt'); ?></a></li>
+
+                    <li><a role="presentation" href="<?php echo_uri("projects/customer_feedback/" . $project_info->id); ?>" data-target="#project-customer-feedback-section"> <?php echo lang('customer_feedback'); ?></a></li>
+                     <?php }
+
+
+                else { ?>
+                    <?php if ($show_tasks || $this->login_user->user_type == "client") { ?>
                         <li><a role="presentation" href="<?php echo_uri("projects/tasks/" . $project_info->id); ?>" data-target="#project-tasks-section"><?php echo lang('tasks'); ?></a></li>
                     <?php } ?>
 

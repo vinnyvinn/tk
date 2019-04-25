@@ -41,6 +41,7 @@
                 "name" => "start_date",
                 "value" => $model_info->start_date * 1 ? $model_info->start_date : "",
                 "class" => "form-control",
+                "data-date-start-date" => "1d",
                 "placeholder" => lang('start_date')
             ));
             ?>
@@ -55,6 +56,7 @@
                 "name" => "deadline",
                 "value" => $model_info->deadline * 1 ? $model_info->deadline : "",
                 "class" => "form-control",
+                "data-date-start-date" => "1d",
                 "placeholder" => lang('deadline')
             ));
             ?>
@@ -85,6 +87,21 @@
                 "value" => $model_info->labels,
                 "class" => "form-control",
                 "placeholder" => lang('labels')
+            ));
+            ?>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="project_technologys" class=" col-md-3">Project Technologys</label>
+        <div class=" col-md-9">
+            <?php
+            echo form_input(array(
+                "id" => "project_technologys",
+                "name" => "technologys",
+                "value" => $model_info->technologys,
+                "class" => "form-control",
+                "placeholder" => "Project Technologys"
             ));
             ?>
         </div>
@@ -128,6 +145,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         localStorage.setItem('projectLabels', JSON.stringify(<?php echo json_encode($label_suggestions); ?>));
+        localStorage.setItem('projectTechnologys', JSON.stringify(<?php echo json_encode($technologys_suggestions); ?>));
 
         $("#project-form").appForm({
             onSuccess: function (result) {
@@ -144,6 +162,9 @@
 
         $("#project_labels").select2({
             tags: <?php echo json_encode($label_suggestions); ?>
+        });
+        $("#project_technologys").select2({
+            tags: <?php echo json_encode($technology_suggestions); ?>
         });
     });
 </script>    

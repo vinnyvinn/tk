@@ -2,11 +2,25 @@
 <div class="modal-body clearfix">
     <input type="hidden" name="id" value="<?php echo $model_info->id; ?>" />
     <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
-    <div class="form-group" style="min-height: 50px">
+    <!-- <div class="form-group" style="min-height: 50px">
         <label for="user_id" class=" col-md-3"><?php echo lang('member'); ?></label>
         <div class="col-md-9">
             <?php
             echo form_dropdown("user_id", $users_dropdown, array($model_info->user_id), "class='select2'");
+            ?>
+        </div>
+    </div> -->
+    <div class="form-group">
+        <label for="collaborators" class=" col-md-3"><?php echo lang('member'); ?></label>
+        <div class="col-md-9">
+            <?php
+            echo form_input(array(
+                "id" => "collaborators",
+                "name" => "collaborators",
+                "value" => $model_info->collaborators,
+                "class" => "form-control tagged",
+                "placeholder" => lang('member')
+            ));
             ?>
         </div>
     </div>
@@ -22,11 +36,20 @@
     $(document).ready(function() {
         $("#project-member-form").appForm({
             onSuccess: function(result) {
-                if (result.id !== "exists") {
-                    $("#project-member-table").appTable({newData: result.data, dataId: result.id});
-                }
+                /*if (result.id !== "exists") {
+                    // $("#project-member-table").appTable({newData: result.data, dataId: result.id});
+                }*/
+                setTimeout(function () {
+                    window.location.reload();
+                }, 100);
             }
         });
         $("#project-member-form .select2").select2();
+
+        $("#collaborators").select2({
+            tags: <?php echo json_encode($collaborators_dropdown); ?>
+        });
+
+        $('[data-toggle="tooltip"]').tooltip();
     });
 </script>    

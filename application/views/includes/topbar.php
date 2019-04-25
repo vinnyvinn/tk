@@ -7,17 +7,11 @@
             <span class="sr-only">Toggle navigation</span>
             <span class="fa fa-bars"></span>
         </button>
-        <a class="navbar-brand" href="<?php echo_uri('dashboard'); ?>"><img src="<?php echo get_file_uri(get_setting("system_file_path") . get_setting("site_logo")); ?>" /></a>
+        <a class="navbar-brand" href="<?php echo_uri('dashboard'); ?>"><img src="<?php echo base_url('files/system/default-logo.png')?>" /></a>
 
 
     </div>
     <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav navbar-left">
-
-            <li class="hidden-xs pl15 pr15  b-l">
-                <button class="hidden-xs" id="sidebar-toggle-md">
-                    <span class="fa fa-dedent"></span>
-                </button>
             </li>
             <?php echo my_open_timers(); ?>
 
@@ -28,7 +22,7 @@
                     <select data-placeholder="Jump To Project" name="projectsJumpLink" id="projectsJumpLink" class="form-control select2 input-sm">
                         <option selected>Jump To Project (F4)</option>
                         <?php foreach ($projects as $project) : ?>
-                            <option value="/projects/view/<?= $project->id; ?>"><?= $project->title; ?></option>
+                            <option value="<?php echo base_url('projects/view/'.$project->id); ?>"><?= $project->title; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -42,6 +36,10 @@
                         <?php echo anchor("notifications", lang('see_all')); ?>
                     </div>
                 </div>
+            </li>
+
+            <li class="hidden-xs">
+                <?php echo modal_anchor(get_uri("projects/modal_form"), "<i class='fa fa-plus-circle'></i> " . "Quick Project"); ?>
             </li>
 
             <li class="hidden-xs">

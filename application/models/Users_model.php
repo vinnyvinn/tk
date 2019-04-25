@@ -182,14 +182,16 @@ class Users_model extends Crud_model {
         return $this->db->query($sql)->row();
     }
 
-    public function all_dropdown()
+    public function all_dropdown($project_id = NULL)
     {
         $users = $this->db->dbprefix('users');
         $jobInfo = $this->db->dbprefix('team_member_job_info');
 
-        $sql = "SELECT {$users}.id as user_id, CONCAT(first_name,  ' ',last_name) AS member_name FROM {$users} "
-            . "INNER JOIN {$jobInfo} on {$users}.id = {$jobInfo}.user_id WHERE status = 'active' "
-            . "and disable_login = 0 and {$users}.deleted = 0 ORDER BY first_name";
+        if ($project_id) {
+            $sql = "SELECT project_members.user_id AS user_id, CONCAT(first_name,  ' ',last_name) AS member_name FROM project_members INNER JOIN users ON project_members.user_id = users.id WHERE project_members.project_id = {$project_id} AND project_members.deleted = 0";
+        } else {
+            $sql = "SELECT {$users}.id as user_id, CONCAT(first_name,  ' ',last_name) AS member_name FROM {$users} " . "INNER JOIN {$jobInfo} on {$users}.id = {$jobInfo}.user_id WHERE status = 'active' " . "and disable_login = 0 and {$users}.deleted = 0 ORDER BY first_name";
+        }
 
         return $this->db->query($sql);
     }

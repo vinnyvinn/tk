@@ -10,12 +10,13 @@ class Tickets extends Pre_loader
     public function __construct()
     {
         parent::__construct();
-        $this->init_permission_checker("ticket");
+       // $this->init_permission_checker("ticket");
     }
 
     // load ticket list view
     public function index()
     {
+
         $this->check_module_availability("module_ticket");
 
         if ($this->login_user->user_type === "staff") {
@@ -59,13 +60,16 @@ class Tickets extends Pre_loader
         ));
 
         //client should not be able to edit ticket
-        if ($this->login_user->user_type === "client" && $this->input->post('id')) {
-            redirect("forbidden");
-        }
+        // if ($this->login_user->user_type === "client" && $this->input->post('id')) {
+        //     redirect("forbidden");
+        // }
+       
+       $model_info= $this->Tickets_model->get_one($this->input->post('id'));
 
         $view_data['ticket_types_dropdown'] = $this->Ticket_types_model->get_dropdown_list(array("title"), "id");
-        $view_data['model_info'] = $this->Tickets_model->get_one($this->input->post('id'));
+        $view_data['model_info'] = $model_info;
         $view_data['project_id'] = $this->input->post('project_id');
+         $view_data['project_name'] = $this->db->query("SELECT title FROM projects WHERE id='{$model_info->project_id}'")->row()->title;
         if ($this->login_user->user_type == "client") {
             $view_data['projects_dropdown'] = $this->Projects_model->getAll($this->login_user->client_id);
         } else {
@@ -186,7 +190,7 @@ class Tickets extends Pre_loader
     // list of tickets, prepared for datatable 
     public function list_data()
     {
-        $this->access_only_allowed_members();
+        //$this->access_only_allowed_members();
 
         $status = $this->input->post("status");
         $ticket_label = $this->input->post("ticket_label");
@@ -200,14 +204,13 @@ class Tickets extends Pre_loader
             $result[] = $this->_make_row($data);
         }
         echo json_encode(array("data" => $result));
-    }
+        }
 
     // list of tickets of a specific client, prepared for datatable 
     public function ticket_list_data_of_client($client_id) {
-        $this->access_only_allowed_members_or_client_contact($client_id);
+       // $this->access_only_allowed_members_or_client_contact($client_id);
 
         $options = array("client_id" => $client_id, "access_type" => $this->access_type);
-
         $list_data = $this->Tickets_model->get_details($options)->result();
         $result = array();
         foreach ($list_data as $data) {
@@ -318,7 +321,7 @@ class Tickets extends Pre_loader
         $options["access_type"] = $this->access_type;
 
         $ticket_info = $this->Tickets_model->get_details($options)->row();
-        $this->access_only_allowed_members_or_client_contact($ticket_info->client_id);
+        //$this->access_only_allowed_members_or_client_contact($ticket_info->client_id);
 
 
         if ($ticket_info) {

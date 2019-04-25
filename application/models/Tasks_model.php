@@ -142,7 +142,7 @@ class Tasks_model extends Crud_model {
         LEFT JOIN $milestones_table ON $tasks_table.milestone_id=$milestones_table.id 
         LEFT JOIN $mainTasksTable as parent ON $tasks_table.parent_id=parent.id 
         $extra_left_join
-        WHERE $tasks_table.deleted=0 $where ORDER BY parentTask";
+        WHERE $tasks_table.deleted=0 $where ORDER BY $tasks_table.id DESC";
 
         return $this->db->query($sql);
     }
@@ -207,8 +207,17 @@ class Tasks_model extends Crud_model {
         $tasks_table = $this->db->dbprefix('tasks');
         $sql = "SELECT GROUP_CONCAT(labels) as label_groups
         FROM $tasks_table
-        WHERE $tasks_table.deleted=0 AND $tasks_table.project_id=$project_id";
+        WHERE $tasks_table.deleted=0";
+        // WHERE $tasks_table.deleted=0 AND $tasks_table.project_id=$project_id";
         return $this->db->query($sql)->row()->label_groups;
+    }
+
+    function get_technology_suggestions($project_id) {
+        $projects_table = $this->db->dbprefix('tasks');
+        $sql = "SELECT GROUP_CONCAT(technologys) as technology_groups
+        FROM $projects_table
+        WHERE $projects_table.deleted=0";
+        return $this->db->query($sql)->row()->technology_groups;
     }
 
     function get_my_projects_dropdown_list($user_id = 0) {

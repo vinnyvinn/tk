@@ -41,7 +41,7 @@
                 {title: '<?php echo lang("status") ?>', "class": "w10p"},
                 {visible: optionVisibility, title: '<i class="fa fa-bars"></i>', "class": "text-center option w100"}
             ],
-            order: [[1, "desc"]],
+            order: [[1, "asc"]],
             printColumns: [0, 1, 2, 3, 5, 7, 8, 9],
             xlsColumns: [0, 1, 2, 3, 5, 7, 9]
         });

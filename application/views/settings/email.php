@@ -58,7 +58,7 @@
                     </div>
                 </div>
 
-                <div id="smtp_settings" class="<?php echo get_setting('email_protocol') === "smtp" ? "" : "hide"; ?>">
+                <div id="smtp_settings" class="">
                     <div class="form-group">
                         <label for="email_smtp_host" class=" col-md-2"><?php echo lang('email_smtp_host'); ?></label>
                         <div class="col-md-10">

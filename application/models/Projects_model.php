@@ -66,6 +66,14 @@ class Projects_model extends Crud_model {
         return $this->db->query($sql)->row()->label_groups;
     }
 
+    function get_technology_suggestions() {
+        $projects_table = $this->db->dbprefix('projects');
+        $sql = "SELECT GROUP_CONCAT(technologys) as technology_groups
+        FROM $projects_table
+        WHERE $projects_table.deleted=0";
+        return $this->db->query($sql)->row()->technology_groups;
+    }
+
     function count_project_status($options = array()) {
         $projects_table = $this->db->dbprefix('projects');
         $project_members_table = $this->db->dbprefix('project_members');

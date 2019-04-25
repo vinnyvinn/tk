@@ -27,7 +27,7 @@ if (isset($task_id)) {
             echo form_textarea(array(
                 "id" => "comment_description",
                 "name" => "description",
-                "class" => "form-control comment_description wysiwyg",
+                "class" => "form-control wysiwyg",
                 "placeholder" => lang('write_a_comment'),
                 "data-rule-required" => true,
                 "data-msg-required" => lang("field_required"),

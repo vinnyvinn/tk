@@ -19,12 +19,36 @@
                     "data-msg-required" => lang("field_required"),
                 ));
                 ?>
+
+                
             </div>
         </div>
+        <div class="form-group">
+                    <label for="project_id" class=" col-md-3"><?php echo lang('project'); ?></label>
+                    <div class="col-md-9">
+                        <select name="project_id" id="project_id" class='select2 validate-hidden' data-rule-required='true' data-msg-required='<?= lang('field_required') ?>'>
+                            <option value="<?php echo $project_id;?>"><?php echo $project_name?></option>
+                            <?php foreach ($projects_dropdown as $project) : ?>
+                                <option value="<?= $project->id ?>"><?= $project->title ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
         <?php if (!$model_info->id) { ?>
             <!-- client can't be changed during editing -->
             <?php if ($project_id) { ?>
-                <input type="hidden" name="project_id" value="<?php echo $project_id; ?>" />
+                
+                 <div class="form-group">
+                    <label for="project_id" class=" col-md-3"><?php echo lang('project'); ?></label>
+                    <div class="col-md-9">
+                        <select name="project_id" id="project_id" class='select2 validate-hidden' data-rule-required='true' data-msg-required='<?= lang('field_required') ?>'>
+                            <option value="<?php echo $project_id;?>"><?php echo $project_name?></option>
+                            <?php foreach ($projects_dropdown as $project) : ?>
+                                <option value="<?= $project->id ?>"><?= $project->title ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
             <?php } else { ?>
                 <div class="form-group">
                     <label for="project_id" class=" col-md-3"><?php echo lang('project'); ?></label>

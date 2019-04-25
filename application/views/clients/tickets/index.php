@@ -38,7 +38,7 @@
             columns: [
                 {title: '<?php echo lang("ticket_id") ?>', "class": "w10p"},
                 {title: '<?php echo lang("title") ?>'},
-                {visible: false, searchable: false},
+                {title: '<?php echo lang("project") ?>', "class": "w15p"},
                 {title: '<?php echo lang("ticket_type") ?>', "class": "w20p"},
                 {title: '<?php echo lang("assigned_to") ?>', visible: userType == "staff" ? true : false}, //show only to team members
                 {visible: false, searchable: false},

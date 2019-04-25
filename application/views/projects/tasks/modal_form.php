@@ -88,16 +88,9 @@
     <?php if ($show_assign_to_dropdown) { ?>
         <div class="form-group">
             <label for="assigned_to" class=" col-md-3"><?php echo lang('assign_to'); ?></label>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <?php
                 echo form_dropdown("assigned_to", $assign_to_dropdown, array($model_info->assigned_to), ['class' => 'select2', 'id' => 'assigned_to']);
-                ?>
-            </div>
-            <div class="col-md-1">
-                <?php
-                if ($this->login_user->is_admin) {
-                    echo modal_anchor(get_uri("team_members/modal_form"), "<i class='fa fa-plus-circle'></i>", array("class" => "btn btn-info btn-add", "title" => lang('add_team_member'), "data-is-popup" => '1', 'data-populate' => 'assigned_to'));
-                }
                 ?>
             </div>
         </div>
@@ -149,6 +142,20 @@
         </div>
     </div>
     <div class="form-group">
+        <label for="project_technologys" class=" col-md-3">Project Category (Technology's)</label>
+        <div class=" col-md-9">
+            <?php
+            echo form_input(array(
+                "id" => "project_technologys",
+                "name" => "technologys",
+                "value" => $model_info->technologys,
+                "class" => "form-control tagged",
+                "placeholder" => "Project Category (Technology's)"
+            ));
+            ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label for="start_date" class=" col-md-3">Max. Allowed Hours</label>
         <div class=" col-md-9">
             <?php
@@ -182,8 +189,9 @@
             echo form_input(array(
                 "id" => "start_date",
                 "name" => "start_date",
-                "value" => $model_info->start_date * 1 ? $model_info->start_date : "",
+                "value" => $model_info->start_date * 1 ? $model_info->start_date : (get_setting('start_date') ? date('Y-m-d') : ''),
                 "class" => "form-control",
+                "data-date-start-date" => "1d",
                 "placeholder" => "YYYY-MM-DD"
             ));
             ?>
@@ -196,8 +204,9 @@
             echo form_input(array(
                 "id" => "deadline",
                 "name" => "deadline",
-                "value" => $model_info->deadline * 1 ? $model_info->deadline : "",
+                "value" => $model_info->deadline * 1 ? $model_info->deadline : (Date('Y-m-d', strtotime("+".get_setting('deadline_date')." days"))),
                 "class" => "form-control",
+                "data-date-start-date" => "1d",
                 "placeholder" => "YYYY-MM-DD"
             ));
             ?>
@@ -230,6 +239,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         localStorage.setItem('projectLabels', JSON.stringify(<?php echo json_encode($label_suggestions); ?>));
+        localStorage.setItem('projectTechnology', JSON.stringify(<?php echo json_encode($project_technologys); ?>));
         localStorage.setItem('collaborators', JSON.stringify(<?php echo json_encode($collaborators_dropdown); ?>));
         $("#task-form").appForm({
             onSuccess: function (result) {
@@ -249,6 +259,10 @@
 
         $("#project_labels").select2({
             tags: <?php echo json_encode($label_suggestions); ?>
+        });
+
+        $("#project_technology").select2({
+            tags: <?php echo json_encode($technology_suggestions); ?>
         });
 
         $("#collaborators").select2({

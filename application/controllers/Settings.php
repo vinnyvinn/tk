@@ -367,9 +367,47 @@ class Settings extends Pre_loader {
         $this->template->rander("settings/modules");
     }
 
+    function tasks_status() {
+        $this->template->rander("settings/tasks_status");
+    }
+
+    function task_dates() {
+        $this->template->rander("settings/task_dates");
+    }
+
     function save_module_settings() {
 
         $settings = array("module_timeline", "module_event", "module_note", "module_message", "module_invoice", "module_expense", "module_attendance", "module_leave", "module_estimate", "module_estimate_request", "module_ticket", "module_announcement");
+
+        foreach ($settings as $setting) {
+            $value = $this->input->post($setting);
+            if (is_null($value)) {
+                $value = "";
+            }
+
+            $this->Settings_model->save_setting($setting, $value);
+        }
+        echo json_encode(array("success" => true, 'message' => lang('settings_updated')));
+    }
+
+    function save_task_status_settings() {
+
+        $settings = array("task_0", "task_25", "task_50", "task_75", "task_100");
+
+        foreach ($settings as $setting) {
+            $value = $this->input->post($setting);
+            if (is_null($value)) {
+                $value = "";
+            }
+
+            $this->Settings_model->save_setting($setting, $value);
+        }
+        echo json_encode(array("success" => true, 'message' => lang('settings_updated')));
+    }
+
+    function save_task_dates_settings() {
+
+        $settings = array("start_date", "deadline_date");
 
         foreach ($settings as $setting) {
             $value = $this->input->post($setting);

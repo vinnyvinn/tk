@@ -48,7 +48,16 @@
 //
 //                $sidebar_menu[] = array("name" => "projects", "url" => "projects", "class" => "fa-th-large", "submenu" => $openProjects);
 
-                $sidebar_menu[] = ["name" => "All Projects", "class" => "fa-th-large", "url" => "projects/all_projects"];
+                // $sidebar_menu[] = ["name" => "All Projects", "class" => "fa-th-large", "url" => "projects/all_projects"];
+
+                $sidebar_menu[] = array("name" => "Projects", "url" => "projects/", "class" => "fa-th-large",
+                        "submenu" => array(
+                            array("name" => "All Projects", "url" => "projects/all_projects"),
+                            array("name" => "Project Progress", "url" => "projects/project_progress")
+                        )
+                    );
+
+
                 $sidebar_menu[] = array("name" => "Your Tasks", "url" => "projects/all_tasks", "class" => "fa-check", "devider" => true);
 
                 if (get_setting("module_estimate") && get_setting("module_estimate_request") && ($this->login_user->is_admin || $access_estimate)) {
@@ -105,11 +114,7 @@
 
 
                 if ($this->login_user->is_admin) {
-                    $attendanceSubs = [];
-                    $attendanceSubs [] = ["name" => "Team Members", "url" => "team_members"];
-//                    $attendanceSubs [] = ["name" => "Task Summary", "url" => "attendance/task_summary"];
-
-                    $sidebar_menu[] = array("name" => "Team", "url" => "team_members", "class" => "fa-user font-16", "submenu" => $attendanceSubs);
+                    $sidebar_menu[] = array("name" => "team_members", "url" => "team_members", "class" => "fa-user font-16");
                 } else if (get_setting("module_attendance") == "1") {
                     $sidebar_menu[] = array("name" => "team_members", "url" => "team_members", "class" => "fa-user font-16");
                 }

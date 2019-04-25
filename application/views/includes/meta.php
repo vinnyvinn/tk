@@ -4,4 +4,4 @@
 <meta name="description" content="">
 <meta name="author" content="SmoDav">
 <link rel="icon" href="<?php echo get_file_uri("assets/images/favicon.png"); ?>" />
-<title><?php echo get_setting('app_title'); ?></title>
+<title>TEAMKAZI</title>
